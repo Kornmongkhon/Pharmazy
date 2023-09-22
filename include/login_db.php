@@ -23,11 +23,13 @@
                     if($Username == $row['u_username']){
                         if(password_verify($Password,$row['u_password'])){
                             if($row['urole'] == 'admin'){
-                                $_SESSION['admin_login'] = $row['id'];
+                                $_SESSION['admin_login'] = $row['uid'];
                                 header("location: ../admin.php");
                             }else{
-                                $_SESSION['user_login'] = $row['id'];
+                                $_SESSION['user_login'] = $row['uid'];
+                                header("location: header.php");
                                 header("location: ../index.php");
+                                
                             }
                         }else{
                             $_SESSION['error_password'] = 'รหัสผ่านผิด';

@@ -3,8 +3,11 @@
     session_start();
     if(isset($_GET['logout'])){
         session_destroy();
-        unset($_SESSION['username']);
+        unset($_SESSION['user_login']);
         header("location: index.php");
+    }
+    if(!isset($_SESSION['user_login'])){//check session user login
+        echo "Not found";
     }
 ?>
 <head>
@@ -14,7 +17,7 @@
 </head>
 <body>
     <?php 
-        $username = isset($_GET['u_username']) ? $_GET['u_username'] : "";
+        $User_login = isset($_GET['u_username']) ? $_GET['u_username'] : "";
     ?>
     <header>
         <img class="logo" src="assets/images/mentoslogo.png" style="width: 400px;height:120px;">
@@ -30,16 +33,22 @@
                 <li><a href="#">Info</a></li>
             </ul>
         </nav>
-        <!-- check uid -->
-        <?php if(!isset($_SESSION['u_username'])):?>
+        <!-- check user login -->
+        <?php if(!isset($_SESSION['user_login'])):?>
                 <div class='button'>
                     <a href='login.php' >Login</a> / <a href='register.php'>Sign Up</a>
                 </div>
         <?php endif?>
-        <?php if(isset($_SESSION['u_username'])):?>
-            <p style="position: absolute;top=0;right: 25;">Welcome, </p><strong><?=$username?></strong>;
+        <?php if(isset($_SESSION['user_login'])):?>
+            <?php
+                $showName = $pdo->prepare("SELECT * FROM users");
+                $showName->execute();
+                $row = $showName->fetch(PDO::FETCH_ASSOC);
+            ?>
+            
             <div class='button'>
-                <a href="header.php?logout='1'" >Login</a>
+                <span>welcome, <?=$row['u_username']?></span>
+                <a href="logout.php">Logut</a>
             </div>
         <?php endif;?>
     </header>
