@@ -3,109 +3,19 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: white;
     font-family: 'Sriracha', cursive;
 }
-/* body{
-    background-image: linear-gradient(
-  240deg,
-  hsl(0deg 0% 80%) 0%,
-  hsl(0deg 0% 71%) 2%,
-  hsl(0deg 0% 62%) 6%,
-  hsl(0deg 0% 53%) 11%,
-  hsl(0deg 0% 44%) 17%,
-  hsl(0deg 0% 35%) 25%,
-  hsl(0deg 0% 27%) 35%,
-  hsl(0deg 0% 18%) 48%,
-  hsl(0deg 0% 9%) 65%,
-  hsl(0deg 0% 0%) 99%
-);
-} */
-li,a{
-    font-weight: 1000;
-    font-size: 16px;
-    color: #edf0f1;
-    text-decoration: none;
-}
 
-header{
+.navbar{
     background-color: #24252A;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0px 5%;
+    font-size: 20px;
+    font-weight: 600;
+}
+.nav-link{
+    color: white !important;
 }
 
-.logo{
-    background-color: #24252A;
-    cursor: pointer;
-    margin-right: auto;
-    order: 1;
-}
-
-/* header+h1{
-    cursor: pointer;
-    margin-right: auto;
-} */
-
-nav{
-    order: 2;
-}
-
-.nav-links{
-    background-color: #24252A;
-    list-style: none;
-}
-
-.nav-links li{
-    background-color: #24252A;
-    display: inline-block;
-    padding: 0px 20px;
-}
-
-.nav-links li a{
-    background-color: #24252A;
-    transition: all 0.5s ease-in-out 0s;
-}
-
-.nav-links li a:hover{
-    color: goldenrod;
-}
-
-
-.showuser{
-    background-color: aquamarine;
-    border-radius: 20px;
-    padding: 0 20px;
-    margin-left: 20px;
-    border: none;
-    transition: all 0.5s ease-in-out 0s;
-    /* cursor: pointer; */
-    order: 4;
-}
-
-header div.button {
-    background-color: aquamarine;
-    border-radius: 20px;
-    padding: 0 20px;
-    margin-left: 20px;
-    border: none;
-    transition: all 0.5s ease-in-out 0s;
-    cursor: pointer;
-    order: 3;
-}
-
-header div.button a{
-    background-color: aquamarine;
-    color: #24252A;
-    transition: all 0.3s ease-in-out 0s;
-}
-
-header div.button a:hover{
-    color: goldenrod;
-}
-
-footer,footer h1{
-    background: #24252A;
-    display: flex;
+.nav-link.active:hover{
+    color: goldenrod !important;
+    transition: all 0.4s ease-in-out;
 }
