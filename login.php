@@ -29,11 +29,11 @@
             <?php endif?>
             <div class="mb-3">
                 <label for="u_username" class="form-label">Username</label>
-                <input type="text" class="form-control" name="u_username" aria-describedby="Username">
+                <input type="text" class="form-control" name="u_username" aria-describedby="u_username">
             </div>
             <div class="mb-3">
                 <label for="u_password" class="form-label">Password</label>
-                <input type="password" class="form-control" name="u_password" aria-describedby="Password">
+                <input type="password" class="form-control" name="u_password">
             </div>
             <button type="submit" name="signin" class="btn btn-primary btn-lg btn-block">Login</button>
         </form>
