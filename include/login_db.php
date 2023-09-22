@@ -7,10 +7,10 @@
         $Password = $_POST['u_password'];
 
         if(empty($Username)) {
-            $_SESSION['warning'] = 'กรุณากรอกสมาชิก';
+            $_SESSION['warning_username'] = 'กรุณากรอกสมาชิก';
             header("location: ../login.php");
         }else if(empty($Password)) {
-            $_SESSION['warning'] = 'กรุณากรอกรหัสผ่าน';
+            $_SESSION['warning_password'] = 'กรุณากรอกรหัสผ่าน';
             header("location: ../login.php");
         }else{
             try{
@@ -30,15 +30,15 @@
                                 header("location: ../index.php");
                             }
                         }else{
-                            $_SESSION['warning'] = 'รหัสผ่านผิด';
+                            $_SESSION['error_password'] = 'รหัสผ่านผิด';
                             header("location: ../login.php");
                         }
                     }else{
-                        $_SESSION['warning'] = 'สมาชิกผิด';
+                        $_SESSION['error_username'] = 'สมาชิกผิด';
                         header("location: ../login.php");
                     }
                 } else {
-                    $_SESSION['error'] = "ไม่มีข้อมูลในระบบ";
+                    $_SESSION['error_found'] = "ไม่มีข้อมูลในระบบ";
                     header("location: ../login.php");
                 }
 

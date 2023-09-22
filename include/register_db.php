@@ -14,33 +14,35 @@
         $Urole = 'user';
 
         if(empty($Fullname)) {
-            $_SESSION['warning'] = 'กรุณากรอกชื่อ';
+            $_SESSION['warning_name'] = 'กรุณากรอกชื่อ';
             header("location: ../register.php");
         }else if(empty($Username)) {
-            $_SESSION['warning'] = 'กรุณากรอกสมาชิก';
+            $_SESSION['warning_username'] = 'กรุณากรอกสมาชิก';
             header("location: ../register.php");
         }else if(empty($Email)) {
-            $_SESSION['warning'] = 'กรุณากรอกอีเมล';
+            $_SESSION['warning_email'] = 'กรุณากรอกอีเมล';
             header("location: ../register.php");
         }else if(empty($Address)){
-            $_SESSION['warning'] = 'กรุณากรอกที่อยู่';
+            $_SESSION['warning_address'] = 'กรุณากรอกที่อยู่';
             header("location: ../register.php");
         }else if(empty($PhoneNum)){
-            $_SESSION['warning'] = 'กรุณากรอกเบอร์โทรศัพท์';
+            $_SESSION['warning_phone'] = 'กรุณากรอกเบอร์โทรศัพท์';
             header("location: ../register.php");
         }else if(empty($Password)){
-            $_SESSION['warning'] = 'กรุณากรอกรหัสผ่าน';
+            $_SESSION['warning_password'] = 'กรุณากรอกรหัสผ่าน';
             header("location: ../register.php");
         }else if(empty($C_password)) {
-            $_SESSION['warning'] = 'กรุณายืนยันรหัสผ่าน';
+            $_SESSION['warning_cpassword'] = 'กรุณายืนยันรหัสผ่าน';
             header("location: ../register.php");
         }else if($Password != $C_password) {
-            $_SESSION['warning'] = 'รหัสผ่านไม่ตรงกัน';
+            $_SESSION['warning_inpass'] = 'รหัสผ่านไม่ตรงกัน';
             header("location: ../register.php");
-        }else if(empty($Gender)){
-            $_SESSION['warning'] = 'กรุณาระบุเพศ';
+        }
+        else if(empty($Gender)){
+            $_SESSION['warning_gender'] = 'กรุณาระบุเพศ';
             header("location: ../register.php");
-        }else{
+        }
+        else{
             try{
                 $check_user = $pdo->prepare("SELECT u_username FROM users WHERE u_username = :u_username");
                 $check_user->bindParam(":u_username", $Username);
@@ -48,7 +50,7 @@
                 $row = $check_user->fetch(PDO::FETCH_ASSOC);
 
                 if($row['u_username'] == $Username){
-                    $_SESSION['warning'] = "มีสมาชิกนี้อยู่ในระบบแล้ว <a href='login.php'>คลิ๊กที่นี่</a> เพื่อเข้าสู่ระบบ";
+                    $_SESSION['warning_already'] = "มีสมาชิกนี้อยู่ในระบบแล้ว";
                     header("location: ../register.php");
                 }else if(!isset($_SESSION['error'])) {
                     $passwordHash = password_hash($Password, PASSWORD_DEFAULT);
