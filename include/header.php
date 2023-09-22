@@ -35,9 +35,9 @@
                     Category
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item drop" href="#">Action</a></li>
+                    <li><a class="dropdown-item drop" href="#">Another action</a></li>
+                    <li><a class="dropdown-item drop" href="#">Another action</a></li>
                 </ul>
                 </li>
                 <li class="nav-item">
@@ -64,10 +64,10 @@
                             Welcome, <?=$row['u_username']?>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li><a class="dropdown-item" href="#">Carts</a></li>
+                            <li><a class="dropdown-item drop" href="#">Profile</a></li>
+                            <li><a class="dropdown-item drop" href="#">Carts</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                            <li><a class="dropdown-item drop" href="logout.php">Logout</a></li>
                         </ul>
                     </li>
                 </ul>     
