@@ -12,6 +12,15 @@
         $C_password = $_POST['c_password'];
         $Gender = $_POST['gender'];
         $Urole = 'user';
+        $defaultAvatars = [ //set default avatar url
+            'male' => 'assets\images\male.png',
+            'female' => 'assets\images\female.png',
+        ];
+
+        if(isset($Gender) && array_key_exists($Gender,$defaultAvatars)){//check if $Gender equal $defaultAvatars take url avatar to new var
+            $Avatar = $defaultAvatars[$Gender];
+        } 
+
 
         if(empty($Fullname)) {
             $_SESSION['warning_name'] = 'กรุณากรอกชื่อ';
@@ -54,8 +63,8 @@
                     header("location: ../register.php");
                 }else if(!isset($_SESSION['error'])) {
                     $passwordHash = password_hash($Password, PASSWORD_DEFAULT);
-                    $stmt = $pdo->prepare("INSERT INTO users(u_name, u_username, email, address, phone, u_password, gender, urole) 
-                                            VALUES(:u_name, :u_username, :email, :address, :phone, :u_password, :gender, :urole)");
+                    $stmt = $pdo->prepare("INSERT INTO users(u_name, u_username, email, address, phone, u_password, gender, urole, avatar) 
+                                            VALUES(:u_name, :u_username, :email, :address, :phone, :u_password, :gender, :urole, :avatar)");
                     $stmt->bindParam(":u_name", $Fullname);
                     $stmt->bindParam(":u_username", $Username);
                     $stmt->bindParam(":email", $Email);
@@ -64,6 +73,7 @@
                     $stmt->bindParam(":u_password", $passwordHash);
                     $stmt->bindParam(":gender", $Gender);
                     $stmt->bindParam(":urole", $Urole);
+                    $stmt->bindParam(":avatar", $Avatar);
                     $stmt->execute();
                     $_SESSION['success'] = "สมัครสมาชิกเรียบร้อยแล้ว! <a href='login.php' class='alert-link'>คลิ๊กที่นี่</a> เพื่อเข้าสู่ระบบ";
                     header("location: ../register.php");

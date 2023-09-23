@@ -6,9 +6,9 @@
         unset($_SESSION['user_login']);
         header("location: index.php");
     }
-    if(!isset($_SESSION['user_login'])){//check session user login
-        echo "Not found";
-    }
+    // if(!isset($_SESSION['user_login'])){//check session user login
+    //     echo "Not found";
+    // }
 ?>
 <head>
     <meta charset="UTF-8">
@@ -31,7 +31,7 @@
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
                 <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-item nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Category
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -59,11 +59,11 @@
                     $row = $showName->fetch(PDO::FETCH_ASSOC);
                 ?>
                 <ul class="navbar-nav">
-                    <li class="nav-item dropdown" style="margin-right: 15px;">
+                    <li class="nav-item dropdown" style="">
                         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Welcome, <?=$row['u_username']?>
+                        <img src="<?=$row['avatar']?>" class="rounded-circle" height="50" alt="Avatar" loading="lazy" />
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item drop" href="#">Profile</a></li>
                             <li><a class="dropdown-item drop" href="#">Carts</a></li>
                             <li><hr class="dropdown-divider"></li>
