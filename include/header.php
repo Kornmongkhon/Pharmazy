@@ -50,7 +50,7 @@
             <?php if(isset($_SESSION['user_login'])):?>
                 <?php
                     $user_id = $_SESSION['user_login'];
-                    $showName = $pdo->prepare("SELECT * FROM users WHERE uid = :user_id");
+                    $showName = $pdo->prepare("SELECT * FROM users WHERE uid = :user_id"); //search uid cuz session user_login use to uid
                     $showName->bindParam(":user_id", $user_id);
                     $showName->execute();
                     $row = $showName->fetch(PDO::FETCH_ASSOC);
