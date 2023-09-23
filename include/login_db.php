@@ -6,6 +6,8 @@
         $Username = $_POST['u_username'];
         $Password = $_POST['u_password'];
 
+        session_unset(); // clear prev session data
+
         if(empty($Username)) {
             $_SESSION['warning_username'] = 'กรุณากรอกสมาชิก';
             header("location: ../login.php");
@@ -22,12 +24,11 @@
                 if($check_data->rowCount() > 0) {
                     if($Username == $row['u_username']){
                         if(password_verify($Password,$row['u_password'])){
-                            if($row['urole'] == 'admin'){
-                                $_SESSION['admin_login'] = $row['uid'];
+                            if($row['urole'] == 'admin'){//role admin
+                                $_SESSION['admin_login'] = $row['uid'];//take session login from uid
                                 header("location: ../admin.php");
                             }else{
-                                $_SESSION['user_login'] = $row['uid'];
-                                header("location: header.php");
+                                $_SESSION['user_login'] = $row['uid'];//take session login from uid
                                 header("location: ../index.php");
                                 
                             }

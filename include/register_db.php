@@ -2,7 +2,7 @@
     session_start();
     include('functions.php');
 
-    if (isset($_POST['signup'])) {
+    if (isset($_POST['signup'])) { //when hit button sighup
         $Fullname = $_POST['u_name'];
         $Username = $_POST['u_username'];
         $Email = $_POST['email'];
@@ -13,8 +13,8 @@
         $Gender = $_POST['gender'];
         $Urole = 'user';
         $defaultAvatars = [ //set default avatar url
-            'male' => 'assets\images\male.png',
-            'female' => 'assets\images\female.png',
+            'male' => 'assets\avatar\male.png',
+            'female' => 'assets\avatar\female.png',
         ];
 
         if(isset($Gender) && array_key_exists($Gender,$defaultAvatars)){//check if $Gender equal $defaultAvatars take url avatar to new var
@@ -53,7 +53,7 @@
         }
         else{
             try{
-                $check_user = $pdo->prepare("SELECT u_username FROM users WHERE u_username = :u_username");
+                $check_user = $pdo->prepare("SELECT u_username FROM users WHERE u_username = :u_username"); // search username
                 $check_user->bindParam(":u_username", $Username);
                 $check_user->execute();
                 $row = $check_user->fetch(PDO::FETCH_ASSOC);

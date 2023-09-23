@@ -1,11 +1,6 @@
 <?php 
     include('functions.php');
     session_start();
-    if(isset($_GET['logout'])){
-        session_destroy();
-        unset($_SESSION['user_login']);
-        header("location: index.php");
-    }
     // if(!isset($_SESSION['user_login'])){//check session user login
     //     echo "Not found";
     // }
@@ -54,12 +49,15 @@
             <?php endif;?>
             <?php if(isset($_SESSION['user_login'])):?>
                 <?php
-                    $showName = $pdo->prepare("SELECT * FROM users");
+                    $user_id = $_SESSION['user_login'];
+                    $showName = $pdo->prepare("SELECT * FROM users WHERE uid = :user_id");
+                    $showName->bindParam(":user_id", $user_id);
                     $showName->execute();
                     $row = $showName->fetch(PDO::FETCH_ASSOC);
+
                 ?>
                 <ul class="navbar-nav">
-                    <li class="nav-item dropdown" style="">
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="<?=$row['avatar']?>" class="rounded-circle" height="50" alt="Avatar" loading="lazy" />
                         </a>

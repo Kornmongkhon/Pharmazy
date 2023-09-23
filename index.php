@@ -7,7 +7,6 @@
     <div>
         <?php 
             include('include\header.php');
-            
         ?>
         <h1>Test</h1>
     </div>
