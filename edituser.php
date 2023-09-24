@@ -3,7 +3,7 @@
     // ini_set('display_errors', 1);
     include('include/functions.php');
     include('include/head.php');
-    if (!isset($_GET['uid'])) { //check session user login
+    if (!isset($_GET['uid'])) { //check session user login if don't have redirect to index
         header("location: index.php");
     }
 ?>
