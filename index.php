@@ -1,9 +1,6 @@
 <?php 
     include('include\head.php');
 ?>
-<head>
-    
-</head>
 <body>
     <div>
         <?php 
