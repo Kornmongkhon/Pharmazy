@@ -74,6 +74,7 @@
                             <li><a class="dropdown-item drop" href="edituser.php?uid=<?=$row['uid']?>">Profile</a></li>
                             <li><a class="dropdown-item drop" href="#">Carts</a></li>
                             <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item drop" href="#">Change Password</a></li>
                             <li><a class="dropdown-item drop" href="logout.php">Logout</a></li>
                         </ul>
                     </li>
