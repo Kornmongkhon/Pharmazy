@@ -1,18 +1,54 @@
 <?php 
     session_start();
-    include('include/functions.php');
     include('include/head.php');
+    include('include/functions.php');  
 ?>
 <head>
 <link rel="stylesheet" href="style/login/login.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $(document).ready(function(){
+        $("#showPass a").on('click',function(e){
+            e.preventDefault();
+            if($('#showPass input').attr("type")== "text"){
+                $('#showPass input').attr('type','password');
+                $('#showPass i').addClass(" fa-eye-slash");
+                $('#showPass i').removeClass(" fa-e fa-eye");
+            }else if($('#showPass input').attr("type")== "password"){
+                $('#showPass input').attr('type','text');
+                $('#showPass i').removeClass(" fa-eye-slash");
+                $('#showPass i').addClass(" fa-e fa-eye");
+            }
+        })
+        $('#showPass i').hide();
+        $('#u_password').focus(function () {
+            $('#showPass i').show();
+        })
+    })
+</script>
 </head>
 <body>
     <div class="flex-login-form">
-        <form class="card login-card-custom" action="include/login_db.php" method="post">
+        <form class="card login-card-custom" action="include/login_db.php" method="post" id="loginForm">
         <div class="title">Mentos Login</div>
+            <?php if(isset($_SESSION['success_login'])):?>
+                <?php
+                        echo "<script>";
+                        echo "Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Login Successful!',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })";
+                        echo "</script>";
+                        // echo $_SESSION['error_found'];
+                        unset($_SESSION['error_found']); // unset session when refresh
+                    ?>
+            <?php endif;?>
             <?php if(isset($_SESSION['error_found'])):?>
                     <?php
                         echo "<script>";
@@ -84,18 +120,24 @@
                     ?>
             <?php endif?>
             <div class="user-details">
-                <div class="form-outline mb-3">
+                <div class="form-outline mb-3 inputbox">
                     <label for="u_username" class="form-label">Username</label>
                     <input type="text" class="form-control" name="u_username" aria-describedby="u_username" placeholder="Enter your username">
                 </div>
-                <div class="form-outline mb-3">
+                <div class="form-outline mb-3 inputbox">
                     <label for="u_password" class="form-label">Password</label>
-                    <input type="password" class="form-control" name="u_password" placeholder="Enter your password">
+                    <div id="showPass">
+                        <input type="password" class="form-control" name="u_password" id="u_password" placeholder="Enter your password">
+                        <div class="field-icon">
+                            <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <button type="submit" name="signin" class="btn btn-primary btn-lg mb-3" style="width: 80%;margin-left: auto;margin-right: auto;">Login</button>
+            <button type="submit" name="signin" class="btnbg-custom btn-lg mb-3" style="width: 50%;margin-left: auto;margin-right: auto;font-weight: 600;">Login</button>
             <div class="form-label">Don't have an account? <a href="register.php">Register</a></div>
         </form>  
     </div>
+    
 </body>
 </html>

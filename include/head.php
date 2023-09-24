@@ -6,3 +6,4 @@
     <title>Mentos Pharmazy</title>
     <link rel="icon" type="x-icon" href="https://cdn.discordapp.com/attachments/1006202573696552982/1155533903369601124/logo-mentos.png">
 </head>
+<body>

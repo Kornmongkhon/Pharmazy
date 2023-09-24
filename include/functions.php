@@ -1,16 +1,3 @@
-<!-- <?php 
-    $servername = "localhost";
-    $userdb = "root";
-    $passdb = "";
-    $dbname = "pharmazy";
-    $conn = mysqli_connect($servername,$userdb,$passdb,$dbname);
-    
-    //check connection
-    if(!$conn){
-        die("Connection failed!" . mysqli_connect_error());
-    }
-?> -->
-
 <?php
     $servername = "localhost";
     $userdb = "root";

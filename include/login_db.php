@@ -1,18 +1,22 @@
 <?php
     session_start();
     include('functions.php');
+    // header('Content-Type: application/json');
 
-    if (isset($_POST['signin'])) {
+        //using ajax
+    // if (isset($_POST['signin'])) { 
         $Username = $_POST['u_username'];
         $Password = $_POST['u_password'];
 
         session_unset(); // clear prev session data
 
         if(empty($Username)) {
-            $_SESSION['warning_username'] = 'กรุณากรอกสมาชิก';
+            // header('Content-Type: application/json');
+            // echo json_encode(array("status"=>"success","msg"=>"Please enter your username."));
+            $_SESSION['warning_username'] = 'Please enter your username.';
             header("location: ../login.php");
         }else if(empty($Password)) {
-            $_SESSION['warning_password'] = 'กรุณากรอกรหัสผ่าน';
+            $_SESSION['warning_password'] = 'Please enter your password.';
             header("location: ../login.php");
         }else{
             try{
@@ -29,19 +33,19 @@
                                 header("location: ../admin.php");
                             }else{
                                 $_SESSION['user_login'] = $row['uid'];//take session login from uid
+                                $_SESSION['success_login'] = 'Login Successfully!';
                                 header("location: ../index.php");
-                                
                             }
                         }else{
-                            $_SESSION['error_password'] = 'รหัสผ่านผิด';
+                            $_SESSION['error_password'] = 'Wrong password!';
                             header("location: ../login.php");
                         }
                     }else{
-                        $_SESSION['error_username'] = 'สมาชิกผิด';
+                        $_SESSION['error_username'] = 'Wrong username!';
                         header("location: ../login.php");
                     }
                 } else {
-                    $_SESSION['error_found'] = "ไม่มีข้อมูลในระบบ";
+                    $_SESSION['error_found'] = "No results Found!";
                     header("location: ../login.php");
                 }
 
@@ -49,5 +53,5 @@
                 echo $e->getMessage();
             }
         }
-    }
+    // }
 ?>
