@@ -27,7 +27,7 @@
     ?>
     <div class="container">
         <form class="card login-card-custom" action="include/updatepassword.php" method="post">
-            <div class="title">Mentos Reset Password</div>
+            <div class="title">Mentos Change Password</div>
             <?php if(isset($_SESSION['success_updated_pass'])):?>
                     <?php
                         echo "<script>";
