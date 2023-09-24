@@ -2,6 +2,7 @@
     // error_reporting(E_ALL);
     // ini_set('display_errors', 1);
     include('include/functions.php');
+    include('include/head.php');
     if (!isset($_GET['uid'])) { //check session user login
         header("location: index.php");
     }
