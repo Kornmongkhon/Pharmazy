@@ -23,32 +23,32 @@
 
 
         if(empty($Fullname)) {
-            $_SESSION['warning_name'] = 'กรุณากรอกชื่อ';
+            $_SESSION['warning_name'] = 'Please enter your name';
             header("location: ../register.php");
         }else if(empty($Username)) {
-            $_SESSION['warning_username'] = 'กรุณากรอกสมาชิก';
+            $_SESSION['warning_username'] = 'Please enter your username';
             header("location: ../register.php");
         }else if(empty($Email)) {
-            $_SESSION['warning_email'] = 'กรุณากรอกอีเมล';
+            $_SESSION['warning_email'] = 'Please enter your email';
             header("location: ../register.php");
         }else if(empty($Address)){
-            $_SESSION['warning_address'] = 'กรุณากรอกที่อยู่';
+            $_SESSION['warning_address'] = 'Please enter your address';
             header("location: ../register.php");
         }else if(empty($PhoneNum)){
-            $_SESSION['warning_phone'] = 'กรุณากรอกเบอร์โทรศัพท์';
+            $_SESSION['warning_phone'] = 'Please enter your phone number';
             header("location: ../register.php");
         }else if(empty($Password)){
-            $_SESSION['warning_password'] = 'กรุณากรอกรหัสผ่าน';
+            $_SESSION['warning_password'] = 'Please enter your password';
             header("location: ../register.php");
         }else if(empty($C_password)) {
-            $_SESSION['warning_cpassword'] = 'กรุณายืนยันรหัสผ่าน';
+            $_SESSION['warning_cpassword'] = 'Please enter your confirm password';
             header("location: ../register.php");
         }else if($Password != $C_password) {
-            $_SESSION['warning_inpass'] = 'รหัสผ่านไม่ตรงกัน';
+            $_SESSION['warning_inpass'] = 'Password not match';
             header("location: ../register.php");
         }
         else if(empty($Gender)){
-            $_SESSION['warning_gender'] = 'กรุณาระบุเพศ';
+            $_SESSION['warning_gender'] = 'Please enter your gender';
             header("location: ../register.php");
         }
         else{

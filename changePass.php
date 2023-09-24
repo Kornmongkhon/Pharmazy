@@ -28,6 +28,105 @@
     <div class="container">
         <form class="card login-card-custom" action="include/updatepassword.php" method="post">
             <div class="title">Mentos Reset Password</div>
+            <?php if(isset($_SESSION['success_updated_pass'])):?>
+                    <?php
+                        echo "<script>";
+                        echo "Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Update Password Successfully!',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })";
+                        echo "</script>";
+                        // echo $_SESSION['success_updated_pass'];
+                        unset($_SESSION['success_updated_pass']); // unset session when refresh
+                    ?>
+            <?php endif?> 
+            <?php if(isset($_SESSION['error_updated_pass'])):?>
+                    <?php
+                        echo "<script>";
+                        echo "Swal.fire({
+                            icon: 'error',
+                            title: 'Sorry :(',
+                            text: 'Failed to update password!',
+                            confirmButtonColor: '#3085d6'
+                          })";
+                        echo "</script>";
+                        // echo $_SESSION['error_updated_pass'];
+                        unset($_SESSION['error_updated_pass']); // unset session when refresh
+                    ?>
+            <?php endif?> 
+            <?php if(isset($_SESSION['error_currentpass'])):?>
+                    <?php
+                        echo "<script>";
+                        echo "Swal.fire({
+                            icon: 'error',
+                            title: 'Sorry :(',
+                            text: 'Current password not match in data!',
+                            confirmButtonColor: '#3085d6'
+                          })";
+                        echo "</script>";
+                        // echo $_SESSION['error_currentpass'];
+                        unset($_SESSION['error_currentpass']); // unset session when refresh
+                    ?>
+            <?php endif?> 
+            <?php if(isset($_SESSION['warning_password'])):?>
+                <?php
+                        echo "<script>";
+                        echo "Swal.fire({
+                            icon: 'warning',
+                            title: 'Warning',
+                            text: 'Please enter your current password!',
+                            confirmButtonColor: '#3085d6'
+                          })";
+                        echo "</script>";
+                        // echo $_SESSION['warning_password'];
+                        unset($_SESSION['warning_password']); // unset session when refresh
+                    ?>
+            <?php endif;?>
+            <?php if(isset($_SESSION['warning_newpass'])):?>
+                <?php
+                        echo "<script>";
+                        echo "Swal.fire({
+                            icon: 'warning',
+                            title: 'Warning',
+                            text: 'Please enter your new password!',
+                            confirmButtonColor: '#3085d6'
+                          })";
+                        echo "</script>";
+                        // echo $_SESSION['warning_newpass'];
+                        unset($_SESSION['warning_newpass']); // unset session when refresh
+                    ?>
+            <?php endif;?>
+            <?php if(isset($_SESSION['warning_cnewpass'])):?>
+                <?php
+                        echo "<script>";
+                        echo "Swal.fire({
+                            icon: 'warning',
+                            title: 'Warning',
+                            text: 'Please enter your confirm new password!',
+                            confirmButtonColor: '#3085d6'
+                          })";
+                        echo "</script>";
+                        // echo $_SESSION['warning_cnewpass'];
+                        unset($_SESSION['warning_cnewpass']); // unset session when refresh
+                    ?>
+            <?php endif;?>
+            <?php if(isset($_SESSION['warning_innewpass'])):?>
+                    <?php
+                        echo "<script>";
+                        echo "Swal.fire({
+                            icon: 'warning',
+                            title: 'Warning',
+                            text: 'New password not match!',
+                            confirmButtonColor: '#3085d6'
+                          })";
+                        echo "</script>";
+                        // echo $_SESSION['warning_innewpass'];
+                        unset($_SESSION['warning_innewpass']); // unset session when refresh
+                    ?>
+            <?php endif?> 
             <div class="user-details">
                 <div class="form-outline mb-3 inputbox" style="display: none;">
                     <label for="uid" class="form-label">Username ID</label>

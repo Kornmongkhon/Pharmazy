@@ -14,16 +14,16 @@
         // Check if a file is uploaded for avatar
         $avatarPath = null; // Initialize avatar path as null
         if(empty($Fullname)) {
-            $_SESSION['warning_name'] = 'กรุณากรอกชื่อ';
+            $_SESSION['warning_name'] = 'Please enter your Full Name!';
             header("location: ../edituser.php?uid=$Uid");
         }else if(empty($Email)) {
-            $_SESSION['warning_email'] = 'กรุณากรอกอีเมล';
+            $_SESSION['warning_email'] = 'Please enter your Email!';
             header("location: ../edituser.php?uid=$Uid");
         }else if(empty($Address)){
-            $_SESSION['warning_address'] = 'กรุณากรอกที่อยู่';
+            $_SESSION['warning_address'] = 'Please enter your Address!';
             header("location: ../edituser.php?uid=$Uid");
         }else if(empty($PhoneNum)){
-            $_SESSION['warning_phone'] = 'กรุณากรอกเบอร์โทรศัพท์';
+            $_SESSION['warning_phone'] = 'Please enter your Phone Number!';
             header("location: ../edituser.php?uid=$Uid");
         }else{
             try{
