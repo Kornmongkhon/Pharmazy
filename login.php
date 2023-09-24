@@ -10,23 +10,27 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    $(document).ready(function(){
-        $("#showPass a").on('click',function(e){
-            e.preventDefault();
-            if($('#showPass input').attr("type")== "text"){
+    $(document).ready(function(){//use jquery
+        $("#showPass a").on('click',function(e){//ref id $showPass -> a
+            e.preventDefault();//stop refresh page
+            if($('#showPass input').attr("type")== "text"){//check if input type = text change to password add class,remove class icon
                 $('#showPass input').attr('type','password');
                 $('#showPass i').addClass(" fa-eye-slash");
                 $('#showPass i').removeClass(" fa-e fa-eye");
-            }else if($('#showPass input').attr("type")== "password"){
+            }else if($('#showPass input').attr("type")== "password"){//check if input type = pass change to text add class,remove class icon
                 $('#showPass input').attr('type','text');
                 $('#showPass i').removeClass(" fa-eye-slash");
                 $('#showPass i').addClass(" fa-e fa-eye");
             }
         })
-        $('#showPass i').hide();
-        $('#u_password').focus(function () {
-            $('#showPass i').show();
-        })
+        $('#showPass i').hide(); //ref id #showPass -> i hide icon
+        $('#u_password').on('input',function () {//show icon when input field not empty
+            if($(this).val().trim() !== ''){//check from input id=u_password using method value if !== NULL show icon
+                $('#showPass i').show();
+            }else{
+                $('#showPass i').hide();
+            }
+        });
     })
 </script>
 </head>
