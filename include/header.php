@@ -17,7 +17,7 @@
 <body>
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php"><img class="logo" src="assets/images/mentoslogo.png" style="width: 400px;height:120px;"></a>
+            <a class="navbar-brand" href="index.php"><img class="logo" src="assets/images/mentos.png" style="width: 250px;height:80px;"></a>
             <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> -->
             <span class="navbar-toggler-icon"></span>
             </button>
