@@ -13,8 +13,8 @@
         $Gender = $_POST['gender'];
         $Urole = 'user';
         $defaultAvatars = [ //set default avatar url
-            'male' => 'assets\avatar\male.png',
-            'female' => 'assets\avatar\female.png',
+            'male' => 'assets/avatar/male.png',
+            'female' => 'assets/avatar/female.png',
         ];
 
         if(isset($Gender) && array_key_exists($Gender,$defaultAvatars)){//check if $Gender equal $defaultAvatars take url avatar to new var

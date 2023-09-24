@@ -5,6 +5,7 @@
 ?>
 <head>
 <link rel="stylesheet" href="style/register/register.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -201,36 +202,36 @@
                         unset($_SESSION['warning_gender']); // unset session when refresh
                     ?>
             <?php endif?> 
-            <div class="user-details">
-                <div class="form-outline mb-3">
+            <div class="user-details warp">
+                <div class="form-outline mb-3 inputbox">
                     <label for="u_name" class="form-label">Full Name</label>
                     <input type="text" class="form-control" name="u_name" aria-describedby="u_name" placeholder="Enter your name">
                 </div>
-                <div class="form-outline mb-3">
+                <div class="form-outline inputbox">
                     <label for="u_username" class="form-label">Username</label>
                     <input type="text" class="form-control" name="u_username" aria-describedby="u_username" placeholder="Enter your username">
                 </div>
-                <div class="form-outline mb-3">
+                <div class="form-outline inputbox">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" name="email" aria-describedby="email" placeholder="Enter your email">
                 </div>
-                <div class="form-outline mb-3">
+                <div class="form-outline inputbox">
                     <label for="address" class="form-label">Address</label>
                     <textarea class="form-control" name="address" aria-describedby="address" placeholder="Enter your address"></textarea>
                 </div>
-                <div class="form-outline mb-3">
+                <div class="form-outline inputbox">
                     <label for="phone" class="form-label">Phone Number</label>
                     <input type="text" class="form-control" name="phone" aria-describedby="phone" placeholder="Enter your phone number">
                 </div>
-                <div class="form-outline mb-3">
+                <div class="form-outline inputbox">
                     <label for="u_password" class="form-label">Password</label>
                     <input type="password" class="form-control" name="u_password" placeholder="Enter your password">
                 </div>
-                <div class="form-outline mb-3">
+                <div class="form-outline inputbox">
                     <label for="c_password" class="form-label">Confirm password</label>
                     <input type="password" class="form-control" name="c_password" placeholder="Enter your confirm password">
                 </div>
-                <div class="form-outline radio mb-3">
+                <div class="form-outline radio mb-3 inputbox">
                     <div class="mb-3">
                         <label for="gender">Gender</label>
                     </div>
