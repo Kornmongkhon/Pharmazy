@@ -2,17 +2,11 @@
     session_start();
     include('functions.php');
     // header('Content-Type: application/json');
-
-        //using ajax
-    // if (isset($_POST['signin'])) { 
+    if (isset($_POST['signin'])) { 
         $Username = $_POST['u_username'];
         $Password = $_POST['u_password'];
 
-        session_unset(); // clear prev session data
-
         if(empty($Username)) {
-            // header('Content-Type: application/json');
-            // echo json_encode(array("status"=>"success","msg"=>"Please enter your username."));
             $_SESSION['warning_username'] = 'Please enter your username.';
             header("location: ../login.php");
         }else if(empty($Password)) {
@@ -53,5 +47,5 @@
                 echo $e->getMessage();
             }
         }
-    // }
+    }
 ?>

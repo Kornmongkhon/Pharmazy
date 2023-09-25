@@ -59,9 +59,9 @@
                 $row = $check_user->fetch(PDO::FETCH_ASSOC);
 
                 if($row['u_username'] == $Username){
-                    $_SESSION['warning_already'] = "มีสมาชิกนี้อยู่ในระบบแล้ว";
+                    $_SESSION['error_already'] = "มีสมาชิกนี้อยู่ในระบบแล้ว";
                     header("location: ../register.php");
-                }else if(!isset($_SESSION['error'])) {
+                }else if(!isset($_SESSION['error_already'])) {
                     $passwordHash = password_hash($Password, PASSWORD_DEFAULT);
                     $stmt = $pdo->prepare("INSERT INTO users(u_name, u_username, email, address, phone, u_password, gender, urole, avatar) 
                                             VALUES(:u_name, :u_username, :email, :address, :phone, :u_password, :gender, :urole, :avatar)");
