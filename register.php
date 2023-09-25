@@ -5,9 +5,54 @@
 ?>
 <head>
 <link rel="stylesheet" href="style/register/register.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $(document).ready(function(){//use jquery
+        $("#showPass a").on('click',function(e){//ref id $showPass -> a
+            e.preventDefault();//stop refresh page
+            if($('#showPass input').attr("type")== "text"){//check if input type = text change to password add class,remove class icon
+                $('#showPass input').attr('type','password');
+                $('#showPass i').addClass(" fa-eye-slash");
+                $('#showPass i').removeClass(" fa-e fa-eye");
+            }else if($('#showPass input').attr("type")== "password"){//check if input type = pass change to text add class,remove class icon
+                $('#showPass input').attr('type','text');
+                $('#showPass i').removeClass(" fa-eye-slash");
+                $('#showPass i').addClass(" fa-e fa-eye");
+            }
+        })
+        $('#showPass i').hide(); //ref id #showPass -> i hide icon
+        $('#u_password').on('input',function () {//show icon when input field not empty
+            if($(this).val().trim() !== ''){//check from input id=u_password using method value if !== NULL show icon
+                $('#showPass i').show();
+            }else{
+                $('#showPass i').hide();
+            }
+        });
+        $("#showConfirmPass a").on('click',function(e){//ref id $showPass -> a
+            e.preventDefault();//stop refresh page
+            if($('#showConfirmPass input').attr("type")== "text"){//check if input type = text change to password add class,remove class icon
+                $('#showConfirmPass input').attr('type','password');
+                $('#showConfirmPass i').addClass(" fa-eye-slash");
+                $('#showConfirmPass i').removeClass(" fa-e fa-eye");
+            }else if($('#showConfirmPass input').attr("type")== "password"){//check if input type = pass change to text add class,remove class icon
+                $('#showConfirmPass input').attr('type','text');
+                $('#showConfirmPass i').removeClass(" fa-eye-slash");
+                $('#showConfirmPass i').addClass(" fa-e fa-eye");
+            }
+        })
+        $('#showConfirmPass i').hide(); //ref id #showPass -> i hide icon
+        $('#c_password').on('input',function () {//show icon when input field not empty
+            if($(this).val().trim() !== ''){//check from input id=u_password using method value if !== NULL show icon
+                $('#showConfirmPass i').show();
+            }else{
+                $('#showConfirmPass i').hide();
+            }
+        });
+    })
+</script>
 </head>
 <body>
     <div class="flex-login-form">
@@ -214,25 +259,34 @@
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" name="email" aria-describedby="email" placeholder="Enter your email">
                 </div>
-                <div class="form-outline inputbox"></div>
-                <div class="form-outline inputbox">
-                    <label for="address" class="form-label">Address</label>
-                    <textarea class="form-control" name="address" aria-describedby="address" placeholder="Enter your address"></textarea>
-                </div>
                 <div class="form-outline inputbox">
                     <label for="phone" class="form-label">Phone Number</label>
                     <input type="text" class="form-control" name="phone" aria-describedby="phone" placeholder="Enter your phone number">
                 </div>
+                <div class="form-outline inputbox textbox" style="margin-bottom: 30px;">
+                    <label for="address" class="form-label">Address</label>
+                    <textarea class="form-control" name="address" aria-describedby="address" placeholder="Enter your address"></textarea>
+                </div>
                 <div class="form-outline inputbox">
                     <label for="u_password" class="form-label">Password</label>
-                    <input type="password" class="form-control" name="u_password" placeholder="Enter your password">
+                    <div id="showPass">
+                        <input type="password" class="form-control" name="u_password" id="u_password" placeholder="Enter your password">
+                        <div class="field-icon">
+                            <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-outline inputbox">
                     <label for="c_password" class="form-label">Confirm password</label>
-                    <input type="password" class="form-control" name="c_password" placeholder="Enter your confirm password">
+                    <div id="showConfirmPass">
+                        <input type="password" class="form-control" name="c_password" id="c_password" placeholder="Enter your confirm password">
+                        <div class="field-icon">
+                            <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-outline radio mb-3 inputgender">
-                    <div class="mb-3">
+                <div class="form-outline radio mb-3 inputbox inputgender">
+                    <div class="mb-2">
                         <label for="gender">Gender</label>
                     </div>
                     <div>
@@ -247,8 +301,8 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" name="signup" class="btn btn-primary btn-lg mb-3" style="width: 80%;margin-left: auto;margin-right: auto;">Register</button>
-            <div class="form-label">Already have an account? <a href="login.php">Login</a></div>
+            <button type="submit" name="signup" class="btnbg-custom btn-lg mb-3" style="width: 80%;margin-left: auto;margin-right: auto;">Register</button>
+            <div class="form-label mb-3">Already have an account? <a href="login.php">Login</a></div>
         </form>
             
     </div>

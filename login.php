@@ -139,7 +139,7 @@
                 </div>
             </div>
             <button type="submit" name="signin" class="btnbg-custom btn-lg mb-3" style="width: 50%;margin-left: auto;margin-right: auto;font-weight: 600;">Login</button>
-            <div class="form-label">Don't have an account? <a href="register.php">Register</a></div>
+            <div class="form-label mb-3">Don't have an account? <a href="register.php">Register</a></div>
         </form>  
     </div>
     

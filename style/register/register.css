@@ -35,6 +35,20 @@ body{
     margin-right: auto;
     
 }
+.field-icon{
+    float: right;
+    margin-right: 10px;
+    margin-top: -30px;
+    position: relative;
+    z-index: 2;
+}
+
+.field-icon a:visited{
+    color: #24252A;
+}
+.field-icon a:link {
+    color: #24252A;
+  }
 form .user-details{
     display: flex;
     flex-wrap: wrap;
@@ -45,6 +59,17 @@ form .user-details .inputbox{
     width: calc(100% / 2 - 20px);
     margin-bottom: 15px;
 }
+form .user-details .inputbox.textbox{
+    width: calc(200% / 2 - 20px);
+}
+form .user-details textarea{
+    height: calc(200% / 2 - 20px);
+}
+form .user-details .inputbox.inputgender{
+    /* background-color: red; */
+    margin-right: 53%;
+}
+
 .form-outline label{
    margin-left: 10px;
 }
