@@ -9,7 +9,10 @@
 ?>
 <head>
     <link rel="stylesheet" href="style/user/changePass.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="style/user/changePass.js"></script>
 </head>
 <body>
     <div>
@@ -71,62 +74,6 @@
                         unset($_SESSION['error_currentpass']); // unset session when refresh
                     ?>
             <?php endif?> 
-            <?php if(isset($_SESSION['warning_password'])):?>
-                <?php
-                        echo "<script>";
-                        echo "Swal.fire({
-                            icon: 'warning',
-                            title: 'Warning',
-                            text: 'Please enter your current password!',
-                            confirmButtonColor: '#3085d6'
-                          })";
-                        echo "</script>";
-                        // echo $_SESSION['warning_password'];
-                        unset($_SESSION['warning_password']); // unset session when refresh
-                    ?>
-            <?php endif;?>
-            <?php if(isset($_SESSION['warning_newpass'])):?>
-                <?php
-                        echo "<script>";
-                        echo "Swal.fire({
-                            icon: 'warning',
-                            title: 'Warning',
-                            text: 'Please enter your new password!',
-                            confirmButtonColor: '#3085d6'
-                          })";
-                        echo "</script>";
-                        // echo $_SESSION['warning_newpass'];
-                        unset($_SESSION['warning_newpass']); // unset session when refresh
-                    ?>
-            <?php endif;?>
-            <?php if(isset($_SESSION['warning_cnewpass'])):?>
-                <?php
-                        echo "<script>";
-                        echo "Swal.fire({
-                            icon: 'warning',
-                            title: 'Warning',
-                            text: 'Please enter your confirm new password!',
-                            confirmButtonColor: '#3085d6'
-                          })";
-                        echo "</script>";
-                        // echo $_SESSION['warning_cnewpass'];
-                        unset($_SESSION['warning_cnewpass']); // unset session when refresh
-                    ?>
-            <?php endif;?>
-            <?php if(isset($_SESSION['warning_innewpass'])):?>
-                    <?php
-                        echo "<script>";
-                        echo "Swal.fire({
-                            icon: 'warning',
-                            title: 'Warning',
-                            text: 'New password not match!',
-                            confirmButtonColor: '#3085d6'
-                          })";
-                        echo "</script>";
-                        // echo $_SESSION['warning_innewpass'];
-                        unset($_SESSION['warning_innewpass']); // unset session when refresh
-                    ?>
-            <?php endif?> 
             <div class="user-details">
                 <div class="form-outline mb-3 inputbox" style="display: none;">
                     <label for="uid" class="form-label">Username ID</label>
@@ -134,18 +81,33 @@
                 </div>
                 <div class="form-outline mb-3 currentpass">
                     <label for="u_password" class="form-label">Current Password</label>
-                    <input type="password" class="form-control" name="u_password" placeholder="Enter your current password">
+                    <div id="showPass">
+                        <input type="password" class="form-control" name="u_password" id="u_password" placeholder="Enter your current password">
+                        <div class="field-icon">
+                            <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-outline mb-3 inputbox">
                     <label for="n_password" class="form-label">New Password</label>
-                    <input type="password" class="form-control" name="n_password" placeholder="Enter your new password">
+                    <div id="showNewPass">
+                        <input type="password" class="form-control" name="n_password" id="n_password" placeholder="Enter your new password">
+                        <div class="field-icon">
+                            <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-outline mb-3 inputbox">
-                    <label for="cn_password" class="form-label">Confirm New Password</label>
-                    <input type="password" class="form-control" name="cn_password" placeholder="Confirm your current password">
+                    <label for="c_password" class="form-label">New Password</label>
+                    <div id="showNewCPass">
+                        <input type="password" class="form-control" name="n_password" id="c_password" placeholder="Enter your new password">
+                        <div class="field-icon">
+                            <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <button type="submit" name="u_updatepassword" class="btn btn-primary btn-lg mb-3" style="width: 80%;margin-left: auto;margin-right: auto;">Confirm</button>
+            <button type="submit" name="u_updatepassword" id="updatepass" class="btn btn-primary btn-lg mb-3" style="width: 80%;margin-left: auto;margin-right: auto;">Confirm</button>
         </form>
     </div>
 </body>

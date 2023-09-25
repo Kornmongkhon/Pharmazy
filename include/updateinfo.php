@@ -13,19 +13,22 @@
    
         // Check if a file is uploaded for avatar
         $avatarPath = null; // Initialize avatar path as null
-        if(empty($Fullname)) {
-            $_SESSION['warning_name'] = 'Please enter your Full Name!';
-            header("location: ../edituser.php?uid=$Uid");
-        }else if(empty($Email)) {
-            $_SESSION['warning_email'] = 'Please enter your Email!';
-            header("location: ../edituser.php?uid=$Uid");
-        }else if(empty($Address)){
-            $_SESSION['warning_address'] = 'Please enter your Address!';
-            header("location: ../edituser.php?uid=$Uid");
-        }else if(empty($PhoneNum)){
-            $_SESSION['warning_phone'] = 'Please enter your Phone Number!';
-            header("location: ../edituser.php?uid=$Uid");
-        }else{
+
+        //change $_SESSION to JS validation
+        
+        // if(empty($Fullname)) {
+        //     $_SESSION['warning_name'] = 'Please enter your Full Name!';
+        //     header("location: ../edituser.php?uid=$Uid");
+        // }else if(empty($Email)) {
+        //     $_SESSION['warning_email'] = 'Please enter your Email!';
+        //     header("location: ../edituser.php?uid=$Uid");
+        // }else if(empty($Address)){
+        //     $_SESSION['warning_address'] = 'Please enter your Address!';
+        //     header("location: ../edituser.php?uid=$Uid");
+        // }else if(empty($PhoneNum)){
+        //     $_SESSION['warning_phone'] = 'Please enter your Phone Number!';
+        //     header("location: ../edituser.php?uid=$Uid");
+        // }else{
             try{
                 if($_FILES['avatar']['error'] === UPLOAD_ERR_OK){
                     var_dump($_FILES);
@@ -94,5 +97,5 @@
             }
         }
         
-    }
+    // }
 ?>

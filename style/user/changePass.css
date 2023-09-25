@@ -46,3 +46,17 @@ form .user-details{
 .form-label{
     padding-bottom: 5px;
 }
+.field-icon{
+    float: right;
+    margin-right: 10px;
+    margin-top: -30px;
+    position: relative;
+    z-index: 2;
+}
+
+.field-icon a:visited{
+    color: #24252A;
+}
+.field-icon a:link {
+    color: #24252A;
+  }

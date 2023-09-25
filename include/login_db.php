@@ -6,13 +6,15 @@
         $Username = $_POST['u_username'];
         $Password = $_POST['u_password'];
 
-        if(empty($Username)) {
-            $_SESSION['warning_username'] = 'Please enter your username.';
-            header("location: ../login.php");
-        }else if(empty($Password)) {
-            $_SESSION['warning_password'] = 'Please enter your password.';
-            header("location: ../login.php");
-        }else{
+        //change $_SESSION to JS validation
+
+        // if(empty($Username)) {
+        //     $_SESSION['warning_username'] = 'Please enter your username.';
+        //     header("location: ../login.php");
+        // }else if(empty($Password)) {
+        //     $_SESSION['warning_password'] = 'Please enter your password.';
+        //     header("location: ../login.php");
+        // }else{
             try{
                 $check_data = $pdo->prepare("SELECT * FROM users WHERE u_username = :u_username");
                 $check_data->bindParam(":u_username", $Username);
@@ -47,5 +49,5 @@
                 echo $e->getMessage();
             }
         }
-    }
+    // }
 ?>

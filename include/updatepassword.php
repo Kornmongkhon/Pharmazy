@@ -8,22 +8,25 @@
         $Npassword = $_POST['n_password'];
         $CNpassword = $_POST['cn_password'];
 
-        if(empty($Password)){
-            $_SESSION['warning_password'] = 'Please enter your current password';
-            header("location: ../changePass.php?uid=$Uid");
-        }
-        else if(empty($Npassword)){
-            $_SESSION['warning_newpass'] = 'Please enter your new password';
-            header("location: ../changePass.php?uid=$Uid");
-        }
-        else if(empty($CNpassword)){
-            $_SESSION['warning_cnewpass'] = 'Please enter your confirm new password';
-            header("location: ../changePass.php?uid=$Uid");
-        }
-        else if($Npassword != $CNpassword){
-            $_SESSION['warning_innewpass'] = 'New pass word not match!';
-            header("location: ../changePass.php?uid=$Uid");
-        }else{
+        //change $_SESSION to JS validation
+
+        // if(empty($Password)){
+        //     $_SESSION['warning_password'] = 'Please enter your current password';
+        //     header("location: ../changePass.php?uid=$Uid");
+        // }
+        // else if(empty($Npassword)){
+        //     $_SESSION['warning_newpass'] = 'Please enter your new password';
+        //     header("location: ../changePass.php?uid=$Uid");
+        // }
+        // else if(empty($CNpassword)){
+        //     $_SESSION['warning_cnewpass'] = 'Please enter your confirm new password';
+        //     header("location: ../changePass.php?uid=$Uid");
+        // }
+        // else if($Npassword != $CNpassword){
+        //     $_SESSION['warning_innewpass'] = 'New pass word not match!';
+        //     header("location: ../changePass.php?uid=$Uid");
+        // }else{
+             
             try{
                 $stmt = $pdo->prepare("SELECT * FROM users WHERE uid = :uid");
                 $stmt->bindParam(":uid",$Uid);
@@ -59,5 +62,5 @@
                 echo $e->getMessage();
             }
         }
-    }
+    // }
 ?>
