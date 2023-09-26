@@ -98,9 +98,9 @@
                     </div>
                 </div>
                 <div class="form-outline mb-3 inputbox">
-                    <label for="c_password" class="form-label">New Password</label>
+                    <label for="c_password" class="form-label">Confirm New Password</label>
                     <div id="showNewCPass">
-                        <input type="password" class="form-control" name="n_password" id="c_password" placeholder="Enter your new password">
+                        <input type="password" class="form-control" name="n_password" id="c_password" placeholder="Enter your confirm new password">
                         <div class="field-icon">
                             <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                         </div>
