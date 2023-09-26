@@ -40,7 +40,7 @@
             </ul>
             <form class="d-flex p-3 w-50">
                 <input class="form-control me-2 wd" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <button class="btn-search" type="submit">Search</button>
             </form>
             <?php if(!isset($_SESSION['user_login'])):?>
                     <a class="btn btn-outline-success" style="margin-right: 15px;" href="login.php">Login</a>

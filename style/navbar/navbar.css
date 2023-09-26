@@ -16,10 +16,25 @@
 }
 
 .nav-link.active:hover{
-    color: goldenrod !important;
+    color: rgba(20,172,204,1) !important;
     transition: all 0.4s ease-in-out;
 }
 .dropdown-item.drop:hover{
-    color: goldenrod;
+    color: rgba(20,172,204,1);
     transition: all 0.4s ease-in-out;
+}
+.btn-search{
+    background: linear-gradient(135deg, rgba(19,33,47,1) 0%, rgba(20,172,204,1) 100%) ;
+    outline: none;
+    border: none;
+    color: white;
+    padding: 0 15px;
+    border-radius: 5px;
+    font-size: 16px;
+ 
+}
+.btn-search:hover{
+    background: linear-gradient(-135deg, rgba(19,33,47,1) 0%, rgba(20,172,204,1) 100%) ;
+    color: rgba(20,172,204,1);
+    transition: all 0.3s ease-in-out;
 }
