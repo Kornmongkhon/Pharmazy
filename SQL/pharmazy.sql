@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2023 at 09:49 PM
+-- Generation Time: Sep 26, 2023 at 10:13 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -86,6 +86,15 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`uid`, `u_username`, `u_password`, `u_name`, `email`, `address`, `phone`, `gender`, `urole`, `create_at`, `avatar`) VALUES
+(1, 'user', '$2y$10$WelvYcHgSGg.NgyT2lCGuO3HOIQC.THVE1OoEz91HZ6UFRTpOjRhm', 'user', 'user@user.com', '10/14', '012-345-6789', 'male', 'user', '2023-09-26 20:10:57', '../assets/avatar/261838676_217194513901808_8599102040805275054_n.jpg'),
+(2, 'admin', '$2y$10$lNF0/M0uts9Ir6zDeGsdt.37ZCzW6G.5c2aLW7rluMB9M.MmxcDzS', 'admin', 'admin@admin.com', '10/1134', '045-345-2356', 'female', 'admin', '2023-09-26 20:11:36', 'assets/avatar/female.png'),
+(3, 'user2', '$2y$10$gDuJhSdxZicFtA.KyInDpuuusPgpuLc5.14.bw3A8hB9axxQp/mwe', 'user2', 'user2@user2.com', '10/1241', '086-231-2344', 'female', 'user', '2023-09-26 20:11:58', 'assets/avatar/female.png');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -143,7 +152,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `uid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
