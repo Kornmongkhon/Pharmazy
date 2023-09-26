@@ -72,7 +72,7 @@ CREATE TABLE `product` (
 --
 
 CREATE TABLE `users` (
-  `uid` int(11) NOT NULL,
+  `uid` int(10) NOT NULL,
   `u_username` varchar(255) NOT NULL,
   `u_password` varchar(255) NOT NULL,
   `u_name` varchar(255) NOT NULL,
