@@ -26,7 +26,7 @@
                         if(password_verify($Password,$row['u_password'])){
                             if($row['urole'] == 'admin'){//role admin
                                 $_SESSION['admin_login'] = $row['uid'];//take session login from uid
-                                header("location: ../admin.php");
+                                header("location: ../admin/admin.php");
                             }else{
                                 $_SESSION['user_login'] = $row['uid'];//take session login from uid
                                 $_SESSION['success_login'] = 'Login Successfully!';

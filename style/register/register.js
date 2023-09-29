@@ -59,8 +59,8 @@ function validation(){
     if(fullName === ''){
         Swal.fire({
             icon:'warning',
-            title: 'Warning!',
-            text: 'Please enter your full name.',
+            title: 'แจ้งเตือน!',
+            text: 'โปรดกรอกชื่อ - นามสกุล',
             confirmButtonColor: '#3085d6'
         });
         return false;
@@ -68,8 +68,8 @@ function validation(){
     else if(!fullnameRegex.test(fullName)){
         Swal.fire({
             icon:'warning',
-            title: 'Not match with Regex!',
-            text: 'Please enter your Full Name in regex [ก-ฮ,A-Z,a-z,0-9] 4 - 20 characters and can be whitespace.',
+            title: 'แจ้งเตือน!',
+            text: 'โปรดกรอก ชื่อ - นามสกุล ให้ตรงเงื่อนไข ต้องเป็น [ก-ฮ,A-Z,a-z,0-9] ตั้งแต่ 4 ตัวอักษร ถึง 20 ตัวอักษร / มีช่องว่างได้',
             showConfirmButton: false,
             timer: 3500,
             timerProgressBar: true
@@ -79,8 +79,8 @@ function validation(){
     else if(username === ''){
         Swal.fire({
             icon:'warning',
-            title: 'Warning!',
-            text: 'Please enter your username.',
+            title: 'แจ้งเตือน!',
+            text: 'โปรดกรอกชื่อผู้ใช้',
             confirmButtonColor: '#3085d6'
         });
         return false;
@@ -88,8 +88,8 @@ function validation(){
     else if(!usernameRegex.test(username)){
         Swal.fire({
             icon:'warning',
-            title: 'Not match with Regex!',
-            text: 'Please enter your username in regex [A-Z,a-z,0-9] 4 or more characters and can be whitespace.',
+            title: 'แจ้งเตือน!',
+            text: 'โปรดกรอกชื่อผู้ใช้ให้ตรงเงื่อนไข ต้องเป็น [A-Z,a-z,0-9] ตั้งแต่ 4 ตัวอักษรขึ้นไป',
             showConfirmButton: false,
             timer: 3500,
             timerProgressBar: true
@@ -99,8 +99,8 @@ function validation(){
     else if(email === ''){
         Swal.fire({
             icon:'warning',
-            title: 'Warning!',
-            text: 'Please enter your email.',
+            title: 'แจ้งเตือน!',
+            text: 'โปรดกรอกอีเมล์',
             confirmButtonColor: '#3085d6'
         });
         return false;
@@ -108,8 +108,8 @@ function validation(){
     else if(!emailRegex.test(email)){
         Swal.fire({
             icon:'warning',
-            title: 'Not match with Regex!',
-            text: "Please enter a valid Email in regex example : user@email.com, it's can be [A-Z,a-z,0-9] 1 or more characters",
+            title: 'แจ้งเตือน!',
+            text: "โปรดกรอกอีเมล์ให้ตรงเงื่อนไข ตัวอย่าง : user@email.com",
             showConfirmButton: false,
             timer: 4500,
             timerProgressBar: true
@@ -119,8 +119,8 @@ function validation(){
     else if(phone === ''){
         Swal.fire({
             icon:'warning',
-            title: 'Warning!',
-            text: 'Please enter your phone.',
+            title: 'แจ้งเตือน!',
+            text: 'โปรดกรอกเบอร์โทรศัพท์',
             confirmButtonColor: '#3085d6'
         });
         return false;
@@ -128,8 +128,8 @@ function validation(){
     else if(!phoneRegex.test(phone)){
         Swal.fire({
             icon:'warning',
-            title: 'Not match with Regex!',
-            text: 'Please enter your phone number in regex example : 012-345-6789',
+            title: 'แจ้งเตือน!',
+            text: 'โปรดกรอกเบอร์โทรศัพท์ให้ตรงเงื่อนไข ตัวอย่าง : 012-345-6789',
             showConfirmButton: false,
             timer: 3500,
             timerProgressBar: true
@@ -139,8 +139,8 @@ function validation(){
     else if(address === ''){
         Swal.fire({
             icon:'warning',
-            title: 'Warning!',
-            text: 'Please enter your address.',
+            title: 'แจ้งเตือน!',
+            text: 'โปรดกรอกที่อยู่',
             confirmButtonColor: '#3085d6'
         });
         return false;
@@ -148,8 +148,8 @@ function validation(){
     else if(!addressRegex.test(address)){
         Swal.fire({
             icon:'warning',
-            title: 'Not match with Regex!',
-            text: 'Please enter your address in regex must be 4 or more characters with any characters.',
+            title: 'แจ้งเตือน!',
+            text: 'โปรดกรอกที่อยู่ให้ตรงเงื่อนไข ต้องเป็น [ก-ฮ,A-Z,a-z,0-9] ตั้งแต่ 1 ตัวอักษรขึ้นไป / มีช่องว่างได้',
             showConfirmButton: false,
             timer: 3500,
             timerProgressBar: true
@@ -159,8 +159,8 @@ function validation(){
     else if(password === ''){
         Swal.fire({
             icon:'warning',
-            title: 'Warning!',
-            text: 'Please enter your password.',
+            title: 'แจ้งเตือน!',
+            text: 'โปรดกรอกรหัสผ่าน',
             confirmButtonColor: '#3085d6'
         });
         return false;
@@ -168,8 +168,8 @@ function validation(){
     else if(!passwordRegex.test(password)){
         Swal.fire({
             icon:'warning',
-            title: 'Not match with Regex!',
-            text: 'Please enter your password in regex [A-Z,a-z,0-9] must be 8 or more characters.',
+            title: 'แจ้งเตือน!',
+            text: 'โปรดกรอกรหัสผ่านให้ตรงเงื่อนไข ต้องเป็น [A-Z,a-z,0-9] ตั้งแต่ 8 ตัวอักษรขึ้นไป',
             showConfirmButton: false,
             timer: 3500,
             timerProgressBar: true
@@ -179,8 +179,8 @@ function validation(){
     else if(confirmPassword === ''){
         Swal.fire({
             icon:'warning',
-            title: 'Warning!',
-            text: 'Please enter your confirm password.',
+            title: 'แจ้งเตือน!',
+            text: 'โปรดกรอกรหัสผ่านยืนยัน',
             confirmButtonColor: '#3085d6'
         });
         return false;
@@ -188,8 +188,8 @@ function validation(){
     else if(password != confirmPassword){
         Swal.fire({
             icon:'warning',
-            title: 'Warning!',
-            text: 'Password not match.',
+            title: 'แจ้งเตือน!',
+            text: 'กรอกรหัสผ่านไม่ตรงกัน',
             confirmButtonColor: '#3085d6'
         });
         return false;
@@ -197,8 +197,8 @@ function validation(){
     else if(!gender){
         Swal.fire({
             icon:'warning',
-            title: 'Warning!',
-            text: 'Please enter your gender.',
+            title: 'แจ้งเตือน!',
+            text: 'โปรดระบุเพศ',
             confirmButtonColor: '#3085d6'
         });
         return false;

@@ -70,32 +70,32 @@ function validationChangeP(){
     if(password === ''){
         Swal.fire({
             icon:'warning',
-            title: 'Warning!',
-            text: 'Please enter your password.',
+            title: 'แจ้งเตือน!',
+            text: 'โปรดกรอกรหัสผ่าน',
             confirmButtonColor: '#3085d6'
         });
         return false;
     }else if(Npassword === ''){
         Swal.fire({
             icon:'warning',
-            title: 'Warning!',
-            text: 'Please enter your new password.',
+            title: 'แจ้งเตือน!',
+            text: 'โปรดกรอกรหัสผ่านใหม่',
             confirmButtonColor: '#3085d6'
         });
         return false;
     }else if(Cpassword === ''){
         Swal.fire({
             icon:'warning',
-            title: 'Warning!',
-            text: 'Confirm your new password.',
+            title: 'แจ้งเตือน!',
+            text: 'โปรดกรอกยืนยันรหัสผ่านใหม่',
             confirmButtonColor: '#3085d6'
         });
         return false;
     }else if(!passwordRegex.test(password)){
         Swal.fire({
             icon:'warning',
-            title: 'Not match with Regex!',
-            text: 'Please enter your password in regex [A-Z,a-z,0-9] must be 8 or more characters.',
+            title: 'แจ้งเตือน!',
+            text: 'โปรดกรอกรหัสผ่านให้ตรงเงื่อนไข ต้องเป็น [A-Z,a-z,0-9] ตั้งแต่ 8 ตัวอักษรขึ้นไป',
             showConfirmButton: false,
             timer: 3500,
             timerProgressBar: true
@@ -104,8 +104,8 @@ function validationChangeP(){
     }else if(!passwordRegex.test(Npassword)){
         Swal.fire({
             icon:'warning',
-            title: 'Not match with Regex!',
-            text: 'Please enter your new password in regex [A-Z,a-z,0-9] must be 8 or more characters.',
+            title: 'แจ้งเตือน!',
+            text: 'โปรดกรอกรหัสผ่านใหม่ให้ตรงเงื่อนไข ต้องเป็น [A-Z,a-z,0-9] ตั้งแต่ 8 ตัวอักษรขึ้นไป',
             showConfirmButton: false,
             timer: 3500,
             timerProgressBar: true
@@ -114,8 +114,8 @@ function validationChangeP(){
     }else if(Npassword != Cpassword){
         Swal.fire({
             icon:'warning',
-            title: 'Warning!',
-            text: 'New Password not match.',
+            title: 'แจ้งเตือน!',
+            text: 'กรอกรหัสผ่านใหม่ไม่ตรงกัน',
             confirmButtonColor: '#3085d6'
         });
         return false;

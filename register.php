@@ -62,38 +62,38 @@
             <?php endif?>
             <div class="user-details warp">
                 <div class="form-outline mb-3 inputbox">
-                    <label for="u_name" class="form-label">Full Name</label>
-                    <input type="text" class="form-control" name="u_name" id="u_name" aria-describedby="u_name" placeholder="Enter your name">
+                    <label for="u_name" class="form-label">ชื่อ - นามสกุล</label>
+                    <input type="text" class="form-control" name="u_name" id="u_name" aria-describedby="u_name" placeholder="กรอกชื่อ - นามสกุล">
                 </div>
                 <div class="form-outline inputbox">
-                    <label for="u_username" class="form-label">Username</label>
-                    <input type="text" class="form-control" name="u_username" id="u_username" aria-describedby="u_username" placeholder="Enter your username">
+                    <label for="u_username" class="form-label">ชื่อผู้ใช้</label>
+                    <input type="text" class="form-control" name="u_username" id="u_username" aria-describedby="u_username" placeholder="กรอกชื่อผู้ใช้">
                 </div>
                 <div class="form-outline inputbox">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="text" class="form-control" name="email" id="email" aria-describedby="email" placeholder="Enter your email">
+                    <label for="email" class="form-label">อีเมล์</label>
+                    <input type="text" class="form-control" name="email" id="email" aria-describedby="email" placeholder="กรอกอีเมล์">
                 </div>
                 <div class="form-outline inputbox">
-                    <label for="phone" class="form-label">Phone Number</label>
-                    <input type="text" class="form-control" name="phone" id="phone" aria-describedby="phone" placeholder="Enter your phone number">
+                    <label for="phone" class="form-label">เบอร์โทรศัพท์</label>
+                    <input type="text" class="form-control" name="phone" id="phone" aria-describedby="phone" placeholder="กรอกเบอร์โทรศัพท์">
                 </div>
                 <div class="form-outline inputbox textbox" style="margin-bottom: 30px;">
-                    <label for="address" class="form-label">Address</label>
-                    <textarea class="form-control" name="address" aria-describedby="address" id="address" placeholder="Enter your address"></textarea>
+                    <label for="address" class="form-label">ที่อยู่</label>
+                    <textarea class="form-control" name="address" aria-describedby="address" id="address" placeholder="กรอกที่อยู่"></textarea>
                 </div>
                 <div class="form-outline inputbox">
-                    <label for="u_password" class="form-label">Password</label>
+                    <label for="u_password" class="form-label">รหัสผ่าน</label>
                     <div id="showPass">
-                        <input type="password" class="form-control" name="u_password" id="u_password" placeholder="Enter your password">
+                        <input type="password" class="form-control" name="u_password" id="u_password" placeholder="กรอกรหัสผ่าน">
                         <div class="field-icon">
                             <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
                 <div class="form-outline inputbox">
-                    <label for="c_password" class="form-label">Confirm password</label>
+                    <label for="c_password" class="form-label">ยืนยันรหัสผ่าน</label>
                     <div id="showConfirmPass">
-                        <input type="password" class="form-control" name="c_password" id="c_password" placeholder="Enter your confirm password">
+                        <input type="password" class="form-control" name="c_password" id="c_password" placeholder="ยืนยันรหัสผ่าน">
                         <div class="field-icon">
                             <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                         </div>
@@ -101,22 +101,22 @@
                 </div>
                 <div class="form-outline radio mb-3 inputbox inputgender">
                     <div class="mb-2">
-                        <label for="gender">Gender</label>
+                        <label for="gender">เพศ</label>
                     </div>
                     <div>
                         <label>
                             <input type="radio" name="gender" value="male" aria-describedby="gender">
-                            Male
+                            ชาย
                         </label>
                         <label>
                             <input type="radio" name="gender" value="female" aria-describedby="gender">
-                            Female
+                            หญิง
                         </label>
                     </div>
                 </div>
             </div>
-            <button type="submit" name="signup" id="signup" class="btnbg-custom btn-lg mb-3" style="width: 80%;margin-left: auto;margin-right: auto;">Register</button>
-            <div class="form-label mb-3">Already have an account? <a href="login.php">Login</a></div>
+            <button type="submit" name="signup" id="signup" class="btnbg-custom btn-lg mb-3" style="width: 80%;margin-left: auto;margin-right: auto;">สมัครสมาชิก</button>
+            <div class="form-label mb-3">มีชื่อผู้ใช้อยู่แล้ว? คลิ๊ก <a href="login.php">เข้าสู่ระบบ</a> ตรงนี้</div>
         </form>
             
     </div>

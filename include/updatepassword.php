@@ -8,6 +8,12 @@
         $Npassword = $_POST['n_password'];
         $CNpassword = $_POST['cn_password'];
 
+        $check_user = $pdo->prepare("SELECT * FROM users WHERE uid = :uid");
+        $check_user->bindParam(":uid",$Uid);
+        $check_user->execute();
+        $row = $check_user->fetch(PDO::FETCH_ASSOC);
+        $Username = $row['u_username'];
+
         //change $_SESSION to JS validation
 
         // if(empty($Password)){
@@ -43,18 +49,18 @@
                         // var_dump(password_verify($Password,$row['u_password']));
                         // var_dump($passwordHash);
                         // echo "true";
-                        header("location: ../changePass.php?uid=$Uid");
+                        header("location: ../changePass.php?u_username=$Username");
                         exit;
                     }else{
                         $_SESSION['error_updated_pass'] = "Failed to update password.";
-                        header("location: ../changePass.php?uid=$Uid");
+                        header("location: ../changePass.php?u_username=$Username");
                         exit;
                     }
                 }else{
                     $_SESSION['error_currentpass'] = 'Current password not match in data!';
                     // var_dump(password_verify($Password,$row['u_password']));
                     // var_dump($passwordHash);
-                    header("location: ../changePass.php?uid=$Uid");
+                    header("location: ../changePass.php?u_username=$Username");
                     // echo "false";
                     exit;
                 }

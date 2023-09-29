@@ -23,6 +23,7 @@
     color: rgba(20,172,204,1);
     transition: all 0.4s ease-in-out;
 }
+
 .btn-search{
     background: linear-gradient(135deg, rgba(19,33,47,1) 0%, rgba(20,172,204,1) 100%) ;
     outline: none;

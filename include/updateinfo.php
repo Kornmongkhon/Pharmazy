@@ -14,6 +14,12 @@
         // Check if a file is uploaded for avatar
         $avatarPath = null; // Initialize avatar path as null
 
+        $check_user = $pdo->prepare("SELECT * FROM users WHERE uid = :uid");
+        $check_user->bindParam(":uid",$Uid);
+        $check_user->execute();
+        $row = $check_user->fetch(PDO::FETCH_ASSOC);
+        $Username = $row['u_username'];
+
         //change $_SESSION to JS validation
         
         // if(empty($Fullname)) {
@@ -55,21 +61,21 @@
                             if($stmt->execute()){
                                 $_SESSION['updated_path'];//for replace new path on edituser.php
                                 $_SESSION['success_updated'] = "Update Information Successfully.";
-                                header("location: ../edituser.php?uid=$Uid");
+                                header("location: ../edituser.php?u_username=$Username");
                                 exit;
                             }else{
                                 $_SESSION['error_updated'] = "Failed to update user information.";
-                                header("location: ../edituser.php?uid=$Uid");
+                                header("location: ../edituser.php?u_username=$Username");
                                 exit;
                             }
                         }else{
                             $_SESSION['error_upload'] = "Failed to upload the avatar.";
-                            header("location: ../edituser.php?uid=$Uid");
+                            header("location: ../edituser.php?u_username=$Username");
                             exit;
                         }
                     }else{
                         $_SESSION['error_type'] = "Invalid file type. Please upload a PNG,JPG,JPEG,GIF file.";
-                        header("location: ../edituser.php?uid=$Uid");
+                        header("location: ../edituser.php?u_username=$Username");
                         exit;
                     }
                 }
@@ -84,11 +90,11 @@
                 $stmt->execute();
                 if ($stmt->execute()){
                     $_SESSION['success_updated']="Update Information Successfully.";
-                    header("location: ../edituser.php?uid=$Uid");
+                    header("location: ../edituser.php?u_username=$Username");
                     exit;
                 }else{
                     $_SESSION['error_updated'] = "Failed to update user information.";
-                    header("location: ../edituser.php?uid=$Uid");
+                    header("location: ../edituser.php?u_username=$Username");
                     exit;
                 }
 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('include\head.php');
+include('..\include\head.php');
 include('include\functions.php');
 if (!isset($_SESSION['admin_login'])) {
     echo "false";
@@ -16,6 +16,7 @@ if (!isset($_SESSION['admin_login'])) {
 </head>
 
 <body>
+    <?php include("include/sidebar.php"); ?>
     <?php if (isset($_SESSION['admin_login'])) : ?>
         <?php
         $stmt = $pdo->prepare("SELECT * FROM users WHERE urole = 'user'");
@@ -28,41 +29,46 @@ if (!isset($_SESSION['admin_login'])) {
                 <article class="user-details">
                     <table class="table">
                         <thead class="table-info">
-                            <tr style="align-items: center;text-align: center;" >
-                                <th >User ID</th>
-                                <th >Profile</th>
-                                <th >Username</th>
+                            <tr style="align-items: center;text-align: center;">
+                                <th>User ID</th>
+                                <th>Profile</th>
+                                <th>Username</th>
                                 <th class="col-1">Full Name</th>
-                                <th >Email</th>
-                                <th >Address</th>
-                                <th >Phone</th>
-                                <th >Gender</th>
-                                <th >Role</th>
-                                <th >Create At</th>
+                                <th>Email</th>
+                                <th>Address</th>
+                                <th>Phone</th>
+                                <th>Gender</th>
+                                <th>Role</th>
+                                <th>Create At</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php while ($row = $stmt->fetch()) : ?>
-                                <?php 
-                                    $relativeAvatarPath = str_replace('../', '', $row['avatar']);
+                                <?php
+                                $relativeAvatarPath = str_replace('../', '', $row['avatar']);
                                 ?>
                                 <tr style="align-items: center;text-align: center;">
                                     <td><?= $row['uid'] ?></td>
-                                    <td><img src="<?=$relativeAvatarPath ?>" width="50" height="50" class="rounded-circle"></td>
-                                    <td><?=$row['u_username']?></td>
-                                    <td><?=$row['u_name']?></td>
-                                    <td><?=$row['email']?></td>
-                                    <td><?=$row['address']?></td>
-                                    <td ><?=$row['phone']?></td>
-                                    <td><?=$row['gender']?></td>
-                                    <td><?=$row['urole']?></td>
-                                    <td ><?=$row['create_at']?></td>
+                                    <td><img src="../<?= $relativeAvatarPath ?>" width="50" height="50" class="rounded-circle"></td>
+                                    <td><?= $row['u_username'] ?></td>
+                                    <td><?= $row['u_name'] ?></td>
+                                    <td><?= $row['email'] ?></td>
+                                    <td><?= $row['address'] ?></td>
+                                    <td><?= $row['phone'] ?></td>
+                                    <td><?php if ($row['gender'] == 'male') : ?>
+                                            ชาย
+                                        <?php elseif ($row['gender'] == 'female') : ?>
+                                            หญิง
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?= $row['urole'] ?></td>
+                                    <td><?= $row['create_at'] ?></td>
                                 </tr>
                             <?php endwhile; ?>
                         </tbody>
                     </table>
                 </article>
-                <button class="btnbg-custom btn-lg mb-3" style="width: 50%;margin-left: auto;margin-right: auto;"><a href="logout_admin.php">Log out</a></button>
+                <a href="include/logout_admin.php">Log out</a>
             </form>
         </div>
     <?php endif; ?>

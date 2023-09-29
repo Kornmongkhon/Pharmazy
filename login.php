@@ -43,8 +43,8 @@
                         echo "<script>";
                         echo "Swal.fire({
                             icon: 'error',
-                            title: 'Sorry :(',
-                            text: 'No Results Found',
+                            title: 'พบข้อผิดพลาด!',
+                            text: 'ไม่พบบัญชีผู้ใช้ดังกล่าว',
                             confirmButtonColor: '#3085d6'
                           })";
                         echo "</script>";
@@ -57,8 +57,8 @@
                         echo "<script>";
                         echo "Swal.fire({
                             icon: 'error',
-                            title: 'Sorry :(',
-                            text: 'Wrong Username!',
+                            title: 'พบข้อผิดพลาด!',
+                            text: 'ไม่พบบัญชีผู้ใช้ดังกล่าว',
                             confirmButtonColor: '#3085d6'
                           })";
                         echo "</script>";
@@ -71,8 +71,8 @@
                         echo "<script>";
                         echo "Swal.fire({
                             icon: 'error',
-                            title: 'Sorry :(',
-                            text: 'Wrong password!',
+                            title: 'พบข้อผิดพลาด!',
+                            text: 'รหัสผ่านไม่ถูกต้อง',
                             confirmButtonColor: '#3085d6'
                           })";
                         echo "</script>";
@@ -82,21 +82,21 @@
             <?php endif?> 
             <div class="user-details">
                 <div class="form-outline mb-3 inputbox">
-                    <label for="u_username" class="form-label">Username</label>
-                    <input type="text" class="form-control" name="u_username" id="u_username" aria-describedby="u_username" placeholder="Enter your username">
+                    <label for="u_username" class="form-label">ชื่อผู้ใช้</label>
+                    <input type="text" class="form-control" name="u_username" id="u_username" aria-describedby="u_username" placeholder="กรอกชื่อผู้ใช้">
                 </div>
                 <div class="form-outline mb-3 inputbox">
-                    <label for="u_password" class="form-label">Password</label>
+                    <label for="u_password" class="form-label">รหัสผ่าน</label>
                     <div id="showPass">
-                        <input type="password" class="form-control" name="u_password" id="u_password" placeholder="Enter your password">
+                        <input type="password" class="form-control" name="u_password" id="u_password" placeholder="กรอกรหัสผ่าน">
                         <div class="field-icon">
                             <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-            <button type="submit" name="signin" id="signin" class="btnbg-custom btn-lg mb-3" style="width: 50%;margin-left: auto;margin-right: auto;font-weight: 600;">Login</button>
-            <div class="form-label mb-3">Don't have an account? <a href="register.php">Register</a></div>
+            <button type="submit" name="signin" id="signin" class="btnbg-custom btn-lg mb-3" style="width: 50%;margin-left: auto;margin-right: auto;font-weight: 600;">เข้าสู่ระบบ</button>
+            <div class="form-label mb-3">ยังไม่ได้สมัครสมาชิก? คลิ๊ก <a href="register.php">สมัคร</a> ตรงนี้</div>
         </form>  
     </div>
     

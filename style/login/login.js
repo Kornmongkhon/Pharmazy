@@ -30,8 +30,8 @@ function validation(){
     if(username === ''){
         Swal.fire({
             icon:'warning',
-            title: 'Warning!',
-            text: 'Please enter your username.',
+            title: 'แจ้งเตือน!',
+            text: 'โปรดกรอกชื่อผู้ใช้',
             confirmButtonColor: '#3085d6'
         });
         return false;
@@ -39,8 +39,8 @@ function validation(){
     else if(!usernameRegex.test(username)){
         Swal.fire({
             icon:'warning',
-            title: 'Not match with Regex!',
-            text: 'Please enter your username in regex [A-Z,a-z,0-9] 4 or more characters and can be whitespace.',
+            title: 'แจ้งเตือน!',
+            text: 'โปรดกรอกชื่อผู้ใช้ให้ตรงเงื่อนไข ต้องเป็น [A-Z,a-z,0-9] ตั้งแต่ 4 ตัวอักษรขึ้นไป',
             showConfirmButton: false,
             timer: 3500,
             timerProgressBar: true
@@ -50,8 +50,8 @@ function validation(){
     else if(password === ''){
         Swal.fire({
             icon:'warning',
-            title: 'Warning!',
-            text: 'Please enter your password.',
+            title: 'แจ้งเตือน!',
+            text: 'โปรดกรอกรหัสผ่าน',
             confirmButtonColor: '#3085d6'
         });
         return false;
@@ -60,7 +60,7 @@ function validation(){
         Swal.fire({
             icon:'warning',
             title: 'Not match with Regex!',
-            text: 'Please enter your password in regex [A-Z,a-z,0-9] must be 8 or more characters.',
+            text: 'โปรดกรอกรหัสผ่านให้ตรงเงื่อนไข ต้องเป็น [A-Z,a-z,0-9] ตั้งแต่ 8 ตัวอักษรขึ้นไป',
             showConfirmButton: false,
             timer: 3500,
             timerProgressBar: true

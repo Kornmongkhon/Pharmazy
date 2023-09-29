@@ -8,6 +8,7 @@
 <head>
     <link rel="stylesheet" href="style/navbar/navbar.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!-- <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -22,29 +23,34 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                <a class="nav-link active" aria-current="page" href="index.php">หน้าหลัก</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="store.php">รายการสินค้า</a>
                 </li>
                 <li class="nav-item dropdown">
                 <a class="nav-item nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    Category
+                    ประเภทสินค้า
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item drop" href="#">Action</a></li>
-                    <li><a class="dropdown-item drop" href="#">Another action</a></li>
-                    <li><a class="dropdown-item drop" href="#">Another action</a></li>
+                    <li><a class="dropdown-item drop" href="store.php?ptype=home-medicine">ยาสามัญประจำบ้าน</a></li>
+                    <li><a class="dropdown-item drop" href="store.php?ptype=supplementary-food">อาหารเสริม</a></li>
+                    <li><a class="dropdown-item drop" href="store.php?ptype=skin-care">สกินแคร์</a></li>
                 </ul>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Promotions</a>
+                <a class="nav-link active" aria-current="page" href="#">โปรโมชั่น</a>
+                </li><li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="about.php">เกี่ยวกับ</a>
                 </li>
             </ul>
-            <form class="d-flex p-3 w-50">
-                <input class="form-control me-2 wd" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn-search" type="submit">Search</button>
+            <form class="d-flex p-3">
+                <input class="form-control me-2" type="search" placeholder="ค้นหา" aria-label="Search" style="width: 30rem;">
+                <button class="btn-search" type="submit">ค้นหา</button>
             </form>
             <?php if(!isset($_SESSION['user_login'])):?>
-                    <a class="btn btn-outline-success" style="margin-right: 15px;" href="login.php">Login</a>
-                    <a class="btn btn-outline-success" style="margin-right: 15px;" href="Register.php">Register</a>
+                    <a class="btn btn-outline-success" style="margin-right: 15px;" href="login.php">เข้าสู่ระบบ</a>
+                    <a class="btn btn-outline-success" style="margin-right: 15px;" href="Register.php">สมัครสมาชิก</a>
             <?php endif;?>
             <?php if(isset($_SESSION['user_login'])):?>
                 <?php
@@ -68,12 +74,12 @@
                         <?php endif;?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><span class="dropdown-item drop">Welcome, <?=$row['u_name']?></span></li>
-                            <li><a class="dropdown-item drop" href="edituser.php?uid=<?=$row['uid']?>">Profile</a></li>
-                            <li><a class="dropdown-item drop" href="#">Carts</a></li>
+                            <li><span class="dropdown-item drop">ยินดีต้อนรับ, <?=$row['u_name']?></span></li>
+                            <li><a class="dropdown-item drop" href="edituser.php?u_username=<?=$row['u_username']?>">โปรไฟล์</a></li>
+                            <li><a class="dropdown-item drop" href="#">ตะกร้า</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item drop" href="changePass.php?uid=<?=$row['uid']?>">Change Password</a></li>
-                            <li><a class="dropdown-item drop" href="logout.php">Logout</a></li>
+                            <li><a class="dropdown-item drop" href="changePass.php?u_username=<?=$row['u_username']?>">เปลี่ยนรหัสผ่าน</a></li>
+                            <li><a class="dropdown-item drop" href="logout.php">ออกจากระบบ</a></li>
                         </ul>
                     </li>
                 </ul>     

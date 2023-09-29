@@ -3,7 +3,7 @@
     // ini_set('display_errors', 1);
     include('include/functions.php');
     include('include/head.php');
-    if (!isset($_GET['uid'])) { //check session user login
+    if (!isset($_GET['u_username'])) { //check session user login
         header("location: index.php");
     }
 ?>
@@ -21,12 +21,10 @@
         ?>
     </div>
     <?php
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE uid = :uid");
-    $stmt->bindParam(":uid", $_GET['uid']);
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE u_username = :u_username");
+    $stmt->bindParam(":u_username", $_GET['u_username']);
     $stmt->execute();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    $avatarName = $row['avatar'];
-    $webAccesspath = 'assets/avatar/'.$avatarName;
     ?>
     <div class="container">
         <form class="card login-card-custom" action="include/updatepassword.php" method="post">
@@ -37,7 +35,7 @@
                         echo "Swal.fire({
                             position: 'center',
                             icon: 'success',
-                            title: 'Update Password Successfully!',
+                            title: 'อัพเดทรหัสผ่านสำเร็จ',
                             showConfirmButton: false,
                             timer: 2000
                         })";
@@ -51,8 +49,8 @@
                         echo "<script>";
                         echo "Swal.fire({
                             icon: 'error',
-                            title: 'Sorry :(',
-                            text: 'Failed to update password!',
+                            title: 'พบข้อผิดพลาด!',
+                            text: 'ไม่สามารถเปลี่ยนรหัสผ่านได้!',
                             confirmButtonColor: '#3085d6'
                           })";
                         echo "</script>";
@@ -65,8 +63,8 @@
                         echo "<script>";
                         echo "Swal.fire({
                             icon: 'error',
-                            title: 'Sorry :(',
-                            text: 'Current password not match in data!',
+                            title: 'พบข้อผิดพลาด!',
+                            text: 'รหัสผ่านไม่ตรงกันกับรหัสผ่านปัจจุบันที่กรอกมา',
                             confirmButtonColor: '#3085d6'
                           })";
                         echo "</script>";
@@ -80,34 +78,34 @@
                     <input type="text" class="form-control" name="uid" aria-describedby="uid" readonly value="<?= $row['uid'] ?>">
                 </div>
                 <div class="form-outline mb-3 currentpass">
-                    <label for="u_password" class="form-label">Current Password</label>
+                    <label for="u_password" class="form-label">รหัสผ่านปัจจุบัน</label>
                     <div id="showPass">
-                        <input type="password" class="form-control" name="u_password" id="u_password" placeholder="Enter your current password">
+                        <input type="password" class="form-control" name="u_password" id="u_password" placeholder="กรอกรหัสผ่านปัจจุบัน">
                         <div class="field-icon">
                             <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
                 <div class="form-outline mb-3 inputbox">
-                    <label for="n_password" class="form-label">New Password</label>
+                    <label for="n_password" class="form-label">รหัสผ่านใหม่</label>
                     <div id="showNewPass">
-                        <input type="password" class="form-control" name="n_password" id="n_password" placeholder="Enter your new password">
+                        <input type="password" class="form-control" name="n_password" id="n_password" placeholder="กรอกรหัสผ่านใหม่">
                         <div class="field-icon">
                             <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
                 <div class="form-outline mb-3 inputbox">
-                    <label for="c_password" class="form-label">Confirm New Password</label>
+                    <label for="c_password" class="form-label">ยืนยันรหัสผ่านใหม่</label>
                     <div id="showNewCPass">
-                        <input type="password" class="form-control" name="n_password" id="c_password" placeholder="Enter your confirm new password">
+                        <input type="password" class="form-control" name="n_password" id="c_password" placeholder="ยืนยันรหัสผ่านใหม่">
                         <div class="field-icon">
                             <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-            <button type="submit" name="u_updatepassword" id="updatepass" class="btn btn-primary btn-lg mb-3" style="width: 80%;margin-left: auto;margin-right: auto;">Confirm</button>
+            <button type="submit" name="u_updatepassword" id="updatepass" class="btn btn-primary btn-lg mb-3" style="width: 80%;margin-left: auto;margin-right: auto;">ยืนยัน</button>
         </form>
     </div>
 </body>

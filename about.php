@@ -1,63 +1,84 @@
-<?php
-include('include\head.php');
+<?php 
+    include('include\head.php');
 ?>
-
 <head>
-    <link href="style/index/index.css" rel="stylesheet">
-    </link>
+    <link rel="stylesheet" href="style/about/about.css">
 </head>
-
 <body>
     <div>
-        <?php
-        include('include\header.php');
+        <?php 
+            include('include\header.php');
         ?>
+        <div class="container">
+
+        </div>
         <section class="hero">
             <div class="container">
                 <div class="hero-con">
                     <div class="hero-info">
-                        <h3>MENTOS PHARMAZY</h3>
-                        <p>Pharmacy is the science and practice of discovering, producing, preparing, dispensing, reviewing and monitoring medications, aiming to ensure the safe, effective, and affordable use of medicines. It is a miscellaneous science as it links health sciences with pharmaceutical sciences and natural sciences. The professional practice is becoming more clinically oriented as most of the drugs are now manufactured by pharmaceutical industries. Based on the setting, pharmacy practice is either classified as community or institutional pharmacy. Providing direct patient care in the community of institutional pharmacies is considered clinical pharmacy.</p>
-                        <a href="#" class="hero-btn">shop</a>
-                    </div>
+                        <h3>MENTOS PHARMAZY คือใคร</h3>
+                        <p>ร้านขายยา ที่มียาครบวงจร เรื่องสุขภาพ เรื่องผิวหน้า ที่นี่ที่เดียวครบวงจร</p>
+                        
+                     </div>
 
-                    <div class="hero-img">
-                        <img src="assets/images/pharmazy.jpg" alt="">
-                    </div>
+                    
                 </div>
             </div>
-
+        
         </section>
     </div>
-    
+
+    <div class="container">
+
+</div>
+<section class="About">
+    <div class="container">
+        <div class="About-con">
+            <div class="About-info">
+                <h3>เกี่ยวกับเรา</h3>
+                <p>Pharmacy is the science and practice of discovering, producing, preparing, dispensing, reviewing and monitoring medications, aiming to ensure the safe, effective, and affordable use of medicines. It is a miscellaneous science as it links health sciences with pharmaceutical sciences and natural sciences. The professional practice is becoming more clinically oriented as most of the drugs are now manufactured by pharmaceutical industries. Based on the setting, pharmacy practice is either classified as community or institutional pharmacy. Providing direct patient care in the community of institutional pharmacies is considered clinical pharmacy.</p>
+             </div>
+
+             <div class="hero-img"> 
+                <img src="assets/images/pharmazy.jpg" alt="">
+             </div>
+        </div>
+    </div>
+
+</section>
+</div>
+
     <section class="blog">
         <div class="container">
 
-            <div class="blog-title">
-                <h3>Category</h3>
+            <div class="blog-title"> 
+                <h3>ผู้จ่ายยาของเรา</h3>
             </div>
 
             <div class="blog-con">
 
                 <div class="blog-item">
-                    <img src="assets/images/yasaman.jpg" alt="">
-                    <h4>ยาสามัญประจำบ้าน</h4>
-                    <p>"ยาสามัญประจำบ้าน" คือ ตัวยาที่กระทรวงสาธารณะสุขได้พิจารณาเอาไว้ว่าเป็นยาอันเหมาะสมที่ประชาชนควรซื้อมาไว้ประจำบ้านของตนเอง เพื่อจะเป็นประโยชน์ในการใช้ดูแลตัวเองจากอาการเจ็บป่วยเล็กๆ น้อยๆ ที่สามารถเกิดขึ้นได้ทั่วไปในชีวิตประจำวัน</p>
-                    <a href="#">shop</a>
+                    <img src="assets/images/peem.jpg" alt="">
+                    <h4>เภสัชกร</h4>
+                    <h5>ปริญญาเอก ภาควิชาวิทยาการคอมพิวเตอร์</h5>
+                    <p>มีประสบการณ์เภสัชกรร้านขายยาเดียวและร้านขายยา Mexcio มายาวนานกว่า 10 ปี</p>
+                    
                 </div>
 
                 <div class="blog-item">
-                    <img src="assets/images/serm.jpg" alt="">
-                    <h4>อาหารเสริม</h4>
-                    <p>อาหารเสริม (Complementary foods) ทางเภสัชกรรมหมายถึง อาหารที่ให้รับประทานเพิ่มเติมนอกเหนือจากอาหารหลัก (อาหารมีประโยชน์ 5 หมู่ ที่ได้รับ 3 มื้อต่อวัน) โดยการให้อาหารเสริมมีวัตถุประสงค์ต่างๆ เช่น เพื่อช่วยให้สุขภาพแข็งแรง เพื่อเพิ่มพลังงานให้กับร่างกาย</p>
-                    <a href="#">shop</a>
+                    <img src="assets/images/pang.jpg" alt="">
+                    <h4>ผู้ช่วยเภสัชกร</h4>
+                    <h5>ปริญญาเอก ภาควิชาไฟฟ้ากำลัง</h5>
+                    <p>มีความเชียวชาญด้านยา อาหารเสริม สกินแคร์ มีประสบการณ์ร้านขายยาที่ Argentina 5 ปี</p>
+                    
                 </div>
 
                 <div class="blog-item">
-                    <img src="assets/images/skincare.jpg" alt="">
-                    <h4>สกินแคร์</h4>
-                    <p>สกินแคร์คือ ผลิตภัณฑ์สำหรับดูแลและฟื้นฟูผิวที่เสื่อมสภาพให้ดีขึ้น เช่น รอยดำ รอยแดง ฝ้า กระ ริ้วรอยก่อนวัย รวมถึงให้ความชุ่มชื้นกันผิวไม่ว่าจะเป็นผิวหน้าหรือผิวกาย โดยสกินแคร์แต่ละชนิดอาจมีรูปแบบและส่วนผสมที่แตกต่างกัน ดังนั้น จึงควรเลือกใช้สกินแคร์ให้เหมาะกับสภาพผิว เพื่อประสิทธิภาพในการดูแลผิวที่ดี</p>
-                    <a href="#">shop</a>
+                    <img src="assets/images/golf.jpg" alt="">
+                    <h4>จัดจำหน่าย</h4>
+                    <h5>ปริญญาเอก ภาควิชาสถาปัตยกรรม</h5>
+                    <p>มีประสบการณ์ร้านขายยามากกว่า 12 ปี เคยอยู่ร้านยา France มาหลายที่</p>
+                    
                 </div>
 
             </div>
@@ -114,7 +135,6 @@ include('include\head.php');
     <div class="footer-bottom">
         <p>Copyright 2023 ©. Mentos Pharmazy (When ever you're sick, think of us)</p>
     </div>
-
+            
 </body>
-
 </html>
