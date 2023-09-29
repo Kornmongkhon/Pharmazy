@@ -47,7 +47,22 @@ $count = 0;
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 mb-0 color1">
-                            <article style="display: flex;justify-content: center;align-items: center;"><a href="index.php" class="changec">หน้าหลัก</a> <span class="mx-2 mb-0">/</span> <strong>รายการสินค้า</strong></article>
+                            <?php
+                                //check type
+                                // if($selectType=='skin-care'){ 
+                                //     echo "true";
+                                // }else{
+                                //     echo "false";
+                                // }
+                            ?>
+                            <article style="display: flex;justify-content: center;align-items: center;"><a href="index.php" class="changec">หน้าหลัก</a> <span class="mx-2 mb-0">/</span>
+                            <?php if($selectType=='skin-care'):?><a href="store.php" class="changec" style="margin-right: 0.5rem;">รายการสินค้า</a>/ สกินแคร์ 
+                            <?php elseif($selectType=='supplementary-food'):?><a href="store.php" class="changec" style="margin-right: 0.5rem;">รายการสินค้า</a>/ อาหารเสริม
+                            <?php elseif($selectType=='home-medicine'):?><a href="store.php" class="changec" style="margin-right: 0.5rem;">รายการสินค้า</a>/ ยาสามัญประจำบ้าน
+                            <?php else:?>
+                                <strong>รายการสินค้า</strong>
+                            <?php endif;?>
+                            </article>
                             <aside>
                                 <form id="filterForm">
                                     <select id="productTypeDropdown" class="form-select" name="ptype" onchange="filterProduct()">

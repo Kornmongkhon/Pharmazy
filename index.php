@@ -18,7 +18,7 @@ include('include\head.php');
                     <div class="hero-info">
                         <h3>MENTOS PHARMAZY</h3>
                         <p>Pharmacy is the science and practice of discovering, producing, preparing, dispensing, reviewing and monitoring medications, aiming to ensure the safe, effective, and affordable use of medicines. It is a miscellaneous science as it links health sciences with pharmaceutical sciences and natural sciences. The professional practice is becoming more clinically oriented as most of the drugs are now manufactured by pharmaceutical industries. Based on the setting, pharmacy practice is either classified as community or institutional pharmacy. Providing direct patient care in the community of institutional pharmacies is considered clinical pharmacy.</p>
-                        <a href="#" class="hero-btn">shop</a>
+                        <a href="store.php" class="hero-btn">สั่งซื้อ</a>
                     </div>
 
                     <div class="hero-img">
@@ -43,21 +43,21 @@ include('include\head.php');
                     <img src="assets/images/yasaman.jpg" alt="">
                     <h4>ยาสามัญประจำบ้าน</h4>
                     <p>"ยาสามัญประจำบ้าน" คือ ตัวยาที่กระทรวงสาธารณะสุขได้พิจารณาเอาไว้ว่าเป็นยาอันเหมาะสมที่ประชาชนควรซื้อมาไว้ประจำบ้านของตนเอง เพื่อจะเป็นประโยชน์ในการใช้ดูแลตัวเองจากอาการเจ็บป่วยเล็กๆ น้อยๆ ที่สามารถเกิดขึ้นได้ทั่วไปในชีวิตประจำวัน</p>
-                    <a href="#">shop</a>
+                    <a href="store.php?ptype=home-medicine">สั่งซื้อ</a>
                 </div>
 
                 <div class="blog-item">
                     <img src="assets/images/serm.jpg" alt="">
                     <h4>อาหารเสริม</h4>
                     <p>อาหารเสริม (Complementary foods) ทางเภสัชกรรมหมายถึง อาหารที่ให้รับประทานเพิ่มเติมนอกเหนือจากอาหารหลัก (อาหารมีประโยชน์ 5 หมู่ ที่ได้รับ 3 มื้อต่อวัน) โดยการให้อาหารเสริมมีวัตถุประสงค์ต่างๆ เช่น เพื่อช่วยให้สุขภาพแข็งแรง เพื่อเพิ่มพลังงานให้กับร่างกาย</p>
-                    <a href="#">shop</a>
+                    <a href="store.php?ptype=supplementary-food">สั่งซื้อ</a>
                 </div>
 
                 <div class="blog-item">
                     <img src="assets/images/skincare.jpg" alt="">
                     <h4>สกินแคร์</h4>
                     <p>สกินแคร์คือ ผลิตภัณฑ์สำหรับดูแลและฟื้นฟูผิวที่เสื่อมสภาพให้ดีขึ้น เช่น รอยดำ รอยแดง ฝ้า กระ ริ้วรอยก่อนวัย รวมถึงให้ความชุ่มชื้นกันผิวไม่ว่าจะเป็นผิวหน้าหรือผิวกาย โดยสกินแคร์แต่ละชนิดอาจมีรูปแบบและส่วนผสมที่แตกต่างกัน ดังนั้น จึงควรเลือกใช้สกินแคร์ให้เหมาะกับสภาพผิว เพื่อประสิทธิภาพในการดูแลผิวที่ดี</p>
-                    <a href="#">shop</a>
+                    <a href="store.php?ptype=skin-care">สั่งซื้อ</a>
                 </div>
 
             </div>
