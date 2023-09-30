@@ -4,7 +4,7 @@ include("include/head.php");
 if (!isset($_POST['product']) || !isset($_POST['pid'])) {
     header("location: store.php");
 } else {
-    $pid = $_POST['product'];
+    $pid = $_POST['product']; //get value from button name product (value is pid)
 }
 ?>
 
