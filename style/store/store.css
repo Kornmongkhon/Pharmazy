@@ -26,12 +26,15 @@
     color: #24252A;
 }
 .img-custom{
-    height: 20rem;
-    width: 20rem;
+    height: 15rem;
+    width: 15rem;
     border-radius: 50%;
     /* border: 1px solid; */
     margin-left: auto;
     margin-right: auto;
+}
+.card-title-custom{
+    font-size: 18.5px;
 }
 .card-custom{
     border: 2px dotted;
@@ -54,10 +57,20 @@
     justify-content: center;
     align-items: center;
     background-color: #24252A;
+    color: white;
     text-decoration: none;
     width: 50%;
     height: 2rem;
     border-radius: 10px;
     margin: 1.5rem auto;
     padding: 1.3rem;
+    outline: 0;
+    border: none;
+}
+.page-custom{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -35px;
 }

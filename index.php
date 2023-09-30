@@ -17,7 +17,7 @@ include('include\head.php');
                 <div class="hero-con">
                     <div class="hero-info">
                         <h3>MENTOS PHARMAZY</h3>
-                        <p>Pharmacy is the science and practice of discovering, producing, preparing, dispensing, reviewing and monitoring medications, aiming to ensure the safe, effective, and affordable use of medicines. It is a miscellaneous science as it links health sciences with pharmaceutical sciences and natural sciences. The professional practice is becoming more clinically oriented as most of the drugs are now manufactured by pharmaceutical industries. Based on the setting, pharmacy practice is either classified as community or institutional pharmacy. Providing direct patient care in the community of institutional pharmacies is considered clinical pharmacy.</p>
+                        <p>เภสัชศาสตร์เป็นศาสตร์และการฝึกฝนในการค้นหา ผลิต จัดเตรียม จ่าย ทบทวน และติดตามยา โดยมีจุดมุ่งหมายเพื่อให้แน่ใจว่าการใช้ยามีความปลอดภัย มีประสิทธิภาพ และราคาไม่แพง เป็นวิทยาศาสตร์เบ็ดเตล็ดเนื่องจากเชื่อมโยงวิทยาศาสตร์สุขภาพกับวิทยาศาสตร์เภสัชกรรมและวิทยาศาสตร์ธรรมชาติ การปฏิบัติวิชาชีพกำลังมุ่งเน้นไปที่ทางคลินิกมากขึ้น เนื่องจากปัจจุบันยาส่วนใหญ่ผลิตโดยอุตสาหกรรมยา ขึ้นอยู่กับสภาพแวดล้อม การปฏิบัติงานด้านเภสัชกรรมจัดเป็นร้านขายยาชุมชนหรือร้านขายยาแบบสถาบัน การให้การดูแลผู้ป่วยโดยตรงในชุมชนร้านขายยาของสถาบันถือเป็นร้านขายยาคลินิก</p>
                         <a href="store.php" class="hero-btn">สั่งซื้อ</a>
                     </div>
 
@@ -34,7 +34,7 @@ include('include\head.php');
         <div class="container">
 
             <div class="blog-title">
-                <h3>Category</h3>
+                <h3>ประเภทสินค้า</h3>
             </div>
 
             <div class="blog-con">

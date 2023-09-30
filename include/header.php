@@ -8,7 +8,7 @@
 <head>
     <link rel="stylesheet" href="style/navbar/navbar.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <!-- <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -48,6 +48,7 @@
                 <input class="form-control me-2" type="search" placeholder="ค้นหา" aria-label="Search" style="width: 30rem;">
                 <button class="btn-search" type="submit">ค้นหา</button>
             </form>
+            <i class="fa-solid fa-cart-shopping" style="color: white;margin-right: 0.5rem;"></i>
             <?php if(!isset($_SESSION['user_login'])):?>
                     <a class="btn btn-outline-success" style="margin-right: 15px;" href="login.php">เข้าสู่ระบบ</a>
                     <a class="btn btn-outline-success" style="margin-right: 15px;" href="Register.php">สมัครสมาชิก</a>
