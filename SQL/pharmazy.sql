@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2023 at 04:53 PM
+-- Generation Time: Oct 12, 2023 at 04:50 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -24,29 +24,42 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bill`
+-- Table structure for table `delivery`
 --
 
-CREATE TABLE `bill` (
-  `bid` int(10) NOT NULL,
-  `cid` int(10) NOT NULL,
-  `pid` int(10) NOT NULL,
-  `bdate` timestamp NOT NULL DEFAULT current_timestamp()
+CREATE TABLE `delivery` (
+  `delivery_id` int(10) NOT NULL,
+  `delivery_type` varchar(255) NOT NULL,
+  `delivery_price` int(10) NOT NULL,
+  `delivery_status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cart`
+-- Table structure for table `orders`
 --
 
-CREATE TABLE `cart` (
-  `cid` int(10) NOT NULL,
+CREATE TABLE `orders` (
+  `order_id` int(10) NOT NULL,
   `uid` int(10) NOT NULL,
   `pid` int(10) NOT NULL,
-  `cstatus` varchar(255) NOT NULL,
-  `pquan_buy` int(10) NOT NULL
+  `order_quantity` int(10) NOT NULL,
+  `order_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `order_status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `uid`, `pid`, `order_quantity`, `order_date`, `order_status`) VALUES
+(1, 1, 12, 3, '2023-10-01 13:22:23', 'paid'),
+(2, 1, 6, 7, '2023-10-02 13:29:57', 'wait'),
+(3, 1, 17, 2, '2023-10-02 13:30:12', 'wait'),
+(4, 3, 4, 2, '2023-10-02 13:31:06', 'wait'),
+(5, 3, 10, 2, '2023-10-03 13:31:15', 'paid'),
+(6, 3, 15, 1, '2023-10-03 13:31:25', 'paid');
 
 -- --------------------------------------------------------
 
@@ -71,7 +84,7 @@ CREATE TABLE `product` (
 
 INSERT INTO `product` (`pid`, `pname`, `pdetail`, `price`, `ptype`, `plike`, `pimg`, `pquan_stock`) VALUES
 (1, 'Blackmores MultiVitamin Active 30 TABS', 'Blackmores แบลคมอร์ส มัลติวิตามิน แอคทีฟ (30 เม็ด) MultiVitamin Active (30 Tab)  คือ วิตามินรวมที่ประกอบด้วย วิตามิน แร่ธาตุ และสารอาหารรวม 23 ชนิด ที่มี ส่วนประกอบของ โคเอนโซม์คิวเทน, ลูทีน,ทอรีน และสารสกัดอาร์ติโชค ช่วยดูแลสุขภาพ เสริมสร้างพลังงานแก่ร่างกาย ต่อต้านอนุมูลอิสระ มีส่วนช่วยในการทำงานของระบบกล้ามเนื้อ เพื่อวัยทำงานที่ต้องการความกระฉับกระเฉง และพร้อมสำหรับการทำงานในแต่ละวัน  ทานครั้งละ 1 เม็ด วันละ 1 ครั้ง หลังอาหาร เช้า ค่ะ', 344.5, 'supplementary-food', 0, 'assets/product/blackmore.jpg', 52),
-(2, 'Centrum Dietary Supplement 30 TABS', 'Centrum Dietary Supplement ผลิตภัณฑ์เสริมอาหาร วิตามินและเกลือแร่รวม 22 ชนิด สูตรใหม่ พร้อมเบต้าแคโรทีน ลูทีน และ ไลโคปีน Centrum A to Zinc + Lutein เพราะอาหารและการพักผ่อน ไม่เพียงพอต่อร่างกายจึงควรได้รับอาหารเสริม ประกอบด้วยวิตามินและเกลือแร่รวมถึง 22 ชนิด พร้อมด้วย เบต้า-แคโรทีน, ลูทีน และไลโคปีน ให้วิตามินเอ ในรูปแบบเบต้า-แคโรทีน มีความหลากหลายของวิตามินและเกลือแร่ที่ร่างกายต้องการในแต่ละวัน', 280.34, 'supplementary-food', 0, 'assets/product/centrum.jpg', 23),
+(2, 'Centrum Dietary Supplement 30 TABS', 'Centrum Dietary Supplement ผลิตภัณฑ์เสริมอาหาร วิตามินและเกลือแร่รวม 22 ชนิด สูตรใหม่ พร้อมเบต้าแคโรทีน ลูทีน และ ไลโคปีน Centrum A to Zinc + Lutein เพราะอาหารและการพักผ่อน ไม่เพียงพอต่อร่างกายจึงควรได้รับอาหารเสริม ประกอบด้วยวิตามินและเกลือแร่รวมถึง 22 ชนิด พร้อมด้วย เบต้า-แคโรทีน, ลูทีน และไลโคปีน ให้วิตามินเอ ในรูปแบบเบต้า-แคโรทีน มีความหลากหลายของวิตามินและเกลือแร่ที่ร่างกายต้องการในแต่ละวัน', 280.34, 'supplementary-food', 1, 'assets/product/centrum.jpg', 23),
 (3, 'HOF Colla UC-II 30 TABS', 'HOF Colla UC-II คอลลาเจนสำหรับข้อและกระดูก 30 เม็ด ผลิตภัณฑ์คอลลาเจน ไทพ์ทู สำหรับข้อและกระดูก ช่วยป้องกันการทำลาย และเสริมสร้างกระดูกอ่อนบริเวณข้อต่อ ช่วยลดการอักเสบ และอาการปวดจากข้อกระดูก', 800, 'supplementary-food', 0, 'assets/product/ucii.png', 15),
 (4, 'Sara Paracetamol Tablets 500 mg 10 Tab', 'Sara Paracetamol Tablets 500 mg 10 Tab ซาร่า พาราเซตามอล สรรพคุณ ลดไข้ ขนาดและวิธีการใช้:\r\n น้ำหนักน้อยกว่า 34 กก. ให้ปรึกษาแพทย์หรือเภสัชกร\r\n น้ำหนักตั้งแต่ 34 - 50 กินยาครั้งละ 1 เม็ด แต่ละครั้งห่างกันอย่างน้อย 4 ชั่วโมง เฉพาะเวลาปวดหรือมีไข้\r\n น้ำหนักมากกว่า 50 - 67 กินยาครั้งละ หนึ่งเม็ดครึ่ง วันละไม่เกิน 5 ครั้ง แต่ละครั้งห่างกันอย่างน้อย 4 ชั่วโมง เฉพาะเวลาปวดหรือมีไข้\r\n น้ำหนักมากกว่า 67 กินยาครั้งละ 2 เม็ด วันละไม่เกิน 4 ครั้ง แต่ละครั้งห่างกันอย่างน้อย 4 ชั่วโมง เฉพาะเวลาปวดหรือมีไข้', 200.42, 'home-medicine', 0, 'assets/product/sara.jpg', 13),
 (5, 'Antacil Gel HH 240 ML', 'Antacil Gel HH แอนตาซิล เยล เอช เอช ลดกรด แสบร้อนกลางอก กรดไหลย้อน ยาสามัญประจำบ้าน สรรพคุณ สำหรับลดกรดและลดแก๊สเคลือบแผลในกระเพาะอาหารและลำไส้เล็กส่วนต้น \r\nบรรเทาอาการปวดท้อง ท้องอืด จุกเสียดแน่น อาหารไม่ย่อย แสบร้อนกลางอกอัน\r\nเนื่องจากกรดไหลย้อนของกรดจากภาวะมีกรดมากเกินในกระเพาะอาหาร\r\nโดยไม่ทำให้เกิดอาการท้องผูก ออกฤทธิ์ภายใน 5 นาที', 55, 'home-medicine', 0, 'assets/product/antacil.png', 36),
@@ -132,20 +145,18 @@ INSERT INTO `users` (`uid`, `u_username`, `u_password`, `u_name`, `email`, `addr
 --
 
 --
--- Indexes for table `bill`
+-- Indexes for table `delivery`
 --
-ALTER TABLE `bill`
-  ADD PRIMARY KEY (`bid`),
-  ADD KEY `bill_cid` (`cid`),
-  ADD KEY `bill_pid` (`pid`);
+ALTER TABLE `delivery`
+  ADD PRIMARY KEY (`delivery_id`);
 
 --
--- Indexes for table `cart`
+-- Indexes for table `orders`
 --
-ALTER TABLE `cart`
-  ADD PRIMARY KEY (`cid`),
-  ADD KEY `cart_uid` (`uid`),
-  ADD KEY `cart_pid` (`pid`);
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `order_uid` (`uid`),
+  ADD KEY `order_pid` (`pid`);
 
 --
 -- Indexes for table `product`
@@ -164,16 +175,16 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `bill`
+-- AUTO_INCREMENT for table `delivery`
 --
-ALTER TABLE `bill`
-  MODIFY `bid` int(10) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `delivery`
+  MODIFY `delivery_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `cart`
+-- AUTO_INCREMENT for table `orders`
 --
-ALTER TABLE `cart`
-  MODIFY `cid` int(10) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `orders`
+  MODIFY `order_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -192,18 +203,11 @@ ALTER TABLE `users`
 --
 
 --
--- Constraints for table `bill`
+-- Constraints for table `orders`
 --
-ALTER TABLE `bill`
-  ADD CONSTRAINT `bill_cid` FOREIGN KEY (`cid`) REFERENCES `cart` (`cid`),
-  ADD CONSTRAINT `bill_pid` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`);
-
---
--- Constraints for table `cart`
---
-ALTER TABLE `cart`
-  ADD CONSTRAINT `cart_pid` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`),
-  ADD CONSTRAINT `cart_uid` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`);
+ALTER TABLE `orders`
+  ADD CONSTRAINT `order_pid` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`),
+  ADD CONSTRAINT `order_uid` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

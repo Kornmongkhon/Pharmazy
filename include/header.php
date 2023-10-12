@@ -77,7 +77,7 @@
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><span class="dropdown-item drop">ยินดีต้อนรับ, <?=$row['u_name']?></span></li>
                             <li><a class="dropdown-item drop" href="edituser.php?u_username=<?=$row['u_username']?>">โปรไฟล์</a></li>
-                            <li><a class="dropdown-item drop" href="#">ตะกร้า</a></li>
+                            <li><a class="dropdown-item drop" href="cart.php?u_username=<?=$row['u_username']?>">ตะกร้า</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item drop" href="changePass.php?u_username=<?=$row['u_username']?>">เปลี่ยนรหัสผ่าน</a></li>
                             <li><a class="dropdown-item drop" href="logout.php">ออกจากระบบ</a></li>

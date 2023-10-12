@@ -52,14 +52,6 @@ $totalPages = ceil($totalProducts / $itemPerPage);
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 mb-0 color1">
-                            <?php
-                            //check type
-                            // if($selectType=='skin-care'){ 
-                            //     echo "true";
-                            // }else{
-                            //     echo "false";
-                            // }
-                            ?>
                             <article style="display: flex;justify-content: center;align-items: center;"><a href="index.php" class="changec">หน้าหลัก</a> <span class="mx-2 mb-0">/</span>
                                 <?php if ($selectType == 'skin-care') : ?><a href="store.php" class="changec" style="margin-right: 0.5rem;">รายการสินค้า</a>/ สกินแคร์
                                 <?php elseif ($selectType == 'supplementary-food') : ?><a href="store.php" class="changec" style="margin-right: 0.5rem;">รายการสินค้า</a>/ อาหารเสริม

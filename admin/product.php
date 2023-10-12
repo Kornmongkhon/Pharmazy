@@ -8,11 +8,11 @@ if (!isset($_SESSION['admin_login'])) {
 ?>
 
 <head>
-    <link rel="stylesheet" href="style/admin/admin.css">
+    <link rel="stylesheet" href="style/admin/product.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link href="https:////cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https:////cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">  <!-- Datatable CSS -->
 </head>
 <body>
     <?php 
@@ -75,7 +75,7 @@ if (!isset($_SESSION['admin_login'])) {
                 <div class="d-flex align-items-center">
                     <!-- icon bar -->
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">Dashboard</h2>
+                    <h2 class="fs-2 m-0"><a href="admin.php" style="text-decoration: none;color: #24252A;">Store</a> / Products</h2>
                 </div>
                 <!-- button for dropdown admin info -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -103,100 +103,63 @@ if (!isset($_SESSION['admin_login'])) {
             <hr>
             <div class="container-fluid px-4">
                 <div class="row g-3 my-2">
-                    <div class="col-md-3">
-                        <a href="product.php" style="text-decoration: none;color:black">
-                            <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                                <div class="text-center mt-3">
-                                    <?php
-                                        $stmt = $pdo->prepare("SELECT SUM(product.pquan_stock) AS total_product FROM product;");
-                                        $stmt->execute();
-                                        $total_product = $stmt->fetch(PDO::FETCH_ASSOC);
-                                    ?>
-                                    <h3 class="fs-2 "><?=number_format($total_product['total_product'],2)?></h3>
-                                    <p class="fs-5">สินค้าทั้งหมด</p>
-                                </div>
-                                <i class="fas fa-gift fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                            <div class="text-center mt-3">
-                                <?php
-                                    $stmt = $pdo->prepare("SELECT SUM(orders.order_quantity * product.price) AS sum_income FROM orders JOIN product ON orders.pid = product.pid;");
-                                    $stmt->execute();
-                                    $sum_income = $stmt->fetch(PDO::FETCH_ASSOC);
-                                ?>
-                                <h3 class="fs-2"><?=number_format($sum_income['sum_income'],2)?></h3>
-                                <p class="fs-5">รายได้ทั้งหมด</p>
-                            </div>
-                            <i
-                                class="fas fa-hand-holding-usd fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                            <div class="text-center mt-3">
-                                <?php
-                                    $stmt = $pdo->prepare("SELECT COUNT(users.uid) AS total_user FROM users WHERE users.urole = 'user';");
-                                    $stmt->execute();
-                                    $total_users = $stmt->fetch(PDO::FETCH_ASSOC);
-                                ?>
-                                <h3 class="fs-2"><?=$total_users['total_user']?></h3>
-                                <p class="fs-5">สมาชิกทั้งหมด</p>
-                            </div>
-                            <i class="fas fa-truck fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                            <div class="text-center mt-3">
-                                <h3 class="fs-2">%25</h3>
-                                <p class="fs-5">Increase</p>
-                            </div>
-                            <i class="fas fa-chart-line fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-                        </div>
-                    </div>
-                </div>
+                    
 
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">การสั่งซื้อล่าสุด</h3>
+                    <h3 class="fs-4 mb-3">สินค้าทั้งหมด</h3>
                     <div class="col">
                         <?php
-                            $stmt = $pdo->prepare("SELECT DATE_FORMAT(orders.order_date + INTERVAL 543 YEAR, '%d/%m/%Y') AS order_date, orders.order_id,users.u_username, product.pid, product.pname, orders.order_quantity ,SUM(orders.order_quantity * product.price) AS sum_price FROM orders JOIN product ON orders.pid = product.pid JOIN users ON orders.uid = users.uid GROUP BY orders.order_date,u_username ORDER BY orders.order_date;");
+                            $stmt = $pdo->prepare("SELECT * FROM `product`;");
                             $stmt->execute();
                         ?>
-                        <table id="OrderTable" class="table table-responsive-md">
+                        <table id="ProductTable" class="table table-responsive-md">
                             <thead class="table-info">
                                 <tr>
-                                    <th style="text-align: center;">วันและเวลา</th>
-                                    <th style="text-align: center;">เลขที่คำสั่งซื้อ</th>
-                                    <th style="text-align: center;">ชื่อผู้ใช้</th>
                                     <th style="text-align: center;">รหัสสินค้า</th>
                                     <th style="text-align: center;">ชื่อสินค้า</th>
-                                    <th style="text-align: center;">จำนวน</th>
-                                    <th style="text-align: center;">ราคารวม</th>
+                                    <th style="text-align: center;">รายละเอียดสินค้า</th>
+                                    <th style="text-align: center;">ราคา</th>
+                                    <th style="text-align: center;">ประเภทสินค้า</th>
+                                    <th style="text-align: center;">ชื่นชอบ</th>
+                                    <th style="text-align: center;">จำนวนในสต๊อก</th>
+                                    <th style="text-align: center;">รูปสินค้า</th>
+                                    <th style="text-align: center;">การจัดการ</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php while($row = $stmt->fetch(PDO::FETCH_ASSOC)):?>
                                     <tr style="text-align: center;">
-                                    <td><?= $row['order_date'] ?></td>
-                                    <td><?= $row['order_id'] ?></td>
-                                    <td><?= $row['u_username'] ?></td>
-                                    <td><?= $row['pid'] ?></td>
-                                    <td><?=$row['pname']?></td>
-                                    <td><?=$row['order_quantity']?></td>
-                                    <td><?= number_format($row['sum_price'],2) ?> ฿</td>
+                                    <td style="padding-right: .6rem;"><?= $row['pid'] ?></td>
+                                    <td><?= $row['pname'] ?></td>
+                                    <td><?= $row['pdetail'] ?></td>
+                                    <td><?= number_format($row['price'],2) ?> ฿</td>
+                                    <?php if($row['ptype'] == 'supplementary-food'):?>
+                                        <td>อาหารเสริม</td>
+                                    <?php elseif($row['ptype'] == 'home-medicine'):?>
+                                        <td>ยาสามัญประจำบ้าน</td>
+                                    <?php elseif($row['ptype'] == 'skin-care'):?>
+                                        <td>สกินแคร์</td>
+                                    <?php endif;?>
+                                    <td><?=$row['plike']?></td>
+                                    <td><?= $row['pquan_stock'] ?> ชิ้น</td>
+                                    <td><?= $row['pimg'] ?></td>
+                                    <td>
+                                        <!-- <a href="product_detail.php?pid=<?=$row['pid']?>" class="btn btn-warning">แก้ไข</a> <a href="#" class="btn btn-danger">ลบ</a> -->
+                                        <div style="display: flex;justify-content: center;align-items: center">
+                                            <form style="margin-right: .6rem;" method="post" action="product_detail.php">
+                                                <input type="hidden" name="pid" value="<?=$row['pid']?>">
+                                                <button type="submit" class="btn btn-warning">แก้ไข</button>
+                                            </form>
+                                            <form style="margin-right: .6rem;" method="post" action=""><button type="submit" class="btn btn-danger">ลบ</button></form>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <?php endwhile;?>
                             </tbody>
                         </table>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -209,7 +172,7 @@ if (!isset($_SESSION['admin_login'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="style/sidebar/sidebar.js"></script>
     <script>
-        let table = new DataTable('#OrderTable');
+        let table = new DataTable('#ProductTable');
     </script>
 </body>
 
