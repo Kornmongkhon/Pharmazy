@@ -80,6 +80,7 @@ function showNotification(){
             title: 'สำเร็จ',
             text: 'อัพเดทสินค้าเสร็จสิ้น',
             showConfirmButton: false,
+            timerProgressBar: true,
             timer: 2500
         });
         return false;
