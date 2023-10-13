@@ -106,7 +106,7 @@ if (!isset($_SESSION['admin_login'])) {
             </nav>
             <hr>
             <div class="container">
-                <div class="notification"></div>
+                <div id="notification" style="display: none;"></div>
                 <form class="card login-card-custom border-info"  method="post" enctype="multipart/form-data" onsubmit="return false">
                     <div class="title">รายละเอียดสินค้า</div>
                     <div class="img-center">
@@ -167,8 +167,8 @@ if (!isset($_SESSION['admin_login'])) {
                             <input type="number" class="form-control" name="plike" id="plikeup" aria-describedby="plike" placeholder="กรอกความนิยมของสินค้า" value="<?= $product['plike'] ?>">
                         </div>
                         <div class="form-outline mb-3 inputbox">
-                            <label label class="form-label">รูปโปรไฟล์</label>
-                            <input class="form-control" type="file" id="formFile" name="pimg" accept="images/gif, image/jpeg, image/jpg, image/png">
+                            <label label class="form-label">รูปสินค้า</label>
+                            <input class="form-control" type="file" id="pimg" name="pimg" accept="images/gif, image/jpeg, image/jpg, image/png">
                         </div>
                         <!-- <div class="form-outline mb-3 inputbox">
                     <label for="u_password" class="form-label">Password</label>
