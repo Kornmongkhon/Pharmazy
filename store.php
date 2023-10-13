@@ -12,7 +12,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $offset = ($page - 1) * $itemPerPage;
 
 if (!empty($selectType) && $selectType !== "all") { //show protype from choosen type
-    $stmtt = $pdo->prepare("SELECT * FROM product WHERE ptype = :ptype LIMIT $offset, $itemPerPage");
+    $stmtt = $pdo->prepare("SELECT * FROM product WHERE ptype = :ptype ORDER BY pname ASC LIMIT $offset, $itemPerPage");
     $stmtt->bindParam(":ptype", $selectType);
 } else { //value = all let ramdom product
     $stmtt = $pdo->prepare("SELECT * FROM product ORDER BY RAND() LIMIT $offset, $itemPerPage");
@@ -85,7 +85,13 @@ $totalPages = ceil($totalProducts / $itemPerPage);
                                 <div class="card">
                                     <!-- Add a hidden input to store the product id -->
                                     <input type="hidden" name="pid" value="<?= $row['pid']; ?>">
-                                    <img class="img-custom" src="<?= $row['pimg']; ?>">
+                                    <?php
+                                    // Remove the '../' part from the stored avatar path
+                                    $relativePhotoPath = str_replace('../', '', $row['pimg']);
+                                    // echo $relativeAvatarPath;
+                                    // var_dump($relativeAvatarPath); //check path
+                                    ?>
+                                    <img class="img-custom" src="<?=$relativePhotoPath?>">
                                     <div class="card-body-custom">
                                         <p class="card-title-custom"><?= $row['pname']; ?></p>
                                     </div>

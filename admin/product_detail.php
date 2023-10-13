@@ -46,7 +46,10 @@ if (!isset($_SESSION['admin_login'])) {
                         </a>
                         <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item" style="margin-top: 1.1rem;">
-                                <a href="product.php" class="sidebar-link">Products</a>
+                                <a href="product.php" class="sidebar-link">Stock</a>
+                            </li>
+                            <li class="sidebar-item" style="margin-top: 1.1rem;">
+                                <a href="add_product.php" class="sidebar-link">Product</a>
                             </li>
                         </ul>
                         <hr>
@@ -105,22 +108,18 @@ if (!isset($_SESSION['admin_login'])) {
                 </div>
             </nav>
             <hr>
-            <div class="container">
+            <div class="container-custom">
                 <div id="notification" style="display: none;"></div>
-                <form class="card login-card-custom border-info"  method="post" enctype="multipart/form-data" onsubmit="return false">
+                <form class="card login-card-custom border-info" method="post" enctype="multipart/form-data" id="formProduct">
                     <div class="title">รายละเอียดสินค้า</div>
                     <div class="img-center">
-                        <?php if (isset($_SESSION['updated_path'])) : ?>
-                            <img src="../<?= $product['pimg'] ?>" class="rounded-circle" height="150" width="150" alt="Avatar" loading="lazy" />
-                        <?php else : ?>
                             <?php
                             // Remove the '../' part from the stored avatar path
-                            $relativeAvatarPath = str_replace('../', '', $product['pimg']);
+                            $relativePhotoPath = str_replace('../', '', $product['pimg']);
                             // echo $relativeAvatarPath;
                             // var_dump($relativeAvatarPath); //check path
                             ?>
-                            <img src="../<?= $relativeAvatarPath ?>" class="rounded-circle" height="150" width="150" alt="Avatar" loading="lazy" />
-                        <?php endif; ?>
+                            <img src="../<?= $relativePhotoPath ?>" class="rounded-circle" height="150" width="150" alt="product" loading="lazy" />
                     </div>
                     <div class="user-details">
                         <div class="form-outline mb-3 inputbox" style="display: none;">
@@ -137,7 +136,7 @@ if (!isset($_SESSION['admin_login'])) {
                         </div>
                         <div class="form-outline inputbox textbox" style="margin-bottom: 30px;">
                             <label for="pdetail" class="form-label">รายละเอียดสินค้า</label>
-                            <textarea class="form-control" name="pdetail" id="pdetailup" aria-describedby="pdetail" placeholder="กรอกรายละเอิยดสินค้า"><?= $product['pdetail'] ?></textarea>
+                            <textarea class="form-control" name="pdetail" id="pdetailup" aria-describedby="pdetail" placeholder="กรอกรายละเอิยดสินค้า" style="height: 5rem;"><?= $product['pdetail'] ?></textarea>
                         </div>
                         <div class="form-outline mb-3 inputbox">
                             <label for="price" class="form-label">ประเภทสินค้า</label>
@@ -167,13 +166,9 @@ if (!isset($_SESSION['admin_login'])) {
                             <input type="number" class="form-control" name="plike" id="plikeup" aria-describedby="plike" placeholder="กรอกความนิยมของสินค้า" value="<?= $product['plike'] ?>">
                         </div>
                         <div class="form-outline mb-3 inputbox">
-                            <label label class="form-label">รูปสินค้า</label>
-                            <input class="form-control" type="file" id="pimg" name="pimg" accept="images/gif, image/jpeg, image/jpg, image/png">
+                            <label for="pimg" class="form-label">รูปสินค้า</label>
+                            <input class="form-control" type="file" id="pimg" name="pimg" accept="image/gif, image/jpeg, image/jpg, image/png">
                         </div>
-                        <!-- <div class="form-outline mb-3 inputbox">
-                    <label for="u_password" class="form-label">Password</label>
-                    <input type="password" class="form-control" name="u_password" placeholder="Enter your password">
-                </div> -->
                     </div>
                     <button type="submit" name="product_update" id="product_update" class="btn btn-primary btn-lg mb-3" style="width: 80%;margin-left: auto;margin-right: auto;">ยืนยัน</button>
                 </form>

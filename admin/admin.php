@@ -44,7 +44,10 @@ if (!isset($_SESSION['admin_login'])) {
                         </a>
                         <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item" style="margin-top: 1.1rem;">
-                                <a href="product.php" class="sidebar-link">Products</a>
+                                <a href="product.php" class="sidebar-link">Stock</a>
+                            </li>
+                            <li class="sidebar-item" style="margin-top: 1.1rem;">
+                                <a href="add_product.php" class="sidebar-link">Product</a>
                             </li>
                         </ul>
                         <hr>
@@ -147,7 +150,7 @@ if (!isset($_SESSION['admin_login'])) {
                                 <h3 class="fs-2"><?=$total_users['total_user']?></h3>
                                 <p class="fs-5">สมาชิกทั้งหมด</p>
                             </div>
-                            <i class="fas fa-truck fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                            <i class="fas fa-users fs-1 primary-text border rounded-full secondary-bg p-3"></i>
                         </div>
                     </div>
 

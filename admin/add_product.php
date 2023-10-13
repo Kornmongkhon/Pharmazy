@@ -8,11 +8,12 @@ if (!isset($_SESSION['admin_login'])) {
 ?>
 
 <head>
-    <link rel="stylesheet" href="style/admin/admin.css">
+    <link rel="stylesheet" href="style/admin/add_product.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link href="https:////cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="style/admin/add_product.js"></script>
 </head>
 <body>
     <?php 
@@ -78,7 +79,7 @@ if (!isset($_SESSION['admin_login'])) {
                 <div class="d-flex align-items-center">
                     <!-- icon bar -->
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0"><a href="admin.php" style="text-decoration: none;color: #24252A;">Users</a> / Admin Management</h2>
+                    <h2 class="fs-2 m-0"><a href="admin.php" style="text-decoration: none;color: #24252A;">Store</a> / Products</h2>
                 </div>
                 <!-- button for dropdown admin info -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -104,62 +105,47 @@ if (!isset($_SESSION['admin_login'])) {
                 </div>
             </nav>
             <hr>
-            <div class="container-fluid px-4">
-                <div class="row my-5">
-                    <h3 class="fs-4 mb-3">รายชื่อทีมงาน</h3>
-                    <div class="col">
-                        <?php
-                            $stmt = $pdo->prepare("SELECT * FROM users WHERE users.urole = 'admin';");
-                            $stmt->execute();
-                        ?>
-                        <table id="OrderTable" class="table table-responsive-md">
-                            <thead class="table-info">
-                                <tr>
-                                    <th style="text-align: center;">ID</th>
-                                    <th style="text-align: center;">โปรไฟล์</th>
-                                    <th style="text-align: center;">ชื่อผู้ใช้</th>
-                                    <th style="text-align: center;">ชื่อ - นามสกุล</th>
-                                    <th style="text-align: center;">อีเมล์</th>
-                                    <th style="text-align: center;">ที่อยู่</th>
-                                    <th style="text-align: center;">เบอร์โทรศัพท์</th>
-                                    <th style="text-align: center;">เพศ</th>
-                                    <th style="text-align: center;">วันที่สร้างบัญชี</th>
-                                    <th style="text-align: center;">การจัดการ</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php while($row = $stmt->fetch(PDO::FETCH_ASSOC)):?>
-                                    <?php
-                                        $relativeAvatarPath = str_replace('../', '', $row['avatar']);
-                                    ?>
-                                    <tr style="text-align: center;">
-                                        <td><?= $row['uid'] ?></td>
-                                        <td><img src="../<?= $relativeAvatarPath ?>" width="50" height="50" class="rounded-circle"></td>
-                                        <td><?= $row['u_username'] ?></td>
-                                        <td><?= $row['u_name'] ?></td>
-                                        <td><?= $row['email'] ?></td>
-                                        <td><?= $row['address'] ?></td>
-                                        <td><?= $row['phone'] ?></td>
-                                        <td><?php if ($row['gender'] == 'male') : ?>
-                                            ชาย
-                                        <?php elseif ($row['gender'] == 'female') : ?>
-                                            หญิง
-                                        <?php endif; ?>
-                                    </td>
-                                    <td><?= $row['create_at'] ?></td>
-                                    <td>
-                                        <!-- <a href="#" class="btn btn-warning">แก้ไข</a> <a href="#" class="btn btn-danger">ลบ</a> -->
-                                        <div style="display: flex;justify-content: center;align-items: center">
-                                            <form style="margin-right: .6rem;" method="post" action=""><button type="submit" class="btn btn-warning">แก้ไข</button></form>
-                                            <form style="margin-right: .6rem;" method="post" action=""><button type="submit" class="btn btn-danger">ลบ</button></form>
-                                        </div>
-                                    </td>
-                                    </tr>
-                                <?php endwhile;?>
-                            </tbody>
-                        </table>
+            <div class="container-custom">
+                <div id="notification" style="display: none;"></div>
+                <form class="card login-card-custom border-info" method="post" enctype="multipart/form-data" id="formaddProduct">
+                    <div class="title">รายละเอียดสินค้า</div>
+                    <div class="user-details">
+                        <div class="form-outline mb-3 inputbox">
+                            <label for="pname" class="form-label">ชื่อสินค้า</label>
+                            <input type="text" class="form-control" name="pname" id="pname" aria-describedby="pname" placeholder="กรอกชื่อสินค้า">
+                        </div>
+                        <div class="form-outline mb-3 inputbox">
+                            <label for="price" class="form-label">ราคาสินค้า</label>
+                            <input type="number" class="form-control" name="price" id="price" aria-describedby="price" placeholder="กรอกราคาสินค้า">
+                        </div>
+                        <div class="form-outline inputbox textbox" style="margin-bottom: 30px;">
+                            <label for="pdetail" class="form-label">รายละเอียดสินค้า</label>
+                            <textarea class="form-control" name="pdetail" id="pdetail" aria-describedby="pdetail" placeholder="กรอกรายละเอิยดสินค้า" style="height: 5rem;"></textarea>
+                        </div>
+                        <div class="form-outline mb-3 inputbox">
+                            <label for="price" class="form-label">ประเภทสินค้า</label>
+                            <select class="form-control" name="ptype" id="ptype">
+                                    <option value=""></option>
+                                    <option value="supplementary-food">อาหารเสริม</option>
+                                    <option value="home-medicine">ยาสามัญประจำบ้าน</option>
+                                    <option value="skin-care">สกินแคร์</option>
+                            </select>
+                        </div>
+                        <div class="form-outline mb-3 inputbox">
+                            <label for="pquan_stock" class="form-label">จำนวนสินค้าในสต็อก</label>
+                            <input type="number" class="form-control" name="pquan_stock" id="pquan_stock" aria-describedby="pquan_stock" placeholder="จำนวนสินค้าในสต็อก">
+                        </div>
+                        <div class="form-outline mb-3 inputbox">
+                            <label for="plike" class="form-label">ความนิยม</label>
+                            <input type="number" class="form-control" name="plike" id="plike" aria-describedby="plike" placeholder="กรอกความนิยมของสินค้า">
+                        </div>
+                        <div class="form-outline mb-3 inputbox">
+                            <label for="pimg" class="form-label">รูปสินค้า</label>
+                            <input class="form-control" type="file" id="pimg" name="pimg" accept="image/gif, image/jpeg, image/jpg, image/png">
+                        </div>
                     </div>
-                </div>
+                    <button type="submit" name="product_add" id="product_add" class="btn btn-primary btn-lg mb-3" style="width: 80%;margin-left: auto;margin-right: auto;">ยืนยัน</button>
+                </form>
             </div>
         </div>
     </div>
@@ -167,13 +153,8 @@ if (!isset($_SESSION['admin_login'])) {
     </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="style/sidebar/sidebar.js"></script>
-    <script>
-        let table = new DataTable('#OrderTable');
-    </script>
 </body>
 
 </html>

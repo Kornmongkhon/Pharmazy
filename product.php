@@ -40,7 +40,13 @@ if (!isset($_POST['product']) || !isset($_POST['pid'])) {
         </section>
         <aside>
             <div class="container" style="margin-top: 2rem;">
-                <img src="<?=$row['pimg']?>" width="100" height="100">
+                <?php
+                    // Remove the '../' part from the stored avatar path
+                    $relativePhotoPath = str_replace('../', '', $row['pimg']);
+                    // echo $relativeAvatarPath;
+                    // var_dump($relativeAvatarPath); //check path
+                ?>
+                <img src="<?=$relativePhotoPath?>" width="100" height="100">
                 <p><?=$row['pname']?></p>
                 <p>รายละเอียดสินค้า</p>
                 <p style="opacity: 0.5;"><?=$row['pdetail']?></p>
