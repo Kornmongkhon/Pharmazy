@@ -55,7 +55,7 @@ if (!isset($_SESSION['admin_login'])) {
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#auth"
                             aria-expanded="false" aria-controls="auth">
-                            <i class="fa-regular fa-user pe-2"></i>
+                            <i class="fa-solid fa-user pe-2"></i>
                             Users
                         </a>
                         <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
@@ -78,7 +78,7 @@ if (!isset($_SESSION['admin_login'])) {
                 <div class="d-flex align-items-center">
                     <!-- icon bar -->
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0"><a href="admin.php" style="text-decoration: none;color: #24252A;">Store</a> / Products</h2>
+                    <h2 class="fs-2 m-0"><a href="admin.php" style="text-decoration: none;color: #24252A;">Store</a> / Stock</h2>
                 </div>
                 <!-- button for dropdown admin info -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"

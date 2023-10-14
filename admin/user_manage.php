@@ -55,7 +55,7 @@ if (!isset($_SESSION['admin_login'])) {
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#auth"
                             aria-expanded="false" aria-controls="auth">
-                            <i class="fa-regular fa-user pe-2"></i>
+                            <i class="fa-solid fa-user pe-2"></i>
                             Users
                         </a>
                         <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
@@ -150,8 +150,11 @@ if (!isset($_SESSION['admin_login'])) {
                                     <td>
                                         <!-- <a href="#" class="btn btn-warning">แก้ไข</a> <a href="#" class="btn btn-danger">ลบ</a> -->
                                         <div style="display: flex;justify-content: center;align-items: center">
-                                            <form style="margin-right: .6rem;" method="post" action=""><button type="submit" class="btn btn-warning">แก้ไข</button></form>
-                                            <form style="margin-right: .6rem;" method="post" action=""><button type="submit" class="btn btn-danger">ลบ</button></form>
+                                            <form style="margin-right: .6rem;" method="post" action="user_detail.php">
+                                                <input type="hidden" name="uid" id="uid" value="<?=$row['uid']?>">
+                                                <button type="submit" class="btn btn-warning" id="edit">แก้ไข</button>
+                                            </form>
+                                            <form style="margin-right: .6rem;" method="post" action=""><button type="submit" class="btn btn-danger" id="delete">ลบ</button></form>
                                         </div>
                                     </td>
                                     </tr>

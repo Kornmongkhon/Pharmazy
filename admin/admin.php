@@ -55,7 +55,7 @@ if (!isset($_SESSION['admin_login'])) {
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#auth"
                             aria-expanded="false" aria-controls="auth">
-                            <i class="fa-regular fa-user pe-2"></i>
+                            <i class="fa-solid fa-user pe-2"></i>
                             Users
                         </a>
                         <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">

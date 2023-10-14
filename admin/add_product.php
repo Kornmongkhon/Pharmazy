@@ -56,7 +56,7 @@ if (!isset($_SESSION['admin_login'])) {
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#auth"
                             aria-expanded="false" aria-controls="auth">
-                            <i class="fa-regular fa-user pe-2"></i>
+                            <i class="fa-solid fa-user pe-2"></i>
                             Users
                         </a>
                         <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
@@ -108,7 +108,7 @@ if (!isset($_SESSION['admin_login'])) {
             <div class="container-custom">
                 <div id="notification" style="display: none;"></div>
                 <form class="card login-card-custom border-info" method="post" enctype="multipart/form-data" id="formaddProduct">
-                    <div class="title">รายละเอียดสินค้า</div>
+                    <div class="title">เพิ่มสินค้าลงคลัง</div>
                     <div class="user-details">
                         <div class="form-outline mb-3 inputbox">
                             <label for="pname" class="form-label">ชื่อสินค้า</label>

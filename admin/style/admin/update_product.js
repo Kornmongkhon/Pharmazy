@@ -83,53 +83,53 @@ function showNotification(){
         // Update the content of the 'notification' element with the response
         document.getElementById('notification').innerHTML = request.responseText;
         // Check if the response is Updated., then show SweetAlert2
-    if(request.responseText.trim() === "Updated."){
-        Swal.fire({
-            icon:'success',
-            title: 'สำเร็จ',
-            text: 'อัพเดทสินค้าเสร็จสิ้น',
-            showConfirmButton: false,
-            timerProgressBar: true,
-            timer: 2500
-        });
-        return false;
-    }else if(request.responseText.trim() === "Updated-photo"){
-        Swal.fire({
-            icon:'success',
-            title: 'สำเร็จ',
-            text: 'อัพเดทสินค้าเสร็จสิ้น',
-            showConfirmButton: false,
-            timerProgressBar: true,
-            timer: 2500
-        });
-    }else if(request.responseText.trim() === "Failed to update."){
-        Swal.fire({
-            icon:'error',
-            title: 'ล้มเหลว',
-            text: 'ไม่สามารถอัพเดทข้อมูลสินค้าได้',
-            showConfirmButton: false,
-            timerProgressBar: true,
-            timer: 2500
-        });
-    }else if(request.responseText.trim() === "Failed to upload the photo."){
-        Swal.fire({
-            icon:'error',
-            title: 'ล้มเหลว',
-            text: 'อัพเดทรูปสินค้าไม่สำเร็จ',
-            showConfirmButton: false,
-            timerProgressBar: true,
-            timer: 2500
-        });
-    }else if(request.responseText.trim() === "Invalid file type. Please upload a PNG,JPG,JPEG,GIF file."){
-        Swal.fire({
-            icon:'error',
-            title: 'ล้มเหลว',
-            text: 'โปรดอัพโหลดรูปภาพในนามสกุล .png, .jpg, .jpeg, .gif เท่านั้น',
-            showConfirmButton: false,
-            timerProgressBar: true,
-            timer: 2500
-        });
-    }
+        if(request.responseText.trim() === "Updated."){
+            Swal.fire({
+                icon:'success',
+                title: 'สำเร็จ',
+                text: 'อัพเดทสินค้าเสร็จสิ้น',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 2500
+            });
+            return false;
+        }else if(request.responseText.trim() === "Updated-photo"){
+            Swal.fire({
+                icon:'success',
+                title: 'สำเร็จ',
+                text: 'อัพเดทสินค้าเสร็จสิ้น',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 2500
+            });
+        }else if(request.responseText.trim() === "Failed to update."){
+            Swal.fire({
+                icon:'error',
+                title: 'ล้มเหลว',
+                text: 'ไม่สามารถอัพเดทข้อมูลสินค้าได้',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 2500
+            });
+        }else if(request.responseText.trim() === "Failed to upload the photo."){
+            Swal.fire({
+                icon:'error',
+                title: 'ล้มเหลว',
+                text: 'อัพเดทรูปสินค้าไม่สำเร็จ',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 2500
+            });
+        }else if(request.responseText.trim() === "Invalid file type. Please upload a PNG,JPG,JPEG,GIF file."){
+            Swal.fire({
+                icon:'error',
+                title: 'ล้มเหลว',
+                text: 'โปรดอัพโหลดรูปภาพในนามสกุล .png, .jpg, .jpeg, .gif เท่านั้น',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 2500
+            });
+        }
     }
     
 }
