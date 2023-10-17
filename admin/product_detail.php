@@ -139,7 +139,7 @@ if (!isset($_SESSION['admin_login'])) {
                             <textarea class="form-control" name="pdetail" id="pdetailup" aria-describedby="pdetail" placeholder="กรอกรายละเอิยดสินค้า" style="height: 5rem;"><?= $product['pdetail'] ?></textarea>
                         </div>
                         <div class="form-outline mb-3 inputbox">
-                            <label for="price" class="form-label">ประเภทสินค้า</label>
+                            <label for="ptype" class="form-label">ประเภทสินค้า</label>
                             <select class="form-control" name="ptype" id="ptypeup">
                                 <?php if($product['ptype']=='supplementary-food'):?>
                                     <option value="supplementary-food">อาหารเสริม</option>

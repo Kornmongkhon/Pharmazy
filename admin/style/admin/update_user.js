@@ -125,7 +125,9 @@ function showNotification(){
                 showConfirmButton: false,
                 timerProgressBar: true,
                 timer: 2500
-            });
+            }).then(function(){
+                location.reload();
+            })
         }else if(request.responseText.trim() === "Updated-photo"){
             Swal.fire({
                 icon:'success',
@@ -134,7 +136,9 @@ function showNotification(){
                 showConfirmButton: false,
                 timerProgressBar: true,
                 timer: 2500
-            });
+            }).then(function(){
+                location.reload();
+            })
         }else if(request.responseText.trim() === "Failed to update."){
             Swal.fire({
                 icon:'error',
@@ -143,7 +147,9 @@ function showNotification(){
                 showConfirmButton: false,
                 timerProgressBar: true,
                 timer: 2500
-            });
+            }).then(function(){
+                location.reload();
+            })
         }else if(request.responseText.trim() === "Failed to upload the photo."){
             Swal.fire({
                 icon:'error',
@@ -152,7 +158,9 @@ function showNotification(){
                 showConfirmButton: false,
                 timerProgressBar: true,
                 timer: 2500
-            });
+            }).then(function(){
+                location.reload();
+            })
         }else if(request.responseText.trim() === "Invalid file type. Please upload a PNG,JPG,JPEG,GIF file."){
             Swal.fire({
                 icon:'error',
@@ -161,7 +169,9 @@ function showNotification(){
                 showConfirmButton: false,
                 timerProgressBar: true,
                 timer: 2500
-            });
+            }).then(function(){
+                location.reload();
+            })
         }
     }
 }

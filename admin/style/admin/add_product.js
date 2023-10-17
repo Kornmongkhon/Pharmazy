@@ -107,7 +107,42 @@ function showNotification(){
                 showConfirmButton: false,
                 timerProgressBar: true,
                 timer: 2500
-            });
+            }).then(function(){
+                location.reload();
+            })
+        }else if(request.responseText.trim() === 'failed insert'){
+            Swal.fire({
+                icon:'error',
+                title: 'ล้มเหลว',
+                text: 'เพิ่มสินค้าไม่สำเร็จ',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 2500
+            }).then(function(){
+                location.reload();
+            })
+        }else if(request.responseText.trim() === 'Failed to upload the photo.'){
+            Swal.fire({
+                icon:'error',
+                title: 'ล้มเหลว',
+                text: 'อัพเดทรูปสินค้าไม่สำเร็จ',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 2500
+            }).then(function(){
+                location.reload();
+            })
+        }else if(request.responseText.trim() === "Invalid file type. Please upload a PNG,JPG,JPEG,GIF file."){
+            Swal.fire({
+                icon:'error',
+                title: 'ล้มเหลว',
+                text: 'โปรดอัพโหลดรูปภาพในนามสกุล .png, .jpg, .jpeg, .gif เท่านั้น',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 2500
+            }).then(function(){
+                location.reload();
+            })
         }
     }
 }

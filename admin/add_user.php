@@ -8,12 +8,12 @@ if (!isset($_SESSION['admin_login'])) {
 ?>
 
 <head>
-    <link rel="stylesheet" href="style/admin/user_detail.css">
+    <link rel="stylesheet" href="style/admin/add_user.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="style/admin/update_user.js"></script>
+    <script src="style/admin/add_user.js"></script>
 </head>
 
 <body>
@@ -77,23 +77,11 @@ if (!isset($_SESSION['admin_login'])) {
         <!-- Sidebar Ends here -->
 
         <div class="page-content-wrapper" style="width: 100%;">
-            <?php
-            $stmt = $pdo->prepare("SELECT * FROM `users` WHERE uid = ?;");
-            $stmt->bindParam(1, $_POST['uid']);
-            $stmt->execute();
-            $check_user = $stmt->fetch(PDO::FETCH_ASSOC);
-            ?>
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <!-- icon bar -->
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0"><a href="admin.php" style="text-decoration: none;color: #24252A;">สมาชิก</a> / 
-                        <?php if($check_user['urole'] == 'user'):?>
-                            <a href="user_manage.php" style="text-decoration: none;color: #24252A;">จัดการผู้ใช้</a> / <?= $check_user['u_name'] ?>
-                        <?php elseif($check_user['urole'] == 'admin'):?>
-                            <a href="admin_manage.php" style="text-decoration: none;color: #24252A;">จัดการแอดมิน</a> / <?= $check_user['u_name'] ?>
-                        <?php endif;?>
-                    </h2>
+                    <h2 class="fs-2 m-0"><a href="admin.php" style="text-decoration: none;color: #24252A;">สมาชิก</a> / เพิ่มสมาชิก</h2>
                 </div>
                 <!-- button for dropdown admin info -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -108,7 +96,7 @@ if (!isset($_SESSION['admin_login'])) {
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">โปรไฟล์</a></li>
-                                <li><a class="dropdown-item" href="#">ตั้งค่าบัญชี</a></li>
+                                <li><a class="dropdown-item" href="#">ตั้งค่า</a></li>
                                 <li><a class="dropdown-item" href="include/logout_admin.php">ออกจากระบบ</a></li>
                             </ul>
                         </li>
@@ -118,44 +106,57 @@ if (!isset($_SESSION['admin_login'])) {
             <hr>
             <div class="container-custom">
                 <div id="notification" style="display: none;"></div>
-                <form class="card login-card-custom border-info" method="post" enctype="multipart/form-data" id="formProduct">
-                    <div class="title">รายละเอียดผู้ใช้</div>
-                    <div class="img-center">
-                        <?php
-                        // Remove the '../' part from the stored avatar path
-                        $relativePhotoPath = str_replace('../', '', $check_user['avatar']);
-                        // echo $relativeAvatarPath;
-                        // var_dump($relativeAvatarPath); //check path
-                        ?>
-                        <img src="../<?= $relativePhotoPath ?>" class="rounded-circle" height="150" width="150" alt="product" loading="lazy" />
-                    </div>
+                <form class="card login-card-custom border-info" method="post" enctype="multipart/form-data" id="formaddUser">
+                    <div class="title">เพิ่มข้อมูลสมาชิก</div>
                     <div class="user-details">
-                        <div class="form-outline mb-3 inputbox" style="display: none;">
-                            <label for="uid" class="form-label">ID ชื่อผู้ใช้</label>
-                            <input type="text" class="form-control" name="uid" id="uidup" aria-describedby="uid" readonly value="<?= $check_user['uid'] ?>">
-                        </div>
-                        <div class="form-outline mb-3 inputbox">
-                            <label for="u_username" class="form-label">ชื่อผู้ใช้</label>
-                            <input type="text" class="form-control" name="u_username" id="u_usernameup" aria-describedby="u_username" disabled readonly value="<?= $check_user['u_username'] ?>">
-                        </div>
                         <div class="form-outline mb-3 inputbox">
                             <label for="u_name" class="form-label">ชื่อ - นามสกุล</label>
-                            <input type="text" class="form-control" name="u_name" id="u_nameup" aria-describedby="u_name" placeholder="กรอกชื่อ - นามสกุล" value="<?= $check_user['u_name'] ?>">
+                            <input type="text" class="form-control" name="u_name" id="u_name" aria-describedby="u_name" placeholder="กรอกชื่อ - นามสกุล">
                         </div>
-                        <div class="form-outline mb-3 inputbox">
+                        <div class="form-outline inputbox">
+                            <label for="u_username" class="form-label">ชื่อผู้ใช้</label>
+                            <input type="text" class="form-control" name="u_username" id="u_username" aria-describedby="u_username" placeholder="กรอกชื่อผู้ใช้">
+                        </div>
+                        <div class="form-outline inputbox">
                             <label for="email" class="form-label">อีเมล์</label>
-                            <input type="text" class="form-control" name="email" id="emailup" aria-describedby="email" placeholder="กรอกอีเมล์" value="<?= $check_user['email'] ?>">
+                            <input type="text" class="form-control" name="email" id="email" aria-describedby="email" placeholder="กรอกอีเมล์">
                         </div>
-                        <div class="form-outline mb-3 inputbox">
-                            <label for="address" class="form-label">ที่อยู่</label>
-                            <textarea class="form-control" name="address" id="addressup" aria-describedby="address" placeholder="กรอกที่อยู่"><?= $check_user['address'] ?></textarea>
-                        </div>
-                        <div class="form-outline mb-3 inputbox">
+                        <div class="form-outline inputbox">
                             <label for="phone" class="form-label">เบอร์โทรศัพท์</label>
-                            <input type="text" class="form-control" name="phone" id="phoneup" aria-describedby="phone" placeholder="กรอกเบอร์โทรศัพท์" value="<?= $check_user['phone'] ?>">
+                            <input type="text" class="form-control" name="phone" id="phone" aria-describedby="phone" placeholder="กรอกเบอร์โทรศัพท์">
+                        </div>
+                        <div class="form-outline inputbox textbox" style="margin-bottom: 30px;">
+                            <label for="address" class="form-label">ที่อยู่</label>
+                            <textarea class="form-control" name="address" aria-describedby="address" id="address" placeholder="กรอกที่อยู่"></textarea>
+                        </div>
+                        <div class="form-outline inputbox">
+                            <label for="u_password" class="form-label">รหัสผ่าน</label>
+                            <div id="showPass">
+                                <input type="password" class="form-control" name="u_password" id="u_password" placeholder="กรอกรหัสผ่าน">
+                                <div class="field-icon">
+                                    <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-outline inputbox">
+                            <label for="c_password" class="form-label">ยืนยันรหัสผ่าน</label>
+                            <div id="showConfirmPass">
+                                <input type="password" class="form-control" name="c_password" id="c_password" placeholder="ยืนยันรหัสผ่าน">
+                                <div class="field-icon">
+                                    <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-outline mb-3 inputbox">
-                            <label label class="form-label">รูปโปรไฟล์</label>
+                            <label for="urole" class="form-label">ประเภทผู้ใช้</label>
+                            <select class="form-control" name="urole" id="urole">
+                                <option value="">เลือกประเภทผู้ใช้งาน</option>
+                                <option value="user">ผู้ใช้ทั่วไป</option>
+                                <option value="admin">แอดมิน</option>
+                            </select>
+                        </div>
+                        <div class="form-outline mb-3 inputbox">
+                            <label class="form-label">รูปโปรไฟล์</label>
                             <input class="form-control" type="file" id="avatar" name="avatar" accept="image/gif, image/jpeg, image/jpg, image/png">
                         </div>
                         <div class="form-outline radio mb-3 inputbox inputgender">
@@ -163,34 +164,25 @@ if (!isset($_SESSION['admin_login'])) {
                                 <label for="gender">เพศ</label>
                             </div>
                             <div>
-                                <?php if ($check_user['gender'] == 'female') : ?>
-                                    <label>
-                                        <input type="radio" name="gender" id="gender" value="male" aria-describedby="gender">
-                                        ชาย
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="gender" id="gender" value="female" aria-describedby="gender" checked>
-                                        หญิง
-                                    </label> 
-                                <?php elseif ($check_user['gender'] == 'male') : ?>
-                                    <label>
-                                        <input type="radio" name="gender" id="gender" value="male" aria-describedby="gender" checked>
-                                        ชาย
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="gender" id="gender" value="female" aria-describedby="gender">
-                                        หญิง
-                                    </label>
-                                <?php endif; ?>    
+                                <label>
+                                    <input type="radio" name="gender" value="male" aria-describedby="gender">
+                                    ชาย
+                                </label>
+                                <label>
+                                    <input type="radio" name="gender" value="female" aria-describedby="gender">
+                                    หญิง
+                                </label>
                             </div>
                         </div>
                     </div>
-                    <button type="submit" name="user_update" id="user_update" class="btn btn-primary btn-lg mb-3" style="width: 80%;margin-left: auto;margin-right: auto;">ยืนยัน</button>
+                    <button type="submit" name="user_add" id="user_add" class="btn btn-primary btn-lg mb-3" style="width: 80%;margin-left: auto;margin-right: auto;">ยืนยัน</button>
                 </form>
             </div>
         </div>
     </div>
     <!-- /#page-content-wrapper -->
+    </div>
+    </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="style/sidebar/sidebar.js"></script>

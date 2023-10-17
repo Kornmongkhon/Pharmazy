@@ -33,7 +33,7 @@ if (!isset($_SESSION['admin_login'])) {
                     <li class="sidebar-item">
                         <a href="admin.php" class="sidebar-link">
                         <i class="fas fa-tachometer-alt me-2"></i>
-                            <span style="margin-left: .1rem;">Dashboard</span>
+                            <span style="margin-left: .1rem;">ภาพรวม</span>
                         </a>
                         <hr>
                     </li>
@@ -41,14 +41,14 @@ if (!isset($_SESSION['admin_login'])) {
                         <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#pages"
                             aria-expanded="false" aria-controls="pages">
                             <i class="fa-solid fa-store"></i>
-                            <span style="margin-left: .5rem;">Store</span>
+                            <span style="margin-left: .5rem;">ร้านค้า</span>
                         </a>
                         <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item" style="margin-top: 1.1rem;">
-                                <a href="product.php" class="sidebar-link">Stock</a>
+                                <a href="product.php" class="sidebar-link">คลังสินค้า</a>
                             </li>
                             <li class="sidebar-item" style="margin-top: 1.1rem;">
-                                <a href="add_product.php" class="sidebar-link">Product</a>
+                                <a href="add_product.php" class="sidebar-link">เพิ่มสินค้า</a>
                             </li>
                         </ul>
                         <hr>
@@ -57,14 +57,16 @@ if (!isset($_SESSION['admin_login'])) {
                         <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#auth"
                             aria-expanded="false" aria-controls="auth">
                             <i class="fa-solid fa-user pe-2"></i>
-                            Users
+                            สมาชิก
                         </a>
                         <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item" style="margin-top: 1.1rem;">
-                                <a href="user_manage.php" class="sidebar-link">User Management</a>
+                                <a href="user_manage.php" class="sidebar-link">จัดการผู้ใช้</a>
                             </li>
                             <li class="sidebar-item" style="margin-top: 1.1rem;">
-                                <a href="admin_manage.php" class="sidebar-link">Admin Management</a>
+                                <a href="admin_manage.php" class="sidebar-link">จัดการแอดมิน</a>
+                            </li><li class="sidebar-item" style="margin-top: 1.1rem;">
+                                <a href="add_user.php" class="sidebar-link">เพิ่มสมาชิก</a>
                             </li>
                         </ul>
                         <hr>
@@ -79,7 +81,7 @@ if (!isset($_SESSION['admin_login'])) {
                 <div class="d-flex align-items-center">
                     <!-- icon bar -->
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0"><a href="admin.php" style="text-decoration: none;color: #24252A;">Store</a> / Products</h2>
+                    <h2 class="fs-2 m-0"><a href="admin.php" style="text-decoration: none;color: #24252A;">ร้านค้า</a> / เพิ่มสินค้า</h2>
                 </div>
                 <!-- button for dropdown admin info -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -96,9 +98,9 @@ if (!isset($_SESSION['admin_login'])) {
                                 <i class="fas fa-user me-2"></i><?=$row['u_name']?>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><a class="dropdown-item" href="include/logout_admin.php">Logout</a></li>
+                                <li><a class="dropdown-item" href="#">โปรไฟล์</a></li>
+                                <li><a class="dropdown-item" href="#">ตั้งค่าบัญชี</a></li>
+                                <li><a class="dropdown-item" href="include/logout_admin.php">ออกจากระบบ</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -123,9 +125,9 @@ if (!isset($_SESSION['admin_login'])) {
                             <textarea class="form-control" name="pdetail" id="pdetail" aria-describedby="pdetail" placeholder="กรอกรายละเอิยดสินค้า" style="height: 5rem;"></textarea>
                         </div>
                         <div class="form-outline mb-3 inputbox">
-                            <label for="price" class="form-label">ประเภทสินค้า</label>
+                            <label for="ptype" class="form-label">ประเภทสินค้า</label>
                             <select class="form-control" name="ptype" id="ptype">
-                                    <option value=""></option>
+                                    <option value="">เลือกประเภทสินค้า</option>
                                     <option value="supplementary-food">อาหารเสริม</option>
                                     <option value="home-medicine">ยาสามัญประจำบ้าน</option>
                                     <option value="skin-care">สกินแคร์</option>

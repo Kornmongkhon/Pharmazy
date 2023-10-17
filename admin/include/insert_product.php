@@ -26,7 +26,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){//send request from ajax
                     $stmt->bindParam(6,$photoPath);
                     $stmt->bindParam(7,$_POST['pquan_stock']);
                     if($stmt->execute()){
-                        echo "inserted";
+                        // echo "inserted";
+                        echo json_encode(["status" => "success", "message" => "Inserted"]);
                         exit;
                     }else{
                         echo "failed insert";

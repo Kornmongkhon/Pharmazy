@@ -13,6 +13,9 @@ if (!isset($_SESSION['admin_login'])) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link href="https:////cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="style/admin/delete_user.js"></script>
 </head>
 <body>
     <?php 
@@ -32,7 +35,7 @@ if (!isset($_SESSION['admin_login'])) {
                     <li class="sidebar-item">
                         <a href="admin.php" class="sidebar-link">
                         <i class="fas fa-tachometer-alt me-2"></i>
-                            <span style="margin-left: .1rem;">Dashboard</span>
+                            <span style="margin-left: .1rem;">ภาพรวม</span>
                         </a>
                         <hr>
                     </li>
@@ -40,14 +43,14 @@ if (!isset($_SESSION['admin_login'])) {
                         <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#pages"
                             aria-expanded="false" aria-controls="pages">
                             <i class="fa-solid fa-store"></i>
-                            <span style="margin-left: .5rem;">Store</span>
+                            <span style="margin-left: .5rem;">ร้านค้า</span>
                         </a>
                         <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item" style="margin-top: 1.1rem;">
-                                <a href="product.php" class="sidebar-link">Stock</a>
+                                <a href="product.php" class="sidebar-link">คลังสินค้า</a>
                             </li>
                             <li class="sidebar-item" style="margin-top: 1.1rem;">
-                                <a href="add_product.php" class="sidebar-link">Product</a>
+                                <a href="add_product.php" class="sidebar-link">เพิ่มสินค้า</a>
                             </li>
                         </ul>
                         <hr>
@@ -56,14 +59,17 @@ if (!isset($_SESSION['admin_login'])) {
                         <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#auth"
                             aria-expanded="false" aria-controls="auth">
                             <i class="fa-solid fa-user pe-2"></i>
-                            Users
+                            สมาชิก
                         </a>
                         <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item" style="margin-top: 1.1rem;">
-                                <a href="user_manage.php" class="sidebar-link">User Management</a>
+                                <a href="user_manage.php" class="sidebar-link">จัดการผู้ใช้</a>
                             </li>
                             <li class="sidebar-item" style="margin-top: 1.1rem;">
-                                <a href="admin_manage.php" class="sidebar-link">Admin Management</a>
+                                <a href="admin_manage.php" class="sidebar-link">จัดการแอดมิน</a>
+                            </li>
+                            <li class="sidebar-item" style="margin-top: 1.1rem;">
+                                <a href="add_user.php" class="sidebar-link">เพิ่มสมาชิก</a>
                             </li>
                         </ul>
                         <hr>
@@ -78,7 +84,7 @@ if (!isset($_SESSION['admin_login'])) {
                 <div class="d-flex align-items-center">
                     <!-- icon bar -->
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0"><a href="admin.php" style="text-decoration: none;color: #24252A;">Users</a> / Admin Management</h2>
+                    <h2 class="fs-2 m-0"><a href="admin.php" style="text-decoration: none;color: #24252A;">สมาชิก</a> / จัดการแอดมิน</h2>
                 </div>
                 <!-- button for dropdown admin info -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -95,9 +101,9 @@ if (!isset($_SESSION['admin_login'])) {
                                 <i class="fas fa-user me-2"></i><?=$row['u_name']?>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><a class="dropdown-item" href="include/logout_admin.php">Logout</a></li>
+                                <li><a class="dropdown-item" href="#">โปรไฟล์</a></li>
+                                <li><a class="dropdown-item" href="#">ตั้งค่าบัญชี</a></li>
+                                <li><a class="dropdown-item" href="include/logout_admin.php">ออกจากระบบ</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -105,6 +111,7 @@ if (!isset($_SESSION['admin_login'])) {
             </nav>
             <hr>
             <div class="container-fluid px-4">
+                <div id="notification" style="display: none;"></div>
                 <div class="row my-5">
                     <h3 class="fs-4 mb-3">รายชื่อทีมงาน</h3>
                     <div class="col">
@@ -128,21 +135,21 @@ if (!isset($_SESSION['admin_login'])) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php while($row = $stmt->fetch(PDO::FETCH_ASSOC)):?>
+                                <?php while($check_user = $stmt->fetch(PDO::FETCH_ASSOC)):?>
                                     <?php
-                                        $relativeAvatarPath = str_replace('../', '', $row['avatar']);
+                                        $relativeAvatarPath = str_replace('../', '', $check_user['avatar']);
                                     ?>
                                     <tr style="text-align: center;">
-                                        <td><?= $row['uid'] ?></td>
+                                        <td><?= $check_user['uid'] ?></td>
                                         <td><img src="../<?= $relativeAvatarPath ?>" width="50" height="50" class="rounded-circle"></td>
-                                        <td><?= $row['u_username'] ?></td>
-                                        <td><?= $row['u_name'] ?></td>
-                                        <td><?= $row['email'] ?></td>
-                                        <td><?= $row['address'] ?></td>
-                                        <td><?= $row['phone'] ?></td>
-                                        <td><?php if ($row['gender'] == 'male') : ?>
+                                        <td><?= $check_user['u_username'] ?></td>
+                                        <td><?= $check_user['u_name'] ?></td>
+                                        <td><?= $check_user['email'] ?></td>
+                                        <td><?= $check_user['address'] ?></td>
+                                        <td><?= $check_user['phone'] ?></td>
+                                        <td><?php if ($check_user['gender'] == 'male') : ?>
                                             ชาย
-                                        <?php elseif ($row['gender'] == 'female') : ?>
+                                        <?php elseif ($check_user['gender'] == 'female') : ?>
                                             หญิง
                                         <?php endif; ?>
                                     </td>
@@ -151,10 +158,13 @@ if (!isset($_SESSION['admin_login'])) {
                                         <!-- <a href="#" class="btn btn-warning">แก้ไข</a> <a href="#" class="btn btn-danger">ลบ</a> -->
                                         <div style="display: flex;justify-content: center;align-items: center">
                                             <form style="margin-right: .6rem;" method="post" action="user_detail.php">
-                                                <input type="hidden" name="uid" id="uid" value="<?=$row['uid']?>">
+                                                <input type="hidden" name="uid" id="uid" value="<?=$check_user['uid']?>">
                                                 <button type="submit" class="btn btn-warning">แก้ไข</button>
                                             </form>
-                                            <form style="margin-right: .6rem;" method="post" action=""><button type="submit" class="btn btn-danger">ลบ</button></form>
+                                            <form style="margin-right: .6rem;" method="post">
+                                            <input type="hidden" name="uid" value="<?= $check_user['uid'] ?>">
+                                            <button type="button" class="btn btn-danger" id="deleteUser" data-uid="<?= $check_user['uid']?>">ลบ</button>
+                                            </form>
                                         </div>
                                     </td>
                                     </tr>

@@ -16,7 +16,6 @@ function validationInfo(){
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'ตกลง'
         });
-        return false;
     }else if(priceup === ''){
         Swal.fire({
             icon:'warning',
@@ -25,7 +24,6 @@ function validationInfo(){
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'ตกลง'
         });
-        return false;
     }else if(pdetailup === ''){
         Swal.fire({
             icon:'warning',
@@ -34,7 +32,6 @@ function validationInfo(){
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'ตกลง'
         });
-        return false;
     }else if(pquan_stockup === ''){
         Swal.fire({
             icon:'warning',
@@ -43,7 +40,6 @@ function validationInfo(){
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'ตกลง'
         });
-        return false;
     }else if(plikeup === ''){
         Swal.fire({
             icon:'warning',
@@ -52,7 +48,6 @@ function validationInfo(){
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'ตกลง'
         });
-        return false;
     }
     let formData = new FormData();
     formData.append('pid',pidup);
@@ -91,8 +86,9 @@ function showNotification(){
                 showConfirmButton: false,
                 timerProgressBar: true,
                 timer: 2500
-            });
-            return false;
+            }).then(function(){
+                location.reload();
+            })
         }else if(request.responseText.trim() === "Updated-photo"){
             Swal.fire({
                 icon:'success',
@@ -101,7 +97,9 @@ function showNotification(){
                 showConfirmButton: false,
                 timerProgressBar: true,
                 timer: 2500
-            });
+            }).then(function(){
+                location.reload();
+            })
         }else if(request.responseText.trim() === "Failed to update."){
             Swal.fire({
                 icon:'error',
@@ -110,7 +108,9 @@ function showNotification(){
                 showConfirmButton: false,
                 timerProgressBar: true,
                 timer: 2500
-            });
+            }).then(function(){
+                location.reload();
+            })
         }else if(request.responseText.trim() === "Failed to upload the photo."){
             Swal.fire({
                 icon:'error',
@@ -119,7 +119,9 @@ function showNotification(){
                 showConfirmButton: false,
                 timerProgressBar: true,
                 timer: 2500
-            });
+            }).then(function(){
+                location.reload();
+            })
         }else if(request.responseText.trim() === "Invalid file type. Please upload a PNG,JPG,JPEG,GIF file."){
             Swal.fire({
                 icon:'error',
@@ -128,7 +130,9 @@ function showNotification(){
                 showConfirmButton: false,
                 timerProgressBar: true,
                 timer: 2500
-            });
+            }).then(function(){
+                location.reload();
+            })
         }
     }
     
