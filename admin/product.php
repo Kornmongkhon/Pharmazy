@@ -9,10 +9,11 @@ if (!isset($_SESSION['admin_login'])) {
 
 <head>
     <link rel="stylesheet" href="style/admin/product.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link href="https:////cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">  <!-- Datatable CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="style/admin/delete_product.js"></script>
 </head>
 <body>
     <?php 
@@ -108,9 +109,7 @@ if (!isset($_SESSION['admin_login'])) {
             </nav>
             <hr>
             <div class="container-fluid px-4">
-                <div class="row g-3 my-2">
-                    
-
+                <div id="notification" style="display: none;"></div>
                 <div class="row my-5">
                     <h3 class="fs-4 mb-3">สินค้าทั้งหมด</h3>
                     <div class="col">
@@ -133,30 +132,33 @@ if (!isset($_SESSION['admin_login'])) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php while($row = $stmt->fetch(PDO::FETCH_ASSOC)):?>
+                                <?php while($check_product = $stmt->fetch(PDO::FETCH_ASSOC)):?>
                                     <tr style="text-align: center;">
-                                    <td style="padding-right: .6rem;"><?= $row['pid'] ?></td>
-                                    <td><?= $row['pname'] ?></td>
-                                    <td><?= $row['pdetail'] ?></td>
-                                    <td><?= number_format($row['price'],2) ?> ฿</td>
-                                    <?php if($row['ptype'] == 'supplementary-food'):?>
+                                    <td style="padding-right: .6rem;"><?= $check_product['pid'] ?></td>
+                                    <td><?= $check_product['pname'] ?></td>
+                                    <td><?= $check_product['pdetail'] ?></td>
+                                    <td><?= number_format($check_product['price'],2) ?> ฿</td>
+                                    <?php if($check_product['ptype'] == 'supplementary-food'):?>
                                         <td>อาหารเสริม</td>
-                                    <?php elseif($row['ptype'] == 'home-medicine'):?>
+                                    <?php elseif($check_product['ptype'] == 'home-medicine'):?>
                                         <td>ยาสามัญประจำบ้าน</td>
-                                    <?php elseif($row['ptype'] == 'skin-care'):?>
+                                    <?php elseif($check_product['ptype'] == 'skin-care'):?>
                                         <td>สกินแคร์</td>
                                     <?php endif;?>
-                                    <td><?=$row['plike']?></td>
-                                    <td><?= $row['pquan_stock'] ?> ชิ้น</td>
-                                    <td><?= $row['pimg'] ?></td>
+                                    <td><?=$check_product['plike']?></td>
+                                    <td><?= $check_product['pquan_stock'] ?> ชิ้น</td>
+                                    <td><?= $check_product['pimg'] ?></td>
                                     <td>
-                                        <!-- <a href="product_detail.php?pid=<?=$row['pid']?>" class="btn btn-warning">แก้ไข</a> <a href="#" class="btn btn-danger">ลบ</a> -->
+                                        <!-- <a href="product_detail.php?pid=<?=$check_product['pid']?>" class="btn btn-warning">แก้ไข</a> <a href="#" class="btn btn-danger">ลบ</a> -->
                                         <div style="display: flex;justify-content: center;align-items: center">
                                             <form style="margin-right: .6rem;" method="post" action="product_detail.php">
-                                                <input type="hidden" name="pid" value="<?=$row['pid']?>">
+                                                <input type="hidden" name="pid" value="<?=$check_product['pid']?>">
                                                 <button type="submit" class="btn btn-warning">แก้ไข</button>
                                             </form>
-                                            <form style="margin-right: .6rem;" method="post" action=""><button type="submit" class="btn btn-danger">ลบ</button></form>
+                                            <form style="margin-right: .6rem;" method="post">
+                                                <input type="hidden" name="pid" value="<?= $check_product['pid'] ?>">
+                                                <button type="button" class="btn btn-danger" id="deleteProduct" data-pid="<?= $check_product['pid']?>">ลบ</button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
@@ -165,7 +167,6 @@ if (!isset($_SESSION['admin_login'])) {
                         </table>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

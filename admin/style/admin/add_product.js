@@ -107,8 +107,6 @@ function showNotification(){
                 showConfirmButton: false,
                 timerProgressBar: true,
                 timer: 2500
-            }).then(function(){
-                location.reload();
             })
         }else if(request.responseText.trim() === 'failed insert'){
             Swal.fire({
