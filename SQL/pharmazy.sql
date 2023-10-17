@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2023 at 04:50 PM
+-- Generation Time: Oct 17, 2023 at 09:53 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -41,25 +41,78 @@ CREATE TABLE `delivery` (
 --
 
 CREATE TABLE `orders` (
-  `order_id` int(10) NOT NULL,
-  `uid` int(10) NOT NULL,
-  `pid` int(10) NOT NULL,
-  `order_quantity` int(10) NOT NULL,
-  `order_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `order_status` varchar(255) NOT NULL
+  `ordID` int(11) NOT NULL,
+  `ordName` varchar(255) NOT NULL,
+  `amount` double NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `uid`, `pid`, `order_quantity`, `order_date`, `order_status`) VALUES
-(1, 1, 12, 3, '2023-10-01 13:22:23', 'paid'),
-(2, 1, 6, 7, '2023-10-02 13:29:57', 'wait'),
-(3, 1, 17, 2, '2023-10-02 13:30:12', 'wait'),
-(4, 3, 4, 2, '2023-10-02 13:31:06', 'wait'),
-(5, 3, 10, 2, '2023-10-03 13:31:15', 'paid'),
-(6, 3, 15, 1, '2023-10-03 13:31:25', 'paid');
+INSERT INTO `orders` (`ordID`, `ordName`, `amount`, `status`, `date`) VALUES
+(1, 'Cetaphil Oily Skin Cleanser 125 ml', 1683, 'wait', '2023-10-15 11:24:31'),
+(2, 'HOF Colla UC-II 30 TABS', 1152, 'wait', '2023-10-15 11:34:06'),
+(3, 'CLEAR NOSE Acne Care Solution 150ml', 260, 'wait', '2023-10-17 11:42:52'),
+(4, 'CERAVE Foaming Cleanser 236ml.', 843, 'wait', '2023-10-17 12:08:04');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_detail`
+--
+
+CREATE TABLE `order_detail` (
+  `ordDeID` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `ordID` int(11) NOT NULL,
+  `pid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_detail`
+--
+
+INSERT INTO `order_detail` (`ordDeID`, `uid`, `qty`, `ordID`, `pid`) VALUES
+(5, 4, 2, 1, 16),
+(6, 4, 1, 1, 20),
+(7, 4, 2, 1, 26),
+(8, 4, 1, 2, 3),
+(9, 4, 4, 2, 13),
+(11, 4, 1, 3, 17),
+(12, 4, 1, 4, 7),
+(13, 4, 1, 4, 4),
+(14, 4, 2, 4, 23);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_test`
+--
+
+CREATE TABLE `order_test` (
+  `order_id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `pid` int(11) NOT NULL,
+  `order_quantity` int(11) NOT NULL,
+  `order_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `order_status` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_test`
+--
+
+INSERT INTO `order_test` (`order_id`, `uid`, `pid`, `order_quantity`, `order_date`, `order_status`) VALUES
+(1, 1, 12, 3, '2023-10-01 06:22:23', 'paid'),
+(2, 1, 6, 7, '2023-10-02 06:29:57', 'wait'),
+(3, 1, 17, 2, '2023-10-02 06:30:12', 'wait'),
+(4, 3, 4, 2, '2023-10-02 06:31:06', 'wait'),
+(5, 3, 10, 2, '2023-10-03 06:31:15', 'paid'),
+(6, 3, 15, 1, '2023-10-03 06:31:25', 'paid');
 
 -- --------------------------------------------------------
 
@@ -138,7 +191,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`uid`, `u_username`, `u_password`, `u_name`, `email`, `address`, `phone`, `gender`, `urole`, `create_at`, `avatar`) VALUES
 (1, 'user', '$2y$10$WelvYcHgSGg.NgyT2lCGuO3HOIQC.THVE1OoEz91HZ6UFRTpOjRhm', 'user', 'user@user.com', '10/14', '012-345-6789', 'male', 'user', '2023-09-26 20:10:57', '../assets/avatar/261838676_217194513901808_8599102040805275054_n.jpg'),
 (2, 'admin', '$2y$10$lNF0/M0uts9Ir6zDeGsdt.37ZCzW6G.5c2aLW7rluMB9M.MmxcDzS', 'admin', 'admin@admin.com', '10/1134', '045-345-2356', 'female', 'admin', '2023-09-26 20:11:36', 'assets/avatar/female.png'),
-(3, 'user2', '$2y$10$gDuJhSdxZicFtA.KyInDpuuusPgpuLc5.14.bw3A8hB9axxQp/mwe', 'user2', 'user2@user2.com', '10/1241', '086-231-2344', 'female', 'user', '2023-09-26 20:11:58', 'assets/avatar/female.png');
+(3, 'user2', '$2y$10$gDuJhSdxZicFtA.KyInDpuuusPgpuLc5.14.bw3A8hB9axxQp/mwe', 'user2', 'user2@user2.com', '10/1241', '086-231-2344', 'female', 'user', '2023-09-26 20:11:58', 'assets/avatar/female.png'),
+(4, 'peem', '$2y$10$i//4VQa0OtWmfSTJcElNtekB7AkQzSKaDZ3FB2G9hEBJgUQCNEH3m', 'awsdasd', 'peemd@email.com', 'peemd@email.com', '092-717-4056', 'male', 'user', '2023-10-13 09:47:11', 'assets/avatar/male.png');
 
 --
 -- Indexes for dumped tables
@@ -154,9 +208,23 @@ ALTER TABLE `delivery`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
+  ADD PRIMARY KEY (`ordID`);
+
+--
+-- Indexes for table `order_detail`
+--
+ALTER TABLE `order_detail`
+  ADD PRIMARY KEY (`ordDeID`),
+  ADD KEY `order_detail_uid` (`uid`),
+  ADD KEY `order_detail_pid` (`pid`);
+
+--
+-- Indexes for table `order_test`
+--
+ALTER TABLE `order_test`
   ADD PRIMARY KEY (`order_id`),
-  ADD KEY `order_uid` (`uid`),
-  ADD KEY `order_pid` (`pid`);
+  ADD KEY `order_test_uid` (`uid`),
+  ADD KEY `order_test_pid` (`pid`);
 
 --
 -- Indexes for table `product`
@@ -184,7 +252,19 @@ ALTER TABLE `delivery`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ordID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `order_detail`
+--
+ALTER TABLE `order_detail`
+  MODIFY `ordDeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `order_test`
+--
+ALTER TABLE `order_test`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -196,18 +276,25 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `uid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `uid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `orders`
+-- Constraints for table `order_detail`
 --
-ALTER TABLE `orders`
-  ADD CONSTRAINT `order_pid` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`),
-  ADD CONSTRAINT `order_uid` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`);
+ALTER TABLE `order_detail`
+  ADD CONSTRAINT `order_detail_pid` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`),
+  ADD CONSTRAINT `order_detail_uid` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`);
+
+--
+-- Constraints for table `order_test`
+--
+ALTER TABLE `order_test`
+  ADD CONSTRAINT `order_test_pid` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`),
+  ADD CONSTRAINT `order_test_uid` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

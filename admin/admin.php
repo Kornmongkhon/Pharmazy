@@ -129,7 +129,7 @@ if (!isset($_SESSION['admin_login'])) {
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div class="text-center mt-3">
                                 <?php
-                                    $stmt = $pdo->prepare("SELECT SUM(orders.order_quantity * product.price) AS sum_income FROM orders JOIN product ON orders.pid = product.pid;");
+                                    $stmt = $pdo->prepare("SELECT SUM(order_test.order_quantity * product.price) AS sum_income FROM order_test JOIN product ON order_test.pid = product.pid;");
                                     $stmt->execute();
                                     $sum_income = $stmt->fetch(PDO::FETCH_ASSOC);
                                 ?>
@@ -171,7 +171,7 @@ if (!isset($_SESSION['admin_login'])) {
                     <h3 class="fs-4 mb-3">การสั่งซื้อล่าสุด</h3>
                     <div class="col">
                         <?php
-                            $stmt = $pdo->prepare("SELECT DATE_FORMAT(orders.order_date + INTERVAL 543 YEAR, '%d/%m/%Y') AS order_date, orders.order_id,users.u_username, product.pid, product.pname, orders.order_quantity ,SUM(orders.order_quantity * product.price) AS sum_price FROM orders JOIN product ON orders.pid = product.pid JOIN users ON orders.uid = users.uid GROUP BY orders.order_date,u_username ORDER BY orders.order_date;");
+                            $stmt = $pdo->prepare("SELECT DATE_FORMAT(order_test.order_date + INTERVAL 543 YEAR, '%d/%m/%Y') AS order_date, order_test.order_id,users.u_username, product.pid, product.pname, order_test.order_quantity ,SUM(order_test.order_quantity * product.price) AS sum_price FROM order_test JOIN product ON order_test.pid = product.pid JOIN users ON order_test.uid = users.uid GROUP BY order_test.order_date,u_username ORDER BY order_test.order_date;");
                             $stmt->execute();
                         ?>
                         <table id="OrderTable" class="table table-responsive-md">
