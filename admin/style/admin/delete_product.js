@@ -27,7 +27,7 @@ function showNotification(){
     }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+window.onload = function() {
     // Use event delegation to handle click events for all delete buttons
     document.body.addEventListener("click", function(event) {
         if (event.target && event.target.id === "deleteProduct") {
@@ -55,5 +55,5 @@ document.addEventListener("DOMContentLoaded", function() {
             })
         }
     });
-});
+};
 
