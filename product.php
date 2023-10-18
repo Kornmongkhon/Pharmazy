@@ -14,14 +14,26 @@ if (!isset($_POST['product']) || !isset($_POST['pid'])) {
 <head>
     <link href="style/store/product.css" rel="stylesheet">
     <script>
-        function Check(pid,pname,price){
-            let q = document.getElementById("quan").value
-            if(q<=0){
-                alert("สินค้าที่จะเพิ่มต้องไม่เป็น 0");
-            }else{
-                location = "cartAdd.php?action=add&pid="+pid+"&pname="+pname+"&price="+price+"&quan="+q
+         function Check(pid, pname, price) {
+            let create = document.getElementById("error-message");
+            let q = document.getElementById("quan").value;
+            let add = document.getElementById("addtext");
+
+            if (q <= 0) {
+                if (!create) {
+                    create = document.createElement("h3");
+                    create.id = "error-message";
+                    add.appendChild(create);
+                }
+                create.innerHTML = "สินค้าต้องมีค่าเป็น 1 ขึ้นไป";
+            } else {
+                if (create) {
+                    // Remove the error message if it exists
+                    create.remove();
+                }
+                location = "cartAdd.php?action=add&pid=" + pid + "&pname=" + pname + "&price=" + price + "&quan=" + q;
             }
-        }
+}
     </script>
 </head>
 
@@ -53,25 +65,23 @@ if (!isset($_POST['product']) || !isset($_POST['pid'])) {
         </section>
         <aside>
             <div class="container" style="margin-top: 2rem;">
-                <?php
-                    // Remove the '../' part from the stored avatar path
-                    $relativePhotoPath = str_replace('../', '', $row['pimg']);
-                    // echo $relativeAvatarPath;
-                    // var_dump($relativeAvatarPath); //check path
-                ?>
-                <img src="<?=$relativePhotoPath?>" width="100" height="100">
+                <img src="<?=$row['pimg']?>" width="100" height="100">
                 <p><?=$row['pname']?></p>
                 <p>รายละเอียดสินค้า</p>
                 <p style="opacity: 0.5;"><?=$row['pdetail']?></p>
                 <p><span>ราคา : </span><?=number_format($row['price'],2)?> ฿</p>
-                <div style="margin-bottom: 2rem;"><input type="text" name="pquan_stock" value="<?=$row['pquan_stock']?>"></div>
+                <p><span>จำนวนในสต๊อก : </span><?=$row['pquan_stock']?> </p>
+                
+                
+                
+                
                 <input type="number" id="quan" name="quan" value="0">
-
-                <!-- เพิ่มปุ่มชำระเงินเลย -->
-                <div><button type="submit" onclick="Check('<?=$pid?>','<?=$row['pname']?>','<?=$row['price']?>')" name="add" value="เพิ่มลงตะกร้า" style="text-decoration: none;background-color: rgba(20,172,204,1);padding: 0.7rem;border-radius: 10px;color:white;">เพิ่มลงตะกร้า</button> 
-                <!-- <span><a href="#" style="text-decoration: none;background-color: rgba(20,172,204,1);padding: 0.7rem;border-radius: 10px;color:white;">ชำระเงิน</a></span> 
-                <span><a href="#"style="text-decoration: none;background-color: rgba(20,172,204,1);padding: 0.7rem;border-radius: 10px;color:white;">เพิ่มลงตะกร้า</a></span> -->
-                <span><i class="fa-regular fa-heart" style="background-color: rgba(20,172,204,1);padding: 0.7rem;border-radius: 10px;"></i></span>
+                
+                <div id="addtext"></div>
+                <div><button type="submit" onclick="Check('<?=$pid?>','<?=$row['pname']?>','<?=$row['price']?>')" name="add" value="เพิ่มลงตะกร้า" style="text-decoration: none;background-color: rgba(20,172,204,1);padding: 0.7rem;border-radius: 10px;color:white;">เพิ่มลงตะกร้า</button>
+                    
+                <span><i class="fa-regular fa-heart" style="background-color: rgba(20,172,204,1);padding: 0.7rem;border-radius: 10px;"></i></span></div>
+                
             </div>
         </aside>
     </main>

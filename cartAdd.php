@@ -1,16 +1,17 @@
 <?php 
-include('include/head.php');
 include("include/header.php");
+include("include/head.php");
 include("include/functions.php"); 
 $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
+if(!isset($_SESSION['cart'])){
+    $_SESSION['cart']=array();
+}	
     if($pageWasRefreshed){
        
     }
     else if(isset($_GET["action"]) && $_GET["action"]=='add'){
         
-        if(!isset($_SESSION['cart'])){
-            $_SESSION['cart']=array();
-        }	
+        
         $pid = $_GET["pid"];
         // echo $_GET["pname"];
         $item = array(
@@ -41,11 +42,12 @@ $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACH
 	$pid = $_GET['pid'];
 	unset($_SESSION['cart'][$pid]);
 
- }
- ?>
+ }?>
     
 
+
 <head>
+
     <style>
         table, th, td {
             border: 1px solid;
@@ -55,21 +57,7 @@ $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACH
             border-collapse: collapse;
         }
     </style>
-    <script>
-        function update(pid) {
-		var qty = document.getElementById(pid).value;
-		// ส่งรหัสสินค้า และจำนวนไปปรับปรุงใน session
-		document.location = "cartAdd.php?action=update&pid=" + pid + "&quan=" + qty; 
-	}
-    function confirmOrder() {
-            // Display a confirmation dialog
-            if (confirm("Are you sure you want to place the order?")) {
-                return true;  // Continue with form submission
-            } else {
-                return false; // Cancel form submission
-            }
-        }
-    </script>
+    
 </head>
 <body>
 <form method="post" action="confirmOrder.php" onsubmit="return confirmOrder();">
@@ -106,8 +94,9 @@ $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACH
 <?php } ?>
 <tr><td colspan="5" align="right">รวม <?=$sum?> บาท</td></tr>
 </table>
-<input type="hidden" value="<?=$sum?>" name="sum">
-<input type="submit" name="submit_button" value="ORDER">
+<input id="sum" type="hidden" value="<?=$sum?>" name="sum">
+<div id="addtext"></div>
+<input  type="submit" name="submit_button" value="ORDER">
 </form>
 
 <a href="store.php"><- เลือกสินค้าต่อ</a>
@@ -115,7 +104,34 @@ $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACH
 <!-- <form method="post" action="cartAdd.php?action=orders">
     
 </form> -->
-
-
 </body>
 </html>
+<script>
+        function update(pid) {
+		var qty = document.getElementById(pid).value;
+		// ส่งรหัสสินค้า และจำนวนไปปรับปรุงใน session
+		document.location = "cartAdd.php?action=update&pid=" + pid + "&quan=" + qty; 
+	}
+    function confirmOrder() {
+            let create = document.getElementById("error-message");
+            let sum = document.getElementById("sum").value;
+            let add = document.getElementById("addtext");
+
+            if (sum <= 0) {
+                if (!create) {
+                    create = document.createElement("h1");
+                    create.id = "error-message";
+                    add.appendChild(create);
+                }
+                create.innerHTML = "กรุณาเพิ่มสินค้าลงตะกร้าก่อน";
+                return false;
+            }
+            else{
+                if (confirm("Are you sure you want to place the order?")) {
+                return true;  // Continue with form submission
+            } else {
+                return false; // Cancel form submission
+            }
+            } 
+        }
+    </script>
