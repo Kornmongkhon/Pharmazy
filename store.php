@@ -34,7 +34,6 @@ $totalPages = ceil($totalProducts / $itemPerPage);
             } else {
                 window.location.href = `store.php?ptype=${selectedType}`;
             }
-
         }
     </script>
 </head>
@@ -78,51 +77,91 @@ $totalPages = ceil($totalProducts / $itemPerPage);
         </section>
         <article>
             <form action="product.php" method="post">
-                <div class="container" style="margin: 3rem auto;">
-                    <div class="row">
-                        <?php while ($row = $stmtt->fetch()) : ?>
-                            <div class="col-md-4 mb-4">
-                                <div class="card">
-                                    <!-- Add a hidden input to store the product id -->
-                                    <input type="hidden" name="pid" value="<?= $row['pid']; ?>">
-                                    <?php
-                                    // Remove the '../' part from the stored avatar path
-                                    $relativePhotoPath = str_replace('../', '', $row['pimg']);
-                                    // echo $relativeAvatarPath;
-                                    // var_dump($relativeAvatarPath); //check path
-                                    ?>
-                                    <img class="img-custom" src="<?=$relativePhotoPath?>">
-                                    <div class="card-body-custom">
-                                        <p class="card-title-custom"><?= $row['pname']; ?></p>
+                <?php if(isset($_POST['search'])):?>
+                    <div class="container" style="margin: 3rem auto;">
+                        <div class="row">
+                            <?php
+                                $search = $_POST['search'];
+                                $stmt = $pdo->prepare("SELECT * FROM product WHERE pname LIKE '%$search%'");
+                                $stmt->execute();
+                            ?>
+                            <?php while ($search = $stmt->fetch(PDO::FETCH_ASSOC)) : ?>
+                                <div class="col-md-4 mb-4">
+                                    <?php if($search === null):?>
+                                        not found
+                                    <?php endif;?>
+                                        <div class="card">
+                                            <!-- Add a hidden input to store the product id -->
+                                            <input type="hidden" name="pid" value="<?= $search['pid']; ?>">
+                                            <?php
+                                            // Remove the '../' part from the stored avatar path
+                                            $relativePhotoPath = str_replace('../', '', $search['pimg']);
+                                            // echo $relativeAvatarPath;
+                                            // var_dump($relativeAvatarPath); //check path
+                                            ?>
+                                            <img class="img-custom" src="<?=$relativePhotoPath?>">
+                                            <div class="card-body-custom">
+                                                <p class="card-title-custom"><?= $search['pname']; ?></p>
+                                            </div>
+                                            <div class="card-detail-custom">
+                                                <p class="card-text"><?= number_format($search['price'], 2); ?> ฿</p>
+                                            </div>
+                                            <!-- <a href="#" class="card-btn-custom">ดูสินค้าเพิ่มเติม</a> -->
+                                            <button type="submit" name="product" class="card-btn-custom" value="<?=$search['pid']?>">ดูสินค้าเพิ่มเติม</button>
+                                        </div>
                                     </div>
-                                    <div class="card-detail-custom">
-                                        <p class="card-text"><?= number_format($row['price'], 2); ?> ฿</p>
-                                    </div>
-                                    <!-- <a href="#" class="card-btn-custom">ดูสินค้าเพิ่มเติม</a> -->
-                                    <button type="submit" name="product" class="card-btn-custom" value="<?=$row['pid']?>">ดูสินค้าเพิ่มเติม</button>
-                                </div>
-                            </div>
-                        <?php endwhile; ?>
+                            <?php endwhile;?>
+                        </div>
                     </div>
-                </div>
+                    <?php elseif(!isset($_POST['search'])):?>
+                        <div class="container" style="margin: 3rem auto;">
+                            <div class="row">
+                                <?php while ($row = $stmtt->fetch()) : ?>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="card">
+                                            <!-- Add a hidden input to store the product id -->
+                                            <input type="hidden" name="pid" value="<?= $row['pid']; ?>">
+                                            <?php
+                                            // Remove the '../' part from the stored avatar path
+                                            $relativePhotoPath = str_replace('../', '', $row['pimg']);
+                                            // echo $relativeAvatarPath;
+                                            // var_dump($relativeAvatarPath); //check path
+                                            ?>
+                                            <img class="img-custom" src="<?=$relativePhotoPath?>">
+                                            <div class="card-body-custom">
+                                                <p class="card-title-custom"><?= $row['pname']; ?></p>
+                                            </div>
+                                            <div class="card-detail-custom">
+                                                <p class="card-text"><?= number_format($row['price'], 2); ?> ฿</p>
+                                            </div>
+                                            <!-- <a href="#" class="card-btn-custom">ดูสินค้าเพิ่มเติม</a> -->
+                                            <button type="submit" name="product" class="card-btn-custom" value="<?=$row['pid']?>">ดูสินค้าเพิ่มเติม</button>
+                                        </div>
+                                    </div>
+                                <?php endwhile; ?>
+                            </div>
+                        </div>
+                <?php endif;?>
             </form>
         </article>
-        <section class="page-custom">
-            <?php if ($page == 1) : ?> <!-- if in first page show btn prev but can't go prev page -->
-                <a class="btn btn-secondary">Previous</a>
-            <?php endif; ?>
-            <?php if ($page > 1) : ?> <!-- if not in first page show btn prev can go prev page -->
-                <a href="store.php?ptype=<?= $selectType ?>&page=<?= $page - 1 ?>" class="btn btn-primary">Previous</a>
-            <?php endif; ?>
-            <?php for ($i = 1; $i <= $totalPages; $i++) : ?> <!-- loop number of page to button -->
-                <a href="store.php?ptype=<?= $selectType ?>&page=<?= $i ?>" class="btn btn-primary <?= ($i == $page) ? 'active' : ''; ?>" style="margin-left: 20px;"><?= $i ?></a>
-            <?php endfor; ?>
-            <?php if ($page < $totalPages)  : ?> <!-- if in first page show btn next can go to next page -->
-                <a href="store.php?ptype=<?= $selectType ?>&page=<?= $page + 1 ?>" class="btn btn-primary" style="margin-left: 20px;">Next</a>
-            <?php else: ?>
-                <a class="btn btn-secondary" style="margin-left: 20px;">Next</a>
-            <?php endif; ?>
+        <?php if(!isset($_POST['search'])):?>
+            <section class="page-custom">
+                <?php if ($page == 1) : ?> <!-- if in first page show btn prev but can't go prev page -->
+                    <a class="btn btn-secondary">Previous</a>
+                <?php endif; ?>
+                <?php if ($page > 1) : ?> <!-- if not in first page show btn prev can go prev page -->
+                    <a href="store.php?ptype=<?= $selectType ?>&page=<?= $page - 1 ?>" class="btn btn-primary">Previous</a>
+                <?php endif; ?>
+                <?php for ($i = 1; $i <= $totalPages; $i++) : ?> <!-- loop number of page to button -->
+                    <a href="store.php?ptype=<?= $selectType ?>&page=<?= $i ?>" class="btn btn-primary <?= ($i == $page) ? 'active' : ''; ?>" style="margin-left: 20px;"><?= $i ?></a>
+                <?php endfor; ?>
+                <?php if ($page < $totalPages)  : ?> <!-- if in first page show btn next can go to next page -->
+                    <a href="store.php?ptype=<?= $selectType ?>&page=<?= $page + 1 ?>" class="btn btn-primary" style="margin-left: 20px;">Next</a>
+                <?php else: ?>
+                    <a class="btn btn-secondary" style="margin-left: 20px;">Next</a>
+                <?php endif; ?>
             </section>
+        <?php endif;?>
     </main>
 </body>
 

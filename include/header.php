@@ -44,8 +44,8 @@
                 <a class="nav-link active" aria-current="page" href="about.php">เกี่ยวกับ</a>
                 </li>
             </ul>
-            <form class="d-flex p-3">
-                <input class="form-control me-2" type="search" placeholder="ค้นหา" aria-label="Search" style="width: 30rem;">
+            <form class="d-flex p-3" action="store.php" method="post">
+                <input class="form-control me-2" type="search" placeholder="ค้นหา" name="search" id="search" aria-label="Search" style="width: 30rem;">
                 <button class="btn-search" type="submit">ค้นหา</button>
             </form>
             <i class="fa-solid fa-cart-shopping" style="color: white;margin-right: 0.5rem;"></i>
