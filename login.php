@@ -15,29 +15,6 @@
     <div class="flex-login-form">
         <form class="card login-card-custom" action="include/login_db.php" method="post" id="loginForm">
         <div class="title">Mentos Login</div>
-            <?php if(isset($_SESSION['success_login'])):?>
-                <?php
-                        echo "<script>";
-                        echo "const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 5500,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                              toast.addEventListener('mouseenter', Swal.stopTimer)
-                              toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                          })
-                          Toast.fire({
-                            icon: 'success',
-                            title: 'Signed in successfully'
-                          })";
-                        echo "</script>";
-                        // echo $_SESSION['success_login'];
-                        unset($_SESSION['success_login']); // unset session when refresh
-                    ?>
-            <?php endif;?>
             <?php if(isset($_SESSION['error_found'])):?>
                     <?php
                         echo "<script>";
