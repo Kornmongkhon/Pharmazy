@@ -6,6 +6,10 @@ $itemPerPage = 15; // set item per 1 page
 if (isset($_GET['ptype'])) {
     $selectType = $_GET['ptype']; //ptype from js
 }
+if(isset($_GET['plike'])){
+    $selectLiked = $_GET['plike'];
+    // echo $selectLiked;
+}
 
 // Calculate the offset based on the current page
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -16,6 +20,17 @@ if (!empty($selectType) && $selectType !== "all") { //show protype from choosen 
     $stmtt->bindParam(":ptype", $selectType);
 } else { //value = all let ramdom product
     $stmtt = $pdo->prepare("SELECT * FROM product ORDER BY RAND() LIMIT $offset, $itemPerPage");
+}
+if(!empty($selectLiked) && $selectLiked !== "allLiked"){
+    if($selectLiked === 'most-like'){
+        $stmttt = $pdo->prepare("SELECT * FROM product WHERE plike = :plike ORDER BY plike DESC LIMIT $offset, $itemPerPage");
+        $stmttt->bindParam(":plike", $selectLiked);
+    }else if($selectLiked === 'less-like'){
+        $stmttt = $pdo->prepare("SELECT * FROM product WHERE plike = :plike ORDER BY plike ASC LIMIT $offset, $itemPerPage");
+        $stmttt->bindParam(":plike", $selectLiked);
+    }
+}else{
+    $stmttt = $pdo->prepare("SELECT * FROM product ORDER BY RAND() LIMIT $offset, $itemPerPage");
 }
 $stmtt->execute();
 $totalProducts = $pdo->query("SELECT COUNT(*) FROM product")->fetchColumn();
@@ -33,6 +48,18 @@ $totalPages = ceil($totalProducts / $itemPerPage);
                 window.location.href = `store.php?ptype=all`;
             } else {
                 window.location.href = `store.php?ptype=${selectedType}`;
+            }
+        }
+        function filterLiked(){
+            let selectliked = document.getElementById('LikedTypeDropdown');
+            let likedType = selectliked.value;
+            let Likedform = document.getElementById('filterLiked');
+            if(likedType === 'allLiked'){
+                window.location.href = `store.php?plike=allLiked`;
+            }else if(likedType === 'most-liked') {
+                window.location.href = `store.php?plike=most-liked`;
+            }else if(likedType === 'less-liked') {
+                window.location.href = `store.php?plike=less-liked`;
             }
         }
     </script>
@@ -59,7 +86,7 @@ $totalPages = ceil($totalProducts / $itemPerPage);
                                     <strong>รายการสินค้า</strong>
                                 <?php endif; ?>
                             </article>
-                            <aside>
+                            <aside class="dropdown-type">
                                 <form id="filterForm">
                                     <select id="productTypeDropdown" class="form-select" name="ptype" onchange="filterProduct()">
                                         <option value="">เลือกประเภทสินค้า</option>
@@ -67,6 +94,14 @@ $totalPages = ceil($totalProducts / $itemPerPage);
                                         <option value="home-medicine">ยาสามัญประจำบ้าน</option>
                                         <option value="supplementary-food">อาหารเสริม</option>
                                         <option value="skin-care">สกินแคร์</option>
+                                    </select>
+                                </form>
+                                <form id="filterLiked">
+                                    <select id="LikedTypeDropdown" class="form-select" name="plike" onchange="filterLiked()">
+                                        <option value="">เรียงลำดับสินค้า</option>
+                                        <option value="allLiked">สินค้าทั้งหมด</option>
+                                        <option value="most-liked">ชื่นชอบมากที่สุด</option>
+                                        <option value="less-liked">ชื่นชอบน้อยที่สุด</option>
                                     </select>
                                 </form>
                             </aside>
