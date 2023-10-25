@@ -5,6 +5,8 @@ $selectType = ''; //set type default to null
 $itemPerPage = 15; // set item per 1 page
 if (isset($_GET['ptype'])) {
     $selectType = $_GET['ptype']; //ptype from js
+    // echo $selectType;
+
 }
 if(isset($_GET['plike'])){
     $selectLiked = $_GET['plike'];
@@ -22,17 +24,15 @@ if (!empty($selectType) && $selectType !== "all") { //show protype from choosen 
     $stmtt = $pdo->prepare("SELECT * FROM product ORDER BY RAND() LIMIT $offset, $itemPerPage");
 }
 if(!empty($selectLiked) && $selectLiked !== "allLiked"){
-    if($selectLiked === 'most-like'){
-        $stmttt = $pdo->prepare("SELECT * FROM product WHERE plike = :plike ORDER BY plike DESC LIMIT $offset, $itemPerPage");
-        $stmttt->bindParam(":plike", $selectLiked);
-    }else if($selectLiked === 'less-like'){
-        $stmttt = $pdo->prepare("SELECT * FROM product WHERE plike = :plike ORDER BY plike ASC LIMIT $offset, $itemPerPage");
-        $stmttt->bindParam(":plike", $selectLiked);
+    if($selectLiked === 'most-liked'){
+        $stmtt = $pdo->prepare("SELECT * FROM product ORDER BY plike DESC,pname ASC LIMIT $offset, $itemPerPage");
+        
+    }else if($selectLiked === 'less-liked'){
+        $stmtt = $pdo->prepare("SELECT * FROM product ORDER BY plike ASC,pname ASC LIMIT $offset, $itemPerPage");
     }
-}else{
-    $stmttt = $pdo->prepare("SELECT * FROM product ORDER BY RAND() LIMIT $offset, $itemPerPage");
 }
 $stmtt->execute();
+// $stmttt->execute();
 $totalProducts = $pdo->query("SELECT COUNT(*) FROM product")->fetchColumn();
 $totalPages = ceil($totalProducts / $itemPerPage);
 ?>
@@ -54,11 +54,11 @@ $totalPages = ceil($totalProducts / $itemPerPage);
             let selectliked = document.getElementById('LikedTypeDropdown');
             let likedType = selectliked.value;
             let Likedform = document.getElementById('filterLiked');
-            if(likedType === 'allLiked'){
+            if (likedType === 'allLiked') {
                 window.location.href = `store.php?plike=allLiked`;
-            }else if(likedType === 'most-liked') {
+            } else if (likedType === 'most-liked') {
                 window.location.href = `store.php?plike=most-liked`;
-            }else if(likedType === 'less-liked') {
+            } else if (likedType === 'less-liked') {
                 window.location.href = `store.php?plike=less-liked`;
             }
         }
@@ -184,16 +184,31 @@ $totalPages = ceil($totalProducts / $itemPerPage);
                 <?php if ($page == 1) : ?> <!-- if in first page show btn prev but can't go prev page -->
                     <a class="btn btn-secondary">Previous</a>
                 <?php endif; ?>
-                <?php if ($page > 1) : ?> <!-- if not in first page show btn prev can go prev page -->
-                    <a href="store.php?ptype=<?= $selectType ?>&page=<?= $page - 1 ?>" class="btn btn-primary">Previous</a>
+                <?php if(isset($_GET['ptype'])):?>
+                    <?php if ($page > 1) : ?> <!-- if not in first page show btn prev can go prev page -->
+                        <a href="store.php?ptype=<?= $selectType ?>&page=<?= $page - 1 ?>" class="btn btn-primary">Previous</a>
+                    <?php endif; ?>
+                    <?php for ($i = 1; $i <= $totalPages; $i++) : ?> <!-- loop number of page to button -->
+                        <a href="store.php?ptype=<?= $selectType ?>&page=<?= $i ?>" class="btn btn-primary <?= ($i == $page) ? 'active' : ''; ?>" style="margin-left: 20px;"><?= $i ?></a>
+                    <?php endfor; ?>
+                    <?php if ($page < $totalPages)  : ?> <!-- if in first page show btn next can go to next page -->
+                        <a href="store.php?ptype=<?= $selectType ?>&page=<?= $page + 1 ?>" class="btn btn-primary" style="margin-left: 20px;">Next</a>
+                    <?php else: ?>
+                        <a class="btn btn-secondary" style="margin-left: 20px;">Next</a>
+                    <?php endif; ?>
                 <?php endif; ?>
-                <?php for ($i = 1; $i <= $totalPages; $i++) : ?> <!-- loop number of page to button -->
-                    <a href="store.php?ptype=<?= $selectType ?>&page=<?= $i ?>" class="btn btn-primary <?= ($i == $page) ? 'active' : ''; ?>" style="margin-left: 20px;"><?= $i ?></a>
-                <?php endfor; ?>
-                <?php if ($page < $totalPages)  : ?> <!-- if in first page show btn next can go to next page -->
-                    <a href="store.php?ptype=<?= $selectType ?>&page=<?= $page + 1 ?>" class="btn btn-primary" style="margin-left: 20px;">Next</a>
-                <?php else: ?>
-                    <a class="btn btn-secondary" style="margin-left: 20px;">Next</a>
+                <?php if(isset($_GET['plike'])):?>
+                    <?php if ($page > 1) : ?> <!-- if not in first page show btn prev can go prev page -->
+                        <a href="store.php?plike=<?= $selectLiked ?>&page=<?= $page - 1 ?>" class="btn btn-primary">Previous</a>
+                    <?php endif; ?>
+                    <?php for ($i = 1; $i <= $totalPages; $i++) : ?> <!-- loop number of page to button -->
+                        <a href="store.php?plike=<?= $selectLiked ?>&page=<?= $i ?>" class="btn btn-primary <?= ($i == $page) ? 'active' : ''; ?>" style="margin-left: 20px;"><?= $i ?></a>
+                    <?php endfor; ?>
+                    <?php if ($page < $totalPages)  : ?> <!-- if in first page show btn next can go to next page -->
+                        <a href="store.php?plike=<?= $selectLiked ?>&page=<?= $page + 1 ?>" class="btn btn-primary" style="margin-left: 20px;">Next</a>
+                    <?php else: ?>
+                        <a class="btn btn-secondary" style="margin-left: 20px;">Next</a>
+                    <?php endif; ?>
                 <?php endif; ?>
             </section>
         <?php endif;?>

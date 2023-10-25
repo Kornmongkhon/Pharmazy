@@ -4,6 +4,12 @@
     // if(!isset($_SESSION['user_login'])){//check session user login
     //     echo "Not found";
     // }
+    if(isset($_COOKIE['user_login'])){
+        if(time() > (int)$_COOKIE['user_login']){ //check time if expires destroy session user_login
+            session_destroy();
+            // header("location: index.php");
+        }
+    }
 ?>
 <head>
     <link rel="stylesheet" href="style/navbar/navbar.css">

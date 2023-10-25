@@ -2,6 +2,7 @@
 include("include/header.php");
 include("include/head.php");
 include("include/functions.php"); 
+
 $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
 if(!isset($_SESSION['cart'])){
     $_SESSION['cart']=array();
