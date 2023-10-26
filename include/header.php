@@ -27,7 +27,7 @@
                 <a class="nav-link active" aria-current="page" href="index.php">หน้าหลัก</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="store.php">รายการสินค้า</a>
+                <a class="nav-link active" aria-current="page" href="store.php">รายการสินค้า</a>
                 </li>
                 <li class="nav-item dropdown">
                 <a class="nav-item nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
