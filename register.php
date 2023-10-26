@@ -15,51 +15,7 @@
     <div class="flex-login-form">
         <form class=" card login-card-custom" action="include/register_db.php" method="post" id="regForm">
         <div class="title">Mentos Register</div>
-        <?php if(isset($_SESSION['success'])):?>
-                <div class="alert alert-success" role="alert" style="text-align: center;">
-                    <?php
-                        echo "<script>";
-                        echo "Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            title: 'Registered Successfully',
-                            showConfirmButton: false,
-                            timer: 2000
-                        })";
-                        echo "</script>";
-                        echo $_SESSION['success'];
-                        unset($_SESSION['success']); // unset session when refresh
-                    ?>
-                </div>
-            <?php endif?>
-            <?php if(isset($_SESSION['error_already'])):?>
-                    <?php
-                        echo "<script>";
-                        echo "Swal.fire({
-                            icon: 'error',
-                            title: 'Sorry :(',
-                            test: 'Account is already exist!',
-                            confirmButtonColor: '#3085d6'
-                        })";
-                        echo "</script>";
-                        // echo $_SESSION['error_already'];
-                        unset($_SESSION['error_already']); // unset session when refresh
-                    ?>
-            <?php endif?>
-            <?php if(isset($_SESSION['error'])):?>
-                    <?php
-                        echo "<script>";
-                        echo "Swal.fire({
-                            icon: 'error',
-                            title: 'Sorry :(',
-                            test: 'Something went wrong!',
-                            confirmButtonColor: '#3085d6'
-                        })";
-                        echo "</script>";
-                        // echo $_SESSION['error'];
-                        unset($_SESSION['error']); // unset session when refresh
-                    ?>
-            <?php endif?>
+        <div id="notification"></div>
             <div class="user-details warp">
                 <div class="form-outline mb-3 inputbox">
                     <label for="u_name" class="form-label">ชื่อ - นามสกุล</label>

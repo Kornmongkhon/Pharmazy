@@ -53,7 +53,7 @@
             <?php endif;?>
             <?php if(!isset($_SESSION['user_login'])):?>
                     <a class="btn btn-outline-success" style="margin-right: 15px;" href="login.php">เข้าสู่ระบบ</a>
-                    <a class="btn btn-outline-success" style="margin-right: 15px;" href="Register.php">สมัครสมาชิก</a>
+                    <a class="btn btn-outline-success" style="margin-right: 15px;" href="register.php">สมัครสมาชิก</a>
             <?php endif;?>
             <?php if(isset($_SESSION['user_login'])):?>
                 <?php

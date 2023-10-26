@@ -59,153 +59,196 @@ function validation(){
     if(fullName === ''){
         Swal.fire({
             icon:'warning',
-            title: 'แจ้งเตือน!',
-            text: 'โปรดกรอกชื่อ - นามสกุล',
+            title: 'คำเตือน',
+            text: 'กรุณากรอก ชื่อ - นามสกุล',
             confirmButtonColor: '#3085d6'
         });
-        return false;
     }
     else if(!fullnameRegex.test(fullName)){
         Swal.fire({
             icon:'warning',
-            title: 'แจ้งเตือน!',
-            text: 'โปรดกรอก ชื่อ - นามสกุล ให้ตรงเงื่อนไข ต้องเป็น [ก-ฮ,A-Z,a-z,0-9] ตั้งแต่ 4 ตัวอักษร ถึง 20 ตัวอักษร / มีช่องว่างได้',
+            title: 'คำเตือน',
+            text: 'กรุณากรอก ชื่อ - นามสกุล ให้ตรงกับเงื่อนไข [ก-ฮ,A-Z,a-z,0-9] 4 - 20 ตัวขึ้นไปและมีช่องว่างได้',
             showConfirmButton: false,
             timer: 3500,
             timerProgressBar: true
         });
-        return false;
     }
     else if(username === ''){
         Swal.fire({
             icon:'warning',
-            title: 'แจ้งเตือน!',
-            text: 'โปรดกรอกชื่อผู้ใช้',
+            title: 'คำเตือน',
+            text: 'กรุณากรอกชื่อผู้ใช้',
             confirmButtonColor: '#3085d6'
         });
-        return false;
     }
     else if(!usernameRegex.test(username)){
         Swal.fire({
             icon:'warning',
-            title: 'แจ้งเตือน!',
-            text: 'โปรดกรอกชื่อผู้ใช้ให้ตรงเงื่อนไข ต้องเป็น [A-Z,a-z,0-9] ตั้งแต่ 4 ตัวอักษรขึ้นไป',
+            title: 'คำเตือน',
+            text: 'กรุณากรอกชื่อผู้ใช้ให้ตรงเงื่อนไข ต้องเป็น [A-Z,a-z,0-9] ตั้งแต่ 4 ตัวอักษรขึ้นไป',
             showConfirmButton: false,
             timer: 3500,
             timerProgressBar: true
         });
-        return false;
     }
     else if(email === ''){
         Swal.fire({
             icon:'warning',
-            title: 'แจ้งเตือน!',
-            text: 'โปรดกรอกอีเมล์',
+            title: 'คำเตือน',
+            text: 'กรุณากรอกอีเมล์',
             confirmButtonColor: '#3085d6'
         });
-        return false;
     }
     else if(!emailRegex.test(email)){
         Swal.fire({
             icon:'warning',
-            title: 'แจ้งเตือน!',
-            text: "โปรดกรอกอีเมล์ให้ตรงเงื่อนไข ตัวอย่าง : user@email.com",
+            title: 'คำเตือน',
+            text: "กรุณากรอกอีเมล์ ให้ตรงกับเงื่อนไข [A-Z,a-z,0-9] 1 ตัวขึ้นไป",
+            footer: 'ตัวอย่าง : user@email.com',
             showConfirmButton: false,
             timer: 4500,
             timerProgressBar: true
         });
-        return false;
     }
     else if(phone === ''){
         Swal.fire({
             icon:'warning',
-            title: 'แจ้งเตือน!',
-            text: 'โปรดกรอกเบอร์โทรศัพท์',
+            title: 'คำเตือน',
+            text: 'กรุณากรอกเบอร์โทรศัพท์',
             confirmButtonColor: '#3085d6'
         });
-        return false;
     }
     else if(!phoneRegex.test(phone)){
         Swal.fire({
             icon:'warning',
-            title: 'แจ้งเตือน!',
-            text: 'โปรดกรอกเบอร์โทรศัพท์ให้ตรงเงื่อนไข ตัวอย่าง : 012-345-6789',
+            title: 'คำเตือน',
+            text: 'กรุณากรอกเบอร์โทรศัพท์ ให้ตรงกับเงื่อนไข',
+            footer: 'ตัวอย่าง : 012-345-6789',
             showConfirmButton: false,
             timer: 3500,
             timerProgressBar: true
         });
-        return false;
     }
     else if(address === ''){
         Swal.fire({
             icon:'warning',
-            title: 'แจ้งเตือน!',
-            text: 'โปรดกรอกที่อยู่',
+            title: 'คำเตือน',
+            text: 'กรุณากรอกที่อยู่',
             confirmButtonColor: '#3085d6'
         });
-        return false;
     }
     else if(!addressRegex.test(address)){
         Swal.fire({
             icon:'warning',
-            title: 'แจ้งเตือน!',
-            text: 'โปรดกรอกที่อยู่ให้ตรงเงื่อนไข ต้องเป็น [ก-ฮ,A-Z,a-z,0-9] ตั้งแต่ 1 ตัวอักษรขึ้นไป / มีช่องว่างได้',
+            title: 'คำเตือน',
+            text: 'กรุณากรอกที่อยู่ ให้ตรงกับเงื่อนไข ต้องมีตัวอักษรอะไรก็ได้ 4 ตัวขึ้นไป',
             showConfirmButton: false,
             timer: 3500,
             timerProgressBar: true
         });
-        return false;
     }
     else if(password === ''){
         Swal.fire({
             icon:'warning',
-            title: 'แจ้งเตือน!',
-            text: 'โปรดกรอกรหัสผ่าน',
+            title: 'คำเตือน',
+            text: 'กรุณากรอกรหัสผ่าน',
             confirmButtonColor: '#3085d6'
         });
-        return false;
     }
     else if(!passwordRegex.test(password)){
         Swal.fire({
             icon:'warning',
-            title: 'แจ้งเตือน!',
-            text: 'โปรดกรอกรหัสผ่านให้ตรงเงื่อนไข ต้องเป็น [A-Z,a-z,0-9] ตั้งแต่ 8 ตัวอักษรขึ้นไป',
+            title: 'คำเตือน',
+            text: 'กรุณากรอกรหัสผ่านให้ตรงเงื่อนไข ต้องเป็น [A-Z,a-z,0-9] ตั้งแต่ 8 ตัวอักษรขึ้นไป',
             showConfirmButton: false,
             timer: 3500,
             timerProgressBar: true
         });
-        return false;
     }
     else if(confirmPassword === ''){
         Swal.fire({
             icon:'warning',
-            title: 'แจ้งเตือน!',
-            text: 'โปรดกรอกรหัสผ่านยืนยัน',
+            title: 'คำเตือน',
+            text: 'กรุณากรอกรหัสผ่านยืนยัน',
             confirmButtonColor: '#3085d6'
         });
-        return false;
     }
     else if(password != confirmPassword){
         Swal.fire({
             icon:'warning',
-            title: 'แจ้งเตือน!',
+            title: 'คำเตือน',
             text: 'กรอกรหัสผ่านไม่ตรงกัน',
             confirmButtonColor: '#3085d6'
         });
-        return false;
     }
     else if(!gender){
         Swal.fire({
             icon:'warning',
-            title: 'แจ้งเตือน!',
-            text: 'โปรดระบุเพศ',
+            title: 'คำเตือน',
+            text: 'กรุณาระบุเพศ',
             confirmButtonColor: '#3085d6'
         });
-        return false;
+    }else{
+        let formData = new FormData();
+        formData.append('u_name',fullName);
+        formData.append('u_username',username);
+        formData.append('email',email);
+        formData.append('phone',phone);
+        formData.append('address',address);
+        formData.append('password',password);
+        formData.append('gender',gender);
+
+        let url = 'include/register_db.php';
+        request = new XMLHttpRequest();
+        request.onreadystatechange = showNotification;
+        request.open('POST',url);
+        request.send(formData);
     }
-    return true;
 }
+
+function showNotification(){
+    if(request.onState == 4 && request.status == 200){
+        document.getElementById('notification').innerHTML = request.responseText;
+        if(request.responseText.trim() === 'registered'){
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'สมัครสมาชิกสำเร็จ',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 2000
+            }).then(function(){
+                location.reload();
+            })
+        }else if(request.responseText.trim() === 'username already exist'){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'พบข้อผิดพลาด',
+                test: 'มีชื่อผู้ใช้นี้อยู่ในระบบแล้ว',
+                confirmButtonColor: '#3085d6'
+            }).then(function(){
+                location.reload();
+            })
+        }else if(request.responseText.trim() === 'someting went wrong'){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'พบข้อผิดพลาด',
+                test: 'เกิดบางอย่างผิดพลาดขึ้น',
+                confirmButtonColor: '#3085d6'
+            }).then(function(){
+                location.reload();
+            })
+        }
+    }
+}
+
 window.onload = function(){
     let regBTN = document.getElementById("signup")
+    regBTN.addEventListener('click',function(e){
+        e.preventDefault();
+    })
     regBTN.onclick = validation;
 }

@@ -30,7 +30,7 @@ function validation(){
     if(username === ''){
         Swal.fire({
             icon:'warning',
-            title: 'แจ้งเตือน!',
+            title: 'คำเตือน',
             text: 'โปรดกรอกชื่อผู้ใช้',
             confirmButtonColor: '#3085d6'
         });
@@ -38,7 +38,7 @@ function validation(){
     else if(!usernameRegex.test(username)){
         Swal.fire({
             icon:'warning',
-            title: 'แจ้งเตือน!',
+            title: 'คำเตือน',
             text: 'โปรดกรอกชื่อผู้ใช้ให้ตรงเงื่อนไข ต้องเป็น [A-Z,a-z,0-9] ตั้งแต่ 4 ตัวอักษรขึ้นไป',
             showConfirmButton: false,
             timer: 3500,
@@ -48,7 +48,7 @@ function validation(){
     else if(password === ''){
         Swal.fire({
             icon:'warning',
-            title: 'แจ้งเตือน!',
+            title: 'คำเตือน',
             text: 'โปรดกรอกรหัสผ่าน',
             confirmButtonColor: '#3085d6'
         });
@@ -56,22 +56,22 @@ function validation(){
     else if(!passwordRegex.test(password)){
         Swal.fire({
             icon:'warning',
-            title: 'Not match with Regex!',
+            title: 'คำเตือน',
             text: 'โปรดกรอกรหัสผ่านให้ตรงเงื่อนไข ต้องเป็น [A-Z,a-z,0-9] ตั้งแต่ 8 ตัวอักษรขึ้นไป',
             showConfirmButton: false,
             timer: 3500,
             timerProgressBar: true
         });
-    }
-
-    let formData = new FormData();
-    formData.append('u_username',username);
-    formData.append('u_password',password);
-    let url = 'include/login_db.php';
-    request = new XMLHttpRequest();
-    request.onreadystatechange = showNotification;
-    request.open("POST",url);
-    request.send(formData);
+    }else{
+        let formData = new FormData();
+        formData.append('u_username',username);
+        formData.append('u_password',password);
+        let url = 'include/login_db.php';
+        request = new XMLHttpRequest();
+        request.onreadystatechange = showNotification;
+        request.open("POST",url);
+        request.send(formData);
+    } 
 }
 
 function showNotification(){
@@ -132,7 +132,7 @@ function showNotification(){
 
 window.onload = function(){
     let logBTN = document.getElementById('signin');
-    logBTN/addEventListener('click',function(e){
+    logBTN.addEventListener('click',function(e){
         e.preventDefault();
     })
     logBTN.onclick = validation;
