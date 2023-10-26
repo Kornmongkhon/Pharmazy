@@ -4,12 +4,7 @@
     // if(!isset($_SESSION['user_login'])){//check session user login
     //     echo "Not found";
     // }
-    if(isset($_COOKIE['user_login'])){
-        if(time() > (int)$_COOKIE['user_login']){ //check time if expires destroy session user_login
-            session_destroy();
-            // header("location: index.php");
-        }
-    }
+    
 ?>
 <head>
     <link rel="stylesheet" href="style/navbar/navbar.css">
@@ -18,6 +13,7 @@
     <!-- <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg">
@@ -55,6 +51,9 @@
                 <button class="btn-search" type="submit">ค้นหา</button>
             </form>
             <i class="fa-solid fa-cart-shopping" style="color: white;margin-right: 0.5rem;"></i>
+            <?php if(!isset($_COOKIE['user_login'])):?>
+                <?php session_destroy();?>
+            <?php endif;?>
             <?php if(!isset($_SESSION['user_login'])):?>
                     <a class="btn btn-outline-success" style="margin-right: 15px;" href="login.php">เข้าสู่ระบบ</a>
                     <a class="btn btn-outline-success" style="margin-right: 15px;" href="Register.php">สมัครสมาชิก</a>

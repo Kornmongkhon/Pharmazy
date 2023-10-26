@@ -12,6 +12,30 @@ include('include\head.php');
         <?php
         include('include\header.php');
         ?>
+        <?php if(isset($_SESSION['success_login'])):?>
+            <script>
+                const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+                })
+
+                Toast.fire({
+                icon: 'success',
+                title: 'ยินดีต้อนรับ เข้าสู่ระบบเสร็จสิ้น'
+                }).then(function(){
+                    <?php
+                    unset($_SESSION['success_login']);
+                    ?>
+                })
+            </script>
+        <?php endif;?>
         <section class="hero">
             <div class="container">
                 <div class="hero-con">

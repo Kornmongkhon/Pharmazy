@@ -13,50 +13,9 @@
 </head>
 <body>
     <div class="flex-login-form">
-        <form class="card login-card-custom" action="include/login_db.php" method="post" id="loginForm">
+        <form class="card login-card-custom" method="post" id="loginForm"> 
         <div class="title">Mentos Login</div>
-            <?php if(isset($_SESSION['error_found'])):?>
-                    <?php
-                        echo "<script>";
-                        echo "Swal.fire({
-                            icon: 'error',
-                            title: 'พบข้อผิดพลาด!',
-                            text: 'ไม่พบบัญชีผู้ใช้ดังกล่าว',
-                            confirmButtonColor: '#3085d6'
-                          })";
-                        echo "</script>";
-                        // echo $_SESSION['error_found'];
-                        unset($_SESSION['error_found']); // unset session when refresh
-                    ?>
-            <?php endif?>  
-            <?php if(isset($_SESSION['error_username'])):?>
-                    <?php
-                        echo "<script>";
-                        echo "Swal.fire({
-                            icon: 'error',
-                            title: 'พบข้อผิดพลาด!',
-                            text: 'ไม่พบบัญชีผู้ใช้ดังกล่าว',
-                            confirmButtonColor: '#3085d6'
-                          })";
-                        echo "</script>";
-                        // echo $_SESSION['error_username'];
-                        unset($_SESSION['error_username']); // unset session when refresh
-                    ?>
-            <?php endif?> 
-            <?php if(isset($_SESSION['error_password'])):?>
-                    <?php
-                        echo "<script>";
-                        echo "Swal.fire({
-                            icon: 'error',
-                            title: 'พบข้อผิดพลาด!',
-                            text: 'รหัสผ่านไม่ถูกต้อง',
-                            confirmButtonColor: '#3085d6'
-                          })";
-                        echo "</script>";
-                        // echo $_SESSION['error_password'];
-                        unset($_SESSION['error_password']); // unset session when refresh
-                    ?>
-            <?php endif?> 
+            <div id="notification" style="display: none;"></div>
             <div class="user-details">
                 <div class="form-outline mb-3 inputbox">
                     <label for="u_username" class="form-label">ชื่อผู้ใช้</label>

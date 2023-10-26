@@ -34,7 +34,6 @@ function validation(){
             text: 'โปรดกรอกชื่อผู้ใช้',
             confirmButtonColor: '#3085d6'
         });
-        return false;
     }
     else if(!usernameRegex.test(username)){
         Swal.fire({
@@ -45,7 +44,6 @@ function validation(){
             timer: 3500,
             timerProgressBar: true
         });
-        return false;
     }
     else if(password === ''){
         Swal.fire({
@@ -54,7 +52,6 @@ function validation(){
             text: 'โปรดกรอกรหัสผ่าน',
             confirmButtonColor: '#3085d6'
         });
-        return false;
     }
     else if(!passwordRegex.test(password)){
         Swal.fire({
@@ -65,11 +62,78 @@ function validation(){
             timer: 3500,
             timerProgressBar: true
         });
-        return false;
     }
-    return true;
+
+    let formData = new FormData();
+    formData.append('u_username',username);
+    formData.append('u_password',password);
+    let url = 'include/login_db.php';
+    request = new XMLHttpRequest();
+    request.onreadystatechange = showNotification;
+    request.open("POST",url);
+    request.send(formData);
 }
+
+function showNotification(){
+    if(request.readyState == 4 && request.status == 200){
+        document.getElementById('notification').innerHTML = request.responseText;
+        if(request.responseText.trim() === 'user login'){
+            Swal.fire({
+                icon:'success',
+                title: 'สำเร็จ',
+                text: 'เข้าสู่ระบบเสร็จสิ้น',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 2500
+            }).then(function(){
+                location.href = 'index.php';
+            })
+        }else if(request.responseText.trim() === 'admin login'){
+            Swal.fire({
+                icon:'success',
+                title: 'สำเร็จ',
+                text: 'เข้าสู่ระบบเสร็จสิ้น',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 2500
+            }).then(function(){
+                location.href = 'admin/admin.php'
+            })
+        }else if(request.responseText.trim() === 'wrong password'){
+            Swal.fire({
+                icon: 'error',
+                title: 'พบข้อผิดพลาด',
+                text: 'รหัสผ่านไม่ถูกต้อง',
+                confirmButtonColor: '#3085d6'
+            }).then(function(){
+                location.reload();
+            })
+        }else if(request.responseText.trim() === 'wrong username'){
+            Swal.fire({
+                icon: 'error',
+                title: 'พบข้อผิดพลาด',
+                text: 'ไม่พบบัญชีผู้ใช้ดังกล่าว',
+                confirmButtonColor: '#3085d6'
+            }).then(function(){
+                location.reload();
+            })
+        }else if(request.responseText.trim() === 'no result found'){
+            Swal.fire({
+                icon: 'error',
+                title: 'พบข้อผิดพลาด',
+                text: 'ไม่พบบัญชีผู้ใช้ดังกล่าว',
+                confirmButtonColor: '#3085d6'
+            }).then(function(){
+                location.reload();
+            })
+        }
+    }
+}
+
 window.onload = function(){
     let logBTN = document.getElementById('signin');
+    logBTN/addEventListener('click',function(e){
+        e.preventDefault();
+    })
     logBTN.onclick = validation;
 }

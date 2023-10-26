@@ -2,7 +2,7 @@
     session_start();
     include('functions.php');
     // header('Content-Type: application/json');
-    if (isset($_POST['signin'])) { 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') { 
         $Username = $_POST['u_username'];
         $Password = $_POST['u_password'];
 
@@ -26,24 +26,23 @@
                         if(password_verify($Password,$row['u_password'])){
                             if($row['urole'] == 'admin'){//role admin
                                 $_SESSION['admin_login'] = $row['uid'];//take session login from uid
-                                setcookie('admin_login',$row['uid'],time()+60,'/');
-                                header("location: ../admin/admin.php");
+                                setcookie('admin_login',$row['uid'],time()+1800,'/');
+                                echo "admin login";
                             }else{
                                 $_SESSION['user_login'] = $row['uid'];//take session login from uid
-                                setcookie('user_login',$row['uid'],time()+60,'/');
-                                header("location: ../index.php");
+                                // Set the cookie to expire 
+                                setcookie('user_login',$row['uid'],time()+1800,'/');
+                                $_SESSION['success_login'] = 'success login';
+                                echo "user login";
                             }
                         }else{
-                            $_SESSION['error_password'] = 'Wrong password!';
-                            header("location: ../login.php");
+                            echo "wrong password";
                         }
                     }else{
-                        $_SESSION['error_username'] = 'Wrong username!';
-                        header("location: ../login.php");
+                        echo "wrong username";
                     }
                 } else {
-                    $_SESSION['error_found'] = "No results Found!";
-                    header("location: ../login.php");
+                    echo "no result found";
                 }
 
             }catch(PDOException $e) {
