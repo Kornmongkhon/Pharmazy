@@ -1,13 +1,19 @@
 <?php
 include('include\head.php');
+if(empty($_COOKIE['visit'])){
+    setcookie('visit',0,time() + 3600*24);
+}
+if(isset($_COOKIE['visit'])){
+    $visit = $_COOKIE["visit"]+1;
+    setcookie('visit',$visit);
+}
 ?>
 
 <head>
-    <link href="style/index/index.css" rel="stylesheet">
-    </link>
+    <link href="style/index/index.css" rel="stylesheet"></link>
 </head>
 
-<body>
+<body id="bodytag">
     <div>
         <?php
         include('include\header.php');
@@ -130,6 +136,17 @@ include('include\head.php');
                     <p><img src="assets/images/ig.png"> <span class="space">peem_des</span></p>
                     <p><img src="assets/images/ig.png"> <span class="space">peeanw</span></p>
                     <p><img src="assets/images/ig.png"> <span class="space">imtrex_.png</span></p>
+                </div>
+                <div class="footer-top-item" style="display: flex;">
+                    <h5>จำนวนคนเข้าชมเว็ปไซต์ในวันนี้</h5> 
+                    <span style="margin:0rem 1rem;" id="visit-count">
+                        <?php if(isset($_COOKIE['visit'])):?>
+                            <?=$visit?>
+                        <?php else:?>
+                            <?=0?>
+                        <?php endif;?>
+                    </span>
+                    <h5>คน</h5>
                 </div>
             </div>
         </div>

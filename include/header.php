@@ -4,7 +4,6 @@
     // if(!isset($_SESSION['user_login'])){//check session user login
     //     echo "Not found";
     // }
-    
 ?>
 <head>
     <link rel="stylesheet" href="style/navbar/navbar.css">

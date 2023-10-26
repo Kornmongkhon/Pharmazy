@@ -13,6 +13,7 @@ if (!isset($_SESSION['admin_login'])) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link href="https:////cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <?php 
@@ -22,6 +23,30 @@ if (!isset($_SESSION['admin_login'])) {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
     ?>
     <div class="d-flex" id="wrapper">
+    <?php if(isset($_SESSION['success_login'])):?>
+            <script>
+                const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+                })
+
+                Toast.fire({
+                icon: 'success',
+                title: 'ยินดีต้อนรับ เข้าสู่ระบบเสร็จสิ้น'
+                }).then(function(){
+                    <?php
+                    unset($_SESSION['success_login']);
+                    ?>
+                })
+            </script>
+        <?php endif;?>
         <!-- Sidebar Starts here -->
         <div class="bg-white" id="sidebar-wrapper">
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase">
