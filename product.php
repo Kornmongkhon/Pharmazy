@@ -112,7 +112,7 @@ if (!isset($_POST['product']) || !isset($_POST['pid'])) {
                 <div class="container1 card">
                     <div class="hero-con">
                         <div class="hero-info">
-                            <h2><?= $row['pname'] ?></h2>
+                            <h3><?= $row['pname'] ?></h3>
                             <h4>รายละเอียดสินค้า</h4>
                             <h6><?= $row['pdetail'] ?></h6>
                             <p><span>ราคา : </span><?= number_format($row['price'], 2) ?> ฿</p>
