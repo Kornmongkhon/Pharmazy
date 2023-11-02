@@ -13,9 +13,9 @@
 </head>
 <body>
     <div class="flex-login-form">
-        <form class=" card login-card-custom" action="include/register_db.php" method="post" id="regForm">
+        <form class=" card login-card-custom" method="post" id="regForm">
         <div class="title">Mentos Register</div>
-        <div id="notification"></div>
+        <div id="notification" style="display: none;"></div>
             <div class="user-details warp">
                 <div class="form-outline mb-3 inputbox">
                     <label for="u_name" class="form-label">ชื่อ - นามสกุล</label>
@@ -62,11 +62,11 @@
                     <div>
                         <label>
                             <input type="radio" name="gender" value="male" aria-describedby="gender">
-                            ชาย
+                                ชาย
                         </label>
                         <label>
                             <input type="radio" name="gender" value="female" aria-describedby="gender">
-                            หญิง
+                                หญิง
                         </label>
                     </div>
                 </div>

@@ -48,7 +48,8 @@ function validation(){
     let phone = document.getElementById("phone").value;
     let password = document.getElementById("u_password").value;
     let confirmPassword = document.getElementById("c_password").value;
-    let gender = document.querySelector('input[name="gender"]:checked');
+    let selectedGenderRadioButton = document.querySelector('input[name="gender"]:checked');
+    let gender = selectedGenderRadioButton ? selectedGenderRadioButton.value : "";
     let fullnameRegex = /^[\wก-๏\s]{4,20}/;
     let usernameRegex = /^[\w]{4,}/;
     let emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
@@ -190,25 +191,26 @@ function validation(){
             confirmButtonColor: '#3085d6'
         });
     }else{
+        console.log(gender);
         let formData = new FormData();
         formData.append('u_name',fullName);
         formData.append('u_username',username);
         formData.append('email',email);
         formData.append('phone',phone);
         formData.append('address',address);
-        formData.append('password',password);
+        formData.append('u_password',password);
         formData.append('gender',gender);
 
         let url = 'include/register_db.php';
         request = new XMLHttpRequest();
-        request.onreadystatechange = showNotification;
+        request.onreadystatechange = showResult;
         request.open('POST',url);
         request.send(formData);
     }
 }
 
-function showNotification(){
-    if(request.onState == 4 && request.status == 200){
+function showResult(){
+    if(request.readyState == 4 && request.status == 200){
         document.getElementById('notification').innerHTML = request.responseText;
         if(request.responseText.trim() === 'registered'){
             Swal.fire({
@@ -231,7 +233,7 @@ function showNotification(){
             }).then(function(){
                 location.reload();
             })
-        }else if(request.responseText.trim() === 'someting went wrong'){
+        }else if(request.responseText.trim() === 'registered failed'){
             Swal.fire({
                 position: 'center',
                 icon: 'error',

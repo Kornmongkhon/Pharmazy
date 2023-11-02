@@ -9,7 +9,6 @@
         $Address = $_POST['address'];
         $PhoneNum = $_POST['phone'];
         $Password = $_POST['u_password'];
-        $C_password = $_POST['c_password'];
         $Gender = $_POST['gender'];
         $Urole = 'user';
         $defaultAvatars = [ //set default avatar url
@@ -26,10 +25,9 @@
                 $check_user->execute();
                 $row = $check_user->fetch(PDO::FETCH_ASSOC);
 
-                if($row['u_username'] == $Username){
-                    $_SESSION['error_already'] = "มีสมาชิกนี้อยู่ในระบบแล้ว";
+                if($row !== false && $row !== null){
                     echo 'username already exist';
-                }else if(!isset($_SESSION['error_already'])) {
+                }else{
                     $passwordHash = password_hash($Password, PASSWORD_DEFAULT);
                     $stmt = $pdo->prepare("INSERT INTO users(u_name, u_username, email, address, phone, u_password, gender, urole, avatar) 
                                             VALUES(:u_name, :u_username, :email, :address, :phone, :u_password, :gender, :urole, :avatar)");
@@ -42,15 +40,16 @@
                     $stmt->bindParam(":gender", $Gender);
                     $stmt->bindParam(":urole", $Urole);
                     $stmt->bindParam(":avatar", $Avatar);
-                    $stmt->execute();
-                    echo 'registered';
-                } else {
-                    echo 'someting went wrong';
+                    if($stmt->execute()){
+                        echo 'registered';
+                    }else{
+                        echo 'registered failed';
+                    } 
                 }
 
             }catch(PDOException $e) {
                 echo $e->getMessage();
             }
-        }
+    }
     // }
 ?>
