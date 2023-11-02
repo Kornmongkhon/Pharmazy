@@ -72,7 +72,8 @@ function validationChangeP(){
             icon:'warning',
             title: 'แจ้งเตือน!',
             text: 'โปรดกรอกรหัสผ่าน',
-            confirmButtonColor: '#3085d6'
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ตกลง'
         });
         return false;
     }else if(Npassword === ''){
@@ -80,7 +81,8 @@ function validationChangeP(){
             icon:'warning',
             title: 'แจ้งเตือน!',
             text: 'โปรดกรอกรหัสผ่านใหม่',
-            confirmButtonColor: '#3085d6'
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ตกลง'
         });
         return false;
     }else if(Cpassword === ''){
@@ -88,7 +90,8 @@ function validationChangeP(){
             icon:'warning',
             title: 'แจ้งเตือน!',
             text: 'โปรดกรอกยืนยันรหัสผ่านใหม่',
-            confirmButtonColor: '#3085d6'
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ตกลง'
         });
         return false;
     }else if(!passwordRegex.test(password)){
@@ -116,7 +119,8 @@ function validationChangeP(){
             icon:'warning',
             title: 'แจ้งเตือน!',
             text: 'กรอกรหัสผ่านใหม่ไม่ตรงกัน',
-            confirmButtonColor: '#3085d6'
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ตกลง'
         });
         return false;
     }

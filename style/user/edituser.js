@@ -13,7 +13,8 @@ function validationInfo(){
             icon:'warning',
             title: 'Warning!',
             text: 'Please enter your full name.',
-            confirmButtonColor: '#3085d6'
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ตกลง'
         });
         return false;
     }
@@ -33,7 +34,8 @@ function validationInfo(){
             icon:'warning',
             title: 'Warning!',
             text: 'Please enter your email.',
-            confirmButtonColor: '#3085d6'
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ตกลง'
         });
         return false;
     }
@@ -53,7 +55,8 @@ function validationInfo(){
             icon:'warning',
             title: 'Warning!',
             text: 'Please enter your phone.',
-            confirmButtonColor: '#3085d6'
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ตกลง'
         });
         return false;
     }
@@ -73,7 +76,8 @@ function validationInfo(){
             icon:'warning',
             title: 'Warning!',
             text: 'Please enter your address.',
-            confirmButtonColor: '#3085d6'
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ตกลง'
         });
         return false;
     }

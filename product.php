@@ -14,10 +14,12 @@ if (!isset($_POST['product']) || !isset($_POST['pid'])) {
 <head>
     <link href="style/store/product.css" rel="stylesheet">
     <script>
-        function Check(pid, pname, price) {
+        function Check(pid, pname, price, pimg) {
             let create = document.getElementById("error-message");
             let q = document.getElementById("quan").value;
+            let qrecent = document.getElementById("quanrecent").value;
             let add = document.getElementById("addtext");
+
 
             if (q <= 0) {
                 if (!create) {
@@ -26,12 +28,23 @@ if (!isset($_POST['product']) || !isset($_POST['pid'])) {
                     add.appendChild(create);
                 }
                 create.innerHTML = "สินค้าต้องมีค่าเป็น 1 ขึ้นไป";
+                
             } else {
                 if (create) {
                     // Remove the error message if it exists
                     create.remove();
                 }
-                location = "cartAdd.php?action=add&pid=" + pid + "&pname=" + pname + "&price=" + price + "&quan=" + q;
+                if(q > qrecent){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'ล้มเหลว',
+                        text : 'สินค้าที่เลือกจำนวนเกินกับสินค้าที่มีอยู่',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'ตกลง'
+                    })
+                }else{
+                    location = "cartAdd.php?action=add&pid=" + pid + "&pname=" + pname + "&price=" + price + "&quan=" + q + "&pimg="+pimg;
+                }
             }
         }
 
@@ -104,12 +117,12 @@ if (!isset($_POST['product']) || !isset($_POST['pid'])) {
 
 
 
-
+                <input type="hidden" id="quanrecent" value="<?= $row['pquan_stock'] ?>">
                 <input type="number" id="quan" name="quan" value="0">
 
                 <div id="addtext"></div>
                 <div id="notification"></div>
-                <button type="submit" onclick="Check('<?= $pid ?>','<?= $row['pname'] ?>','<?= $row['price'] ?>')" name="add" value="เพิ่มลงตะกร้า" style="text-decoration: none;background-color: rgba(20,172,204,1);padding: 0.7rem;border-radius: 10px;color:white;">เพิ่มลงตะกร้า</button>
+                <button type="submit" onclick="Check('<?= $pid ?>','<?= $row['pname'] ?>','<?= $row['price'] ?>','<?= $row['pimg'] ?>')" name="add" value="เพิ่มลงตะกร้า" style="text-decoration: none;background-color: rgba(20,172,204,1);padding: 0.7rem;border-radius: 10px;color:white;">เพิ่มลงตะกร้า</button>
                 <span>
                     <input type="hidden" name="plike" id="plike" value="<?=$row['plike']?>">
                     <input type="hidden" name="pid" id="pid" value="<?=$pid?>">

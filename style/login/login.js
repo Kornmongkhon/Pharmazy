@@ -32,7 +32,8 @@ function validation(){
             icon:'warning',
             title: 'คำเตือน',
             text: 'โปรดกรอกชื่อผู้ใช้',
-            confirmButtonColor: '#3085d6'
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ตกลง'
         });
     }
     else if(!usernameRegex.test(username)){
@@ -50,7 +51,8 @@ function validation(){
             icon:'warning',
             title: 'คำเตือน',
             text: 'โปรดกรอกรหัสผ่าน',
-            confirmButtonColor: '#3085d6'
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ตกลง'
         });
     }
     else if(!passwordRegex.test(password)){
