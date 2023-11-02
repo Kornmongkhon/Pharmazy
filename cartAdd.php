@@ -90,7 +90,7 @@ if ($pageWasRefreshed) {
                                 <input type="number" id="<?= $item["pid"] ?>" value="<?= $item["quan"] ?>" min="1" max="9">
                                 <a href="#" onclick="update(<?= $item['pid'] ?>,'<?= $relativePhotoPath ?>')">แก้ไข</a>
                             </td>
-                            <td style="padding: 1rem;"><?= $item["price"] ?></td>
+                            <td style="padding: 1rem;"><?= number_format($item["price"],2) ?></td>
                             <td style="padding: 1rem;">
                                 <?= $item["price"] * $item["quan"] ?>
 
