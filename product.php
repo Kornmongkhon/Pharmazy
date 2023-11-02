@@ -121,7 +121,7 @@ if (!isset($_POST['product']) || !isset($_POST['pid'])) {
                             <input type="number" id="quan" name="quan" value="0">
 
                             <div id="addtext"></div>
-                            <div id="notification"></div>
+                            <div id="notification" style="display: none;"></div>
                             <br>
                             <span>
                                 <button type="submit" onclick="Check('<?= $pid ?>','<?= $row['pname'] ?>','<?= $row['price'] ?>','<?= $row['pimg'] ?>')" name="add" style="text-decoration: none;background-color: rgba(20,172,204,1);padding: 0.7rem;border-radius: 10px;color:white;width:7rem">ชำระเงิน</button>
