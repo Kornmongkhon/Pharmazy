@@ -115,7 +115,7 @@ if (!isset($_SESSION['admin_login'])) {
                     <h3 class="fs-4 mb-3">รายชื่อสมาชิก</h3>
                     <div class="col">
                         <?php
-                            $stmt = $pdo->prepare("SELECT * FROM users WHERE users.urole = 'user';");
+                            $stmt = $pdo->prepare("SELECT uid,avatar,u_username,u_name,email,address,phone,gender,DATE_FORMAT(create_at + INTERVAL 543 YEAR, '%d/%m/%Y %H:%i:%s') AS create_at FROM users WHERE users.urole = 'user';");
                             $stmt->execute();
                         ?>
                         <table id="OrderTable" class="table table-responsive-md">

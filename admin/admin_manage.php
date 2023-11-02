@@ -116,7 +116,7 @@ if (!isset($_SESSION['admin_login'])) {
                     <h3 class="fs-4 mb-3">รายชื่อทีมงาน</h3>
                     <div class="col">
                         <?php
-                            $stmt = $pdo->prepare("SELECT * FROM users WHERE users.urole = 'admin';");
+                            $stmt = $pdo->prepare("SELECT uid,avatar,u_username,u_name,email,address,phone,gender,DATE_FORMAT(create_at + INTERVAL 543 YEAR, '%d/%m/%Y %H:%i:%s') AS create_at FROM users WHERE users.urole = 'admin';");
                             $stmt->execute();
                         ?>
                         <table id="OrderTable" class="table table-responsive-md">
@@ -153,7 +153,7 @@ if (!isset($_SESSION['admin_login'])) {
                                             หญิง
                                         <?php endif; ?>
                                     </td>
-                                    <td><?= $row['create_at'] ?></td>
+                                    <td><?= $check_user['create_at'] ?></td>
                                     <td>
                                         <!-- <a href="#" class="btn btn-warning">แก้ไข</a> <a href="#" class="btn btn-danger">ลบ</a> -->
                                         <div style="display: flex;justify-content: center;align-items: center">
