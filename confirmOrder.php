@@ -8,10 +8,13 @@ if (isset($_POST['submit_button'])){
     if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])){
         try{
             $sum = $_POST["sum"];
-            $status = "ยังไม่จ่าย";
-            if (isset($_SESSION['cart']) && is_array($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
-                $firstPid = reset($_SESSION['cart'])['pname'];
-            }
+            $status = "wait";
+            
+            $countOrders = $pdo->prepare("SELECT COUNT(*) as order_count FROM orders");
+            $countOrders->execute();
+            $orderCount = $countOrders->fetchColumn();
+            $orderNo = $orderCount + 1; // Increment the last order number
+            $firstPid = 'Order#'.$orderNo;
             $addOrder = $pdo->prepare("INSERT INTO orders (ordName,status,amount) VALUES (?,?,?)");
             $addOrder->bindParam(1,$firstPid);
             $addOrder->bindParam(2,$status);
@@ -28,13 +31,19 @@ if (isset($_POST['submit_button'])){
                 $insertOrderDetail->bindParam(2,$qty);
                 $insertOrderDetail->bindParam(3,$orderId);
                 $insertOrderDetail->bindParam(4,$pid);
-                $insertOrderDetail->execute();
+                if($insertOrderDetail->execute()){
+                    $stmt = $pdo->prepare("SELECT pquan_stock FROM product WHERE pid = ?");
+                    $stmt->bindParam(1,$pid);
+                    $stmt->execute();
+                    $stock = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $update_stock = $stock['pquan_stock'] - $qty;
+                    $new_stock = $pdo->prepare("UPDATE product SET pquan_stock = ? WHERE pid = ?");
+                    $new_stock->bindParam(1,$update_stock);
+                    $new_stock->bindParam(2,$pid);
+                    $new_stock->execute();
+                }
             }
             $_SESSION['cart'] = array(); ?>
-          
-          <script>
-            alert("FIN")
-          </script>
             <?php
             header("Location: cartAdd.php");
         }catch (PDOException $e) {

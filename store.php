@@ -184,6 +184,19 @@ $totalPages = ceil($totalProducts / $itemPerPage);
                 <?php if ($page == 1) : ?> <!-- if in first page show btn prev but can't go prev page -->
                     <a class="btn btn-secondary">Previous</a>
                 <?php endif; ?>
+                <?php if(!isset($_GET['ptype'])):?>
+                    <?php if ($page > 1) : ?> <!-- if not in first page show btn prev can go prev page -->
+                        <a href="store.php?page=<?= $page - 1 ?>" class="btn btn-primary">Previous</a>
+                    <?php endif; ?>
+                    <?php for ($i = 1; $i <= $totalPages; $i++) : ?> <!-- loop number of page to button -->
+                        <a href="store.php?page=<?= $i ?>" class="btn btn-primary <?= ($i == $page) ? 'active' : ''; ?>" style="margin-left: 20px;"><?= $i ?></a>
+                    <?php endfor; ?>
+                    <?php if ($page < $totalPages)  : ?> <!-- if in first page show btn next can go to next page -->
+                        <a href="store.php?page=<?= $page + 1 ?>" class="btn btn-primary" style="margin-left: 20px;">Next</a>
+                    <?php else: ?>
+                        <a class="btn btn-secondary" style="margin-left: 20px;">Next</a>
+                    <?php endif; ?>
+                <?php endif; ?>
                 <?php if(isset($_GET['ptype'])):?>
                     <?php if ($page > 1) : ?> <!-- if not in first page show btn prev can go prev page -->
                         <a href="store.php?ptype=<?= $selectType ?>&page=<?= $page - 1 ?>" class="btn btn-primary">Previous</a>

@@ -11,9 +11,7 @@ if (!isset($_SESSION['cart'])) {
 if ($pageWasRefreshed) {
 } else if (isset($_GET["action"]) && $_GET["action"] == 'add') {
 
-    if(isset($_GET['pimg'])){
-        $pimg = $_GET['pimg'];
-    }
+    
     $pid = $_GET["pid"];
     // echo $_GET["pname"];
     $item = array(
@@ -21,7 +19,7 @@ if ($pageWasRefreshed) {
         'pname' => $_GET['pname'],
         'price' => $_GET['price'],
         'quan' => $_GET['quan'],
-        'pimg' => $pimg
+        'pimg' => $_GET['pimg']
     );
     if (array_key_exists($pid, $_SESSION['cart'])) {
         $_SESSION['cart'][$pid]['quan'] += $_GET['quan'];
@@ -78,7 +76,7 @@ if ($pageWasRefreshed) {
                     <tbody class="text-center mx-auto">
                         <?php
                         // Remove the '../' part from the stored avatar path
-                        $relativePhotoPath = str_replace('../', '', $_GET['pimg']);
+                        $relativePhotoPath = str_replace('../', '', $item['pimg']);
                         ?>
                         <tr >
                             <td style="padding: 1rem;"><?= $count ?></td>
