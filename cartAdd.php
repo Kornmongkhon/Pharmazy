@@ -92,7 +92,7 @@ if ($pageWasRefreshed) {
                             </td>
                             <td style="padding: 1rem;"><?= number_format($item["price"],2) ?></td>
                             <td style="padding: 1rem;">
-                                <?= $item["price"] * $item["quan"] ?>
+                                <?= number_format($item["price"] * $item["quan"],2) ?>
 
                                 <a href="?action=delete&pid=<?= $item["pid"] ?>">ลบ</a>
                             </td>
