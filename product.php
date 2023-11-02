@@ -23,7 +23,7 @@ if (!isset($_POST['product']) || !isset($_POST['pid'])) {
 
             if (q <= 0) {
                 if (!create) {
-                    create = document.createElement("h3");
+                    create = document.createElement("h6");
                     create.id = "error-message";
                     add.appendChild(create);
                 }
