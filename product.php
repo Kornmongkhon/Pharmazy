@@ -117,14 +117,14 @@ if (!isset($_POST['product']) || !isset($_POST['pid'])) {
                             <h6><?= $row['pdetail'] ?></h6>
                             <p><span>ราคา : </span><?= number_format($row['price'], 2) ?> ฿</p>
                             <p><span>จำนวนในสต๊อก : </span><?= $row['pquan_stock'] ?> </p>
-                            <input type="number" id="quanrecent" value="<?= $row['pquan_stock'] ?>">
+                            <input type="hidden" id="quanrecent" value="<?= $row['pquan_stock'] ?>">
                             <input type="number" id="quan" name="quan" value="0">
 
                             <div id="addtext"></div>
                             <div id="notification"></div>
                             <br>
                             <span>
-                                <button type="submit" onclick="Check('<?= $pid ?>','<?= $row['pname'] ?>','<?= $row['price'] ?>','<?= $row['pimg'] ?>')" name="add" style="text-decoration: none;background-color: rgba(20,172,204,1);padding: 0.7rem;border-radius: 10px;color:white;">ชำระเงิน</button>
+                                <button type="submit" onclick="Check('<?= $pid ?>','<?= $row['pname'] ?>','<?= $row['price'] ?>','<?= $row['pimg'] ?>')" name="add" style="text-decoration: none;background-color: rgba(20,172,204,1);padding: 0.7rem;border-radius: 10px;color:white;width:7rem">ชำระเงิน</button>
                                 <button type="submit" onclick="Check('<?= $pid ?>','<?= $row['pname'] ?>','<?= $row['price'] ?>','<?= $row['pimg'] ?>')" name="add" style="text-decoration: none;background-color: rgba(20,172,204,1);padding: 0.7rem;border-radius: 10px;color:white;">เพิ่มลงตะกร้า</button>
                                 <input type="hidden" name="plike" id="plike" value="<?= $row['plike'] ?>">
                                 <input type="hidden" name="pid" id="pid" value="<?= $pid ?>">
