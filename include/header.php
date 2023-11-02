@@ -47,7 +47,7 @@
                 <input class="form-control me-2" type="search" placeholder="ค้นหา" name="search" id="search" aria-label="Search" style="width: 30rem;">
                 <button class="btn-search" type="submit">ค้นหา</button>
             </form>
-            <i class="fa-solid fa-cart-shopping" style="color: white;margin-right: 0.5rem;"></i>
+            <a href="cartAdd.php"><i class="fa-solid fa-cart-shopping" style="color: white;margin-right: 0.5rem;"></i></a>
             <?php if(!isset($_COOKIE['user_login'])):?>
                 <?php session_destroy();?>
             <?php endif;?>
@@ -79,7 +79,7 @@
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><span class="dropdown-item drop">ยินดีต้อนรับ, <?=$row['u_name']?></span></li>
                             <li><a class="dropdown-item drop" href="edituser.php?u_username=<?=$row['u_username']?>">โปรไฟล์</a></li>
-                            <li><a class="dropdown-item drop" href="cartAdd.php?action=">ตะกร้า</a></li>
+                            <li><a class="dropdown-item drop" href="cartAdd.php">ตะกร้า</a></li>
                             <li><a class="dropdown-item drop" href="history.php">ประวัติการซื้อ</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item drop" href="changePass.php?u_username=<?=$row['u_username']?>">เปลี่ยนรหัสผ่าน</a></li>
