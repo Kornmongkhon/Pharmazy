@@ -32,6 +32,7 @@ window.onload = function() {
     document.body.addEventListener("click", function(event) {
         if (event.target && event.target.id === "deleteUser") {
             let userID = event.target.getAttribute("data-uid");
+            event.preventDefault();
             Swal.fire({//show notification confirm to delete
                 title: "แจ้งเตือน",
                 icon: "warning",
@@ -48,7 +49,6 @@ window.onload = function() {
                     let formData = new FormData();
                     formData.append('uid',userID);
                     request.open("POST",url);
-
                     request.onreadystatechange = showNotification;
                     request.send(formData);
                 }

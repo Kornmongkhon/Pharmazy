@@ -161,8 +161,8 @@ if (!isset($_SESSION['admin_login'])) {
                                                 <button type="submit" class="btn btn-warning" id="edit">แก้ไข</button>
                                             </form>
                                             <form style="margin-right: .6rem;" method="post">
-                                                <input type="hidden" name="uid" value="<?= $check_user['uid'] ?>">
-                                                <button type="button" class="btn btn-danger" id="deleteUser" data-uid="<?= $check_user['uid']?>">ลบ</button>
+                                                <input type="hidden" name="uid" value="<?=$check_user['uid'] ?>">
+                                                <button type="button" class="btn btn-danger" id="deleteUser" data-uid="<?=$check_user['uid']?>">ลบ</button>
                                             </form>
                                         </div>
                                     </td>

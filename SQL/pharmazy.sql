@@ -90,33 +90,6 @@ INSERT INTO `order_detail` (`ordDeID`, `uid`, `qty`, `ordID`, `pid`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_test`
---
-
-CREATE TABLE `order_test` (
-  `order_id` int(11) NOT NULL,
-  `uid` int(11) NOT NULL,
-  `pid` int(11) NOT NULL,
-  `order_quantity` int(11) NOT NULL,
-  `order_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `order_status` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `order_test`
---
-
-INSERT INTO `order_test` (`order_id`, `uid`, `pid`, `order_quantity`, `order_date`, `order_status`) VALUES
-(1, 1, 12, 3, '2023-10-01 06:22:23', 'paid'),
-(2, 1, 6, 7, '2023-10-02 06:29:57', 'wait'),
-(3, 1, 17, 2, '2023-10-02 06:30:12', 'wait'),
-(4, 3, 4, 2, '2023-10-02 06:31:06', 'wait'),
-(5, 3, 10, 2, '2023-10-03 06:31:15', 'paid'),
-(6, 3, 15, 1, '2023-10-03 06:31:25', 'paid');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `product`
 --
 
@@ -219,14 +192,6 @@ ALTER TABLE `order_detail`
   ADD KEY `order_detail_pid` (`pid`);
 
 --
--- Indexes for table `order_test`
---
-ALTER TABLE `order_test`
-  ADD PRIMARY KEY (`order_id`),
-  ADD KEY `order_test_uid` (`uid`),
-  ADD KEY `order_test_pid` (`pid`);
-
---
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
@@ -261,12 +226,6 @@ ALTER TABLE `order_detail`
   MODIFY `ordDeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `order_test`
---
-ALTER TABLE `order_test`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
@@ -286,16 +245,8 @@ ALTER TABLE `users`
 -- Constraints for table `order_detail`
 --
 ALTER TABLE `order_detail`
-  ADD CONSTRAINT `order_detail_pid` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`),
-  ADD CONSTRAINT `order_detail_uid` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`);
-
---
--- Constraints for table `order_test`
---
-ALTER TABLE `order_test`
-  ADD CONSTRAINT `order_test_pid` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`),
-  ADD CONSTRAINT `order_test_uid` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`);
-COMMIT;
+  ADD CONSTRAINT `order_detail_pid` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`) ON DELETE CASCADE,
+  ADD CONSTRAINT `order_detail_uid` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`) ON DELETE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

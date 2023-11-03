@@ -153,12 +153,8 @@ if (!isset($_SESSION['admin_login'])) {
                     <div class="col-md-3">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div class="text-center mt-3">
-                                <?php
-                                    $stmt = $pdo->prepare("SELECT SUM(order_test.order_quantity * product.price) AS sum_income FROM order_test JOIN product ON order_test.pid = product.pid;");
-                                    $stmt->execute();
-                                    $sum_income = $stmt->fetch(PDO::FETCH_ASSOC);
-                                ?>
-                                <h3 class="fs-2"><?=number_format($sum_income['sum_income'],2)?></h3>
+                                
+                                <h3 class="fs-2">0</h3>
                                 <p class="fs-5">รายได้ทั้งหมด</p>
                             </div>
                             <i
@@ -195,10 +191,6 @@ if (!isset($_SESSION['admin_login'])) {
                 <div class="row my-5">
                     <h3 class="fs-4 mb-3">การสั่งซื้อล่าสุด</h3>
                     <div class="col">
-                        <?php
-                            $stmt = $pdo->prepare("SELECT DATE_FORMAT(order_test.order_date + INTERVAL 543 YEAR, '%d/%m/%Y') AS order_date, order_test.order_id,users.u_username, product.pid, product.pname, order_test.order_quantity ,SUM(order_test.order_quantity * product.price) AS sum_price FROM order_test JOIN product ON order_test.pid = product.pid JOIN users ON order_test.uid = users.uid GROUP BY order_test.order_date,u_username ORDER BY order_test.order_date;");
-                            $stmt->execute();
-                        ?>
                         <table id="OrderTable" class="table table-responsive-md">
                             <thead class="table-info">
                                 <tr>
@@ -212,17 +204,7 @@ if (!isset($_SESSION['admin_login'])) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php while($row = $stmt->fetch(PDO::FETCH_ASSOC)):?>
-                                    <tr style="text-align: center;">
-                                    <td><?= $row['order_date'] ?></td>
-                                    <td><?= $row['order_id'] ?></td>
-                                    <td><?= $row['u_username'] ?></td>
-                                    <td><?= $row['pid'] ?></td>
-                                    <td><?=$row['pname']?></td>
-                                    <td><?=$row['order_quantity']?></td>
-                                    <td><?= number_format($row['sum_price'],2) ?> ฿</td>
-                                </tr>
-                                <?php endwhile;?>
+                                
                             </tbody>
                         </table>
                     </div>
