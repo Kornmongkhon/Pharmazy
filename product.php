@@ -124,11 +124,11 @@ if (!isset($_POST['product']) || !isset($_POST['pid'])) {
                             <div id="notification" style="display: none;"></div>
                             <br>
                             <span>
-                                <button type="submit" onclick="Check('<?= $pid ?>','<?= $row['pname'] ?>','<?= $row['price'] ?>','<?= $row['pimg'] ?>')" name="add" style="text-decoration: none;background-color: rgba(20,172,204,1);padding: 0.7rem;border-radius: 10px;color:white;width:7rem">ชำระเงิน</button>
-                                <button type="submit" onclick="Check('<?= $pid ?>','<?= $row['pname'] ?>','<?= $row['price'] ?>','<?= $row['pimg'] ?>')" name="add" style="text-decoration: none;background-color: rgba(20,172,204,1);padding: 0.7rem;border-radius: 10px;color:white;">เพิ่มลงตะกร้า</button>
+                                <button type="submit" class="btn" onclick="Check('<?= $pid ?>','<?= $row['pname'] ?>','<?= $row['price'] ?>','<?= $row['pimg'] ?>')" name="add" style="text-decoration: none;background-color: rgba(20,172,204,1);padding: 0.7rem;border-radius: 10px;color:white;width:7rem">ชำระเงิน</button>
+                                <button type="submit" class="btn" onclick="Check('<?= $pid ?>','<?= $row['pname'] ?>','<?= $row['price'] ?>','<?= $row['pimg'] ?>')" name="add" style="text-decoration: none;background-color: rgba(20,172,204,1);padding: 0.7rem;border-radius: 10px;color:white;">เพิ่มลงตะกร้า</button>
                                 <input type="hidden" name="plike" id="plike" value="<?= $row['plike'] ?>">
                                 <input type="hidden" name="pid" id="pid" value="<?= $pid ?>">
-                                <button style="background-color: rgba(20,172,204,1);padding: 0.7rem 2.5rem;border-radius: 10px;" onclick="like()"><i id="like-icon" class="fa-regular fa-heart"></i></button>
+                                <button class="btn" style="background-color: rgba(20,172,204,1);padding: 0.7rem 2.5rem;border-radius: 10px;" onclick="like()"><i id="like-icon" class="fa-regular fa-heart"></i></button>
                             </span>
                         </div>
                         <div class="hero-img">
