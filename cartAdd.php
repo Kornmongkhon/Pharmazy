@@ -48,8 +48,7 @@ if ($pageWasRefreshed) {
 
 
 <head>
-
-
+    <link href="style/store/cart.css" rel="stylesheet">
 </head>
 
 <body>
@@ -112,7 +111,21 @@ if ($pageWasRefreshed) {
                     <tfoot>
                         <?php if (isset($item['pid'])) : ?>
                             <tr>
-                                <td colspan="6" align="right">true</td>
+                                <td colspan="6" align="right">
+                                    <article class="ship-type">
+                                        <aside>
+                                            การจัดส่ง : 
+                                        </aside>
+                                        <section>
+                                            <select class="form-control">
+                                                <option value="">กรุณาเลือกการจัดส่ง</option>
+                                                <option value="flash">Flash Express</option>
+                                                <option value="kery">Kery Express</option>
+                                            </select>
+                                        </section>
+                                        
+                                    </article>         
+                                </td>
                             </tr>
                         <?php endif; ?>
                         <tr>

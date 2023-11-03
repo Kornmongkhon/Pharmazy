@@ -50,16 +50,6 @@ CREATE TABLE `orders` (
   `date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`ordID`, `ordName`, `amount`, `status`, `date`) VALUES
-(1, 'Order#1', 1683, 'wait', '2023-10-15 11:24:31'),
-(2, 'Order#2', 1152, 'wait', '2023-10-15 11:34:06'),
-(3, 'Order#3', 260, 'wait', '2023-10-17 11:42:52'),
-(4, 'Order#4', 843, 'wait', '2023-10-17 12:08:04');
-
 -- --------------------------------------------------------
 
 --
@@ -73,21 +63,6 @@ CREATE TABLE `order_detail` (
   `ordID` int(11) NOT NULL,
   `pid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `order_detail`
---
-
-INSERT INTO `order_detail` (`ordDeID`, `uid`, `qty`, `ordID`, `pid`) VALUES
-(5, 4, 2, 1, 16),
-(6, 4, 1, 1, 20),
-(7, 4, 2, 1, 26),
-(8, 4, 1, 2, 3),
-(9, 4, 4, 2, 13),
-(11, 4, 1, 3, 17),
-(12, 4, 1, 4, 7),
-(13, 4, 1, 4, 4),
-(14, 4, 2, 4, 23);
 
 -- --------------------------------------------------------
 
@@ -221,13 +196,13 @@ ALTER TABLE `delivery`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `ordID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ordID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT for table `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `ordDeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ordDeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT for table `product`

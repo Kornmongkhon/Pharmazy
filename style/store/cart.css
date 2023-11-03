@@ -1,0 +1,9 @@
+.ship-type{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.ship-type section{
+    margin-left: 2rem;
+}
