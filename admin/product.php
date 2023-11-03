@@ -142,6 +142,8 @@ if (!isset($_SESSION['admin_login'])) {
                                         <td>อาหารเสริม</td>
                                     <?php elseif($check_product['ptype'] == 'home-medicine'):?>
                                         <td>ยาสามัญประจำบ้าน</td>
+                                    <?php elseif($check_product['ptype'] == 'medical-supply'):?>
+                                        <td>อุปกรณ์การเเพทย์</td>
                                     <?php elseif($check_product['ptype'] == 'skin-care'):?>
                                         <td>สกินแคร์</td>
                                     <?php endif;?>

@@ -35,6 +35,7 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item drop" href="store.php?ptype=home-medicine">ยาสามัญประจำบ้าน</a></li>
+                    <li><a class="dropdown-item drop" href="store.php?ptype=medical-supply">อุปกรณ์การเเพทย์</a></li>
                     <li><a class="dropdown-item drop" href="store.php?ptype=supplementary-food">อาหารเสริม</a></li>
                     <li><a class="dropdown-item drop" href="store.php?ptype=skin-care">สกินแคร์</a></li>
                 </ul>

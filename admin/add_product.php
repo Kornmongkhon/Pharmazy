@@ -129,6 +129,7 @@ if (!isset($_SESSION['admin_login'])) {
                             <select class="form-control" name="ptype" id="ptype">
                                     <option value="">เลือกประเภทสินค้า</option>
                                     <option value="supplementary-food">อาหารเสริม</option>
+                                    <option value="medical-supply">อุปกรณ์การเเพทย์</option>
                                     <option value="home-medicine">ยาสามัญประจำบ้าน</option>
                                     <option value="skin-care">สกินแคร์</option>
                             </select>

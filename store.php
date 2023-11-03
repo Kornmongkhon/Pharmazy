@@ -81,6 +81,7 @@ $totalPages = ceil($totalProducts / $itemPerPage);
                             <article style="display: flex;justify-content: center;align-items: center;"><a href="index.php" class="changec">หน้าหลัก</a> <span class="mx-2 mb-0">/</span>
                                 <?php if ($selectType == 'skin-care') : ?><a href="store.php" class="changec" style="margin-right: 0.5rem;">รายการสินค้า</a>/ สกินแคร์
                                 <?php elseif ($selectType == 'supplementary-food') : ?><a href="store.php" class="changec" style="margin-right: 0.5rem;">รายการสินค้า</a>/ อาหารเสริม
+                                <?php elseif ($selectType == 'medical-supply') : ?><a href="store.php" class="changec" style="margin-right: 0.5rem;">รายการสินค้า</a>/ อุปกรณ์การแพทย์
                                 <?php elseif ($selectType == 'home-medicine') : ?><a href="store.php" class="changec" style="margin-right: 0.5rem;">รายการสินค้า</a>/ ยาสามัญประจำบ้าน
                                 <?php else : ?>
                                     <strong>รายการสินค้า</strong>
@@ -92,6 +93,7 @@ $totalPages = ceil($totalProducts / $itemPerPage);
                                         <option value="">เลือกประเภทสินค้า</option>
                                         <option value="all">สินค้าทั้งหมด</option>
                                         <option value="home-medicine">ยาสามัญประจำบ้าน</option>
+                                        <option value="medical-supply">อุปกรณ์การเเพทย์</option>
                                         <option value="supplementary-food">อาหารเสริม</option>
                                         <option value="skin-care">สกินแคร์</option>
                                     </select>

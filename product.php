@@ -132,7 +132,10 @@ if (!isset($_POST['product']) || !isset($_POST['pid'])) {
                             </span>
                         </div>
                         <div class="hero-img">
-                            <img src="<?= $row['pimg'] ?>">
+                            <?php
+                                $relativePhotoPath = str_replace('../', '', $row['pimg']);
+                            ?>
+                            <img src="<?= $relativePhotoPath?>" width="350" height="400">
                         </div>
                     </div>
                 </div>
