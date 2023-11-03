@@ -6,6 +6,7 @@ if (isset($_GET['pid'])) {
 }
 if (!isset($_POST['product']) || !isset($_POST['pid'])) {
     header("location: store.php");
+    exit;
 } else {
     $pid = $_POST['product']; //get value from button name product (value is pid)
 }
@@ -19,34 +20,33 @@ if (!isset($_POST['product']) || !isset($_POST['pid'])) {
             let q = parseInt(document.getElementById("quan").value);
             let qrecent = parseInt(document.getElementById("quanrecent").value);
             let add = document.getElementById("addtext");
-
-
-            if (q <= 0) {
-                if (!create) {
-                    create = document.createElement("h6");
-                    create.id = "error-message";
-                    add.appendChild(create);
-                }
-                create.innerHTML = "สินค้าต้องมีค่าเป็น 1 ขึ้นไป";
-
-            } else {
-                if (create) {
-                    // Remove the error message if it exists
-                    create.remove();
-                }
-                if (q > qrecent) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'ล้มเหลว',
-                        text: 'สินค้าที่เลือกจำนวนเกินกับสินค้าที่มีอยู่',
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'ตกลง'
-                    })
-                    console.log(q,qrecent)
+                if (q <= 0) {
+                    if (!create) {
+                        create = document.createElement("h6");
+                        create.id = "error-message";
+                        add.appendChild(create);
+                    }
+                    create.innerHTML = "สินค้าต้องมีค่าเป็น 1 ขึ้นไป";
                 } else {
-                    location = "cartAdd.php?action=add&pid=" + pid + "&pname=" + pname + "&price=" + price + "&quan=" + q + "&pimg=" + pimg;
+                    if (create) {
+                        // Remove the error message if it exists
+                        create.remove();
+                    }
+                    if (q > qrecent) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'ล้มเหลว',
+                            text: 'สินค้าที่เลือกจำนวนเกินกับสินค้าที่มีอยู่',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'ตกลง'
+                        })
+                        console.log(q,qrecent)
+                    } else {
+                        location = "cartAdd.php?action=add&pid=" + pid + "&pname=" + pname + "&price=" + price + "&quan=" + q + "&pimg=" + pimg;
+                    }
                 }
-            }
+            
+            
         }
 
         function like() {
@@ -91,6 +91,9 @@ if (!isset($_POST['product']) || !isset($_POST['pid'])) {
         $show_product->bindParam(":pid", $pid);
         $show_product->execute();
         $row = $show_product->fetch(PDO::FETCH_ASSOC);
+        if(isset($_SESSION['user_login'])){
+            $uid = $_SESSION['user_login'];
+        }
         ?>
         <section>
             <div class="bg-light py-3">

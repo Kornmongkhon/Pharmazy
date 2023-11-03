@@ -11,7 +11,7 @@ if (!isset($_SESSION['cart'])) {
 if ($pageWasRefreshed) {
 } else if (isset($_GET["action"]) && $_GET["action"] == 'add') {
 
-    
+
     $pid = $_GET["pid"];
     // echo $_GET["pname"];
     $item = array(
@@ -49,14 +49,14 @@ if ($pageWasRefreshed) {
 
 <head>
 
-    
+
 </head>
 
 <body>
     <main class="container" style="margin-top: 2rem;">
         <form method="post" action="confirmOrder.php" onsubmit="return confirmOrder();">
-            <table class="table table-bordered">
-                <thead class="thead-dark text-center mx-auto">
+            <table class="table table-bordered text-center">
+                <thead class="table-dark text-center mx-auto">
                     <tr>
                         <th>ลำดับที่</th>
                         <th>รูปสินค้า</th>
@@ -66,42 +66,60 @@ if ($pageWasRefreshed) {
                         <th>ราคาทั้งสิ้น</th>
                     </tr>
                 </thead>
-                <?php
-                $sum = 0;
-                $count = 0;
-                foreach ($_SESSION['cart'] as $item) {
-                    $count += 1;
-                    $sum += $item["price"] * $item["quan"];
-                ?>
-                    <tbody class="text-center mx-auto">
-                        <?php
-                        // Remove the '../' part from the stored avatar path
-                        $relativePhotoPath = str_replace('../', '', $item['pimg']);
-                        ?>
-                        <tr >
-                            <td style="padding: 1rem;"><?= $count ?></td>
-                            <td ><img src="<?= $relativePhotoPath?>" width="50" height="50"></td>
-                            <td style="padding: 1rem;">
-                                <a href="product.php?pid=<?= $item["pid"] ?>"><?= $item["pname"] ?></a>
-                            </td>
-                            <td style="padding: 1rem;">
-                                <input type="number" id="<?= $item["pid"] ?>" value="<?= $item["quan"] ?>" min="1" max="9">
-                                <a href="#" onclick="update(<?= $item['pid'] ?>,'<?= $relativePhotoPath ?>')">แก้ไข</a>
-                            </td>
-                            <td style="padding: 1rem;"><?= number_format($item["price"],2) ?></td>
-                            <td style="padding: 1rem;">
-                                <?= number_format($item["price"] * $item["quan"],2) ?>
-
-                                <a href="?action=delete&pid=<?= $item["pid"] ?>">ลบ</a>
-                            </td>
+                <?php if (!isset($_SESSION['user_login'])) : ?>
+                    <script>
+                        Swal.fire({
+                            title: 'ล้มเหลว',
+                            icon: 'error',
+                            text: 'กรุณาเข้าสู่ระบบก่อน',
+                            timer: 3500,
+                            showConfirmButton: false,
+                            timerProgressBar: true
+                        }).then(function() {
+                            location.href = 'login.php';
+                        }, 2000)
+                    </script>
+                <?php else : ?>
+                    <?php
+                    $sum = 0;
+                    $count = 0;
+                    foreach ($_SESSION['cart'] as $item) {
+                        $count += 1;
+                        $sum += $item["price"] * $item["quan"];
+                    ?>
+                        <tbody>
+                            <?php
+                            // Remove the '../' part from the stored avatar path
+                            $relativePhotoPath = str_replace('../', '', $item['pimg']);
+                            ?>
+                            <tr>
+                                <td style="padding: 1rem;"><?= $count ?></td>
+                                <td><img src="<?= $relativePhotoPath ?>" width="50" height="50"></td>
+                                <td style="padding: 1rem;">
+                                    <a href="product.php?pid=<?= $item["pid"] ?>"><?= $item["pname"] ?></a>
+                                </td>
+                                <td style="padding: 1rem;">
+                                    <input type="number" class="form-control" style="width: 5rem;margin: 0 auto;" id="<?= $item["pid"] ?>" value="<?= $item["quan"] ?>" min="1" onblur="update(<?= $item['pid'] ?>,'<?= $relativePhotoPath ?>')">
+                                </td>
+                                <td style="padding: 1rem;"><?= number_format($item["price"], 2) ?> บาท</td>
+                                <td style="padding: 1rem;">
+                                    <?= number_format($item["price"] * $item["quan"], 2) ?> บาท
+                                    <a href="?action=delete&pid=<?= $item["pid"] ?>"><i class="fa-solid fa-xmark text-danger"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    <?php } ?>
+                    <tfoot>
+                        <?php if (isset($item['pid'])) : ?>
+                            <tr>
+                                <td colspan="6" align="right">true</td>
+                            </tr>
+                        <?php endif; ?>
+                        <tr>
+                            <td colspan="6" align="right">รวม <?= number_format($sum, 2) ?> บาท</td>
                         </tr>
-                    </tbody>
-                <?php } ?>
-                <tfoot>
-                    <tr>
-                        <td colspan="6" align="right">รวม <?= number_format($sum,2) ?> บาท</td>
-                    </tr>
-                </tfoot>
+                    </tfoot>
+                <?php endif; ?>
             </table>
             <input id="sum" type="hidden" value="<?= $sum ?>" name="sum">
             <div id="addtext"></div>
@@ -113,15 +131,22 @@ if ($pageWasRefreshed) {
                 <!-- <form method="post" action="cartAdd.php?action=orders">
         
     </form> -->
+
     </main>
 </body>
 
 </html>
 <script>
-    function update(pid,pimg) {
+    function update(pid, pimg) {
         var qty = document.getElementById(pid).value;
-        // ส่งรหัสสินค้า และจำนวนไปปรับปรุงใน session
-        document.location = "cartAdd.php?action=update&pid=" + pid + "&quan=" + qty + "&pimg=" + pimg;
+        if (qty === '' || qty === 0) {
+            qty = 1
+            document.location = "cartAdd.php?action=update&pid=" + pid + "&quan=" + qty + "&pimg=" + pimg;
+        } else {
+            // ส่งรหัสสินค้า และจำนวนไปปรับปรุงใน session
+            document.location = "cartAdd.php?action=update&pid=" + pid + "&quan=" + qty + "&pimg=" + pimg;
+        }
+
     }
 
     function confirmOrder() {

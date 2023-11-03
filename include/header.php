@@ -48,7 +48,6 @@
                 <input class="form-control me-2" type="search" placeholder="ค้นหา" name="search" id="search" aria-label="Search" style="width: 30rem;">
                 <button class="btn-search" type="submit">ค้นหา</button>
             </form>
-            <a href="cartAdd.php"><i class="fa-solid fa-cart-shopping" style="color: white;margin-right: 0.5rem;"></i></a>
             <?php if(!isset($_COOKIE['user_login'])):?>
                 <?php session_destroy();?>
             <?php endif;?>
@@ -57,6 +56,7 @@
                     <a class="btn btn-outline-success" style="margin-right: 15px;" href="register.php">สมัครสมาชิก</a>
             <?php endif;?>
             <?php if(isset($_SESSION['user_login'])):?>
+                <a href="cartAdd.php"><i class="fa-solid fa-cart-shopping" style="color: white;margin-right: 0.5rem;"></i></a>
                 <?php
                     $user_id = $_SESSION['user_login'];
                     $showName = $pdo->prepare("SELECT * FROM users WHERE uid = :user_id"); //search uid cuz session user_login use to uid
