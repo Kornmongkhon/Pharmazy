@@ -118,7 +118,7 @@ if (!isset($_POST['product']) || !isset($_POST['pid'])) {
                             <p><span>ราคา : </span><?= number_format($row['price'], 2) ?> ฿</p>
                             <p><span>จำนวนในสต๊อก : </span><?= $row['pquan_stock'] ?> </p>
                             <input type="hidden" id="quanrecent" value="<?= $row['pquan_stock'] ?>">
-                            <input type="number" class="form-control" id="quan" name="quan" value="0">
+                            <input type="number" class="form-control" style="width: 15rem;" id="quan" name="quan" value="0">
 
                             <div id="addtext"></div>
                             <div id="notification" style="display: none;"></div>
