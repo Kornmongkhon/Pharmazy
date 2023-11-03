@@ -5,37 +5,55 @@
 ?>
 
 <head>
-    <link rel="stylesheet" href="style\cart\payment.css">
     <style>
         h1{
+            margin: 2rem 0;
+        }
+        h1,table{
             text-align: center;
         }
-        table, th, td {
-    border: 1px solid;
-}
+        .swal-wide{
+        width:850px ;
+        
+        }
     </style>
+    <script src="style/store/history.js"></script>
 </head>
 <body>
     <h1>ประวัติการสั่งซื้อ</h1>
     <?php
     $uid = $_SESSION["user_login"];
-        $stmt=$pdo->prepare("SELECT DISTINCT orders.ordID,orders.ordName,orders.amount FROM orders JOIN order_detail on orders.ordID=order_detail.ordID WHERE uid = ? AND status='wait'");
+        $stmt=$pdo->prepare("SELECT DISTINCT orders.ordID,orders.ordName,orders.amount FROM orders JOIN order_detail on orders.ordID=order_detail.ordID WHERE uid = ?");
         $stmt->bindParam(1,$uid);
         $stmt->execute();?>
-        <table>
-            <tr>
-                <td>ลำดับที่</td>
-                <td>ชื่อสินค้า</td>
-                <td>ราคาที่ต้องชำระ</td>
-            </tr>
-            <?php $count=1; while($row=$stmt->fetch()): ?>
-            <tr>
-                <th><?=$count?></th>
-                <th><?=$row['ordName']?></th>
-                <th><?=number_format($row['amount'],2)?> บาท</th>
-            </tr>
-            <?php $count++; endwhile;?>
-        </table>
-    
+        <main class="container">
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ลำดับที่</th>
+                        <th>ชื่อสินค้า</th>
+                        <th>ราคารวม</th>
+                        <th>รายละเอียด</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $count=1; while($row=$stmt->fetch()): ?>
+                    <tr>
+                        <td><?=$count?></td>
+                        <td><?=$row['ordName']?></td>
+                        <td><?=number_format($row['amount'],2)?> บาท</td>
+                        <td>
+                            <form method="post">
+                                <input type="hidden" name="ordID" id="ordID" value="<?=$row['ordID']?>">
+                                <button class="btn btn-info" id="btnOrder" data-ordID="<?=$row['ordID']?>">ดูรายละเอียด</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <?php $count++; endwhile;?>
+                </tbody>
+            </table>
+            <section id="orderHistory">
+            </section>
+        </main>
 </body>
 </html>

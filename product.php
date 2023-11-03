@@ -114,11 +114,11 @@ if (!isset($_POST['product']) || !isset($_POST['pid'])) {
                         <div class="hero-info">
                             <h3><?= $row['pname'] ?></h3>
                             <h4>รายละเอียดสินค้า</h4>
-                            <h6><?= $row['pdetail'] ?></h6>
+                            <h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?= $row['pdetail'] ?></h6>
                             <p><span>ราคา : </span><?= number_format($row['price'], 2) ?> ฿</p>
                             <p><span>จำนวนในสต๊อก : </span><?= $row['pquan_stock'] ?> </p>
                             <input type="hidden" id="quanrecent" value="<?= $row['pquan_stock'] ?>">
-                            <input type="number" id="quan" name="quan" value="0">
+                            <input type="number" class="form-control" id="quan" name="quan" value="0">
 
                             <div id="addtext"></div>
                             <div id="notification" style="display: none;"></div>

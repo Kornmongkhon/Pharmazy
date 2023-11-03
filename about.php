@@ -36,7 +36,7 @@
         <div class="About-con">
             <div class="About-info">
                 <h3>เกี่ยวกับเรา</h3>
-                <p>Pharmacy is the science and practice of discovering, producing, preparing, dispensing, reviewing and monitoring medications, aiming to ensure the safe, effective, and affordable use of medicines. It is a miscellaneous science as it links health sciences with pharmaceutical sciences and natural sciences. The professional practice is becoming more clinically oriented as most of the drugs are now manufactured by pharmaceutical industries. Based on the setting, pharmacy practice is either classified as community or institutional pharmacy. Providing direct patient care in the community of institutional pharmacies is considered clinical pharmacy.</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pharmacy is the science and practice of discovering, producing, preparing, dispensing, reviewing and monitoring medications, aiming to ensure the safe, effective, and affordable use of medicines. It is a miscellaneous science as it links health sciences with pharmaceutical sciences and natural sciences. The professional practice is becoming more clinically oriented as most of the drugs are now manufactured by pharmaceutical industries. Based on the setting, pharmacy practice is either classified as community or institutional pharmacy. Providing direct patient care in the community of institutional pharmacies is considered clinical pharmacy.</p>
              </div>
 
              <div class="hero-img"> 
@@ -119,7 +119,7 @@
                 </div>
                 <div class="footer-top-item">
                     <h4>About</h4>
-                    <p>ร้านขายยาเราเริ่มก่อตั้งเมื่อปี พ.ศ 2558 โดยเภสัชกรจาก 2 มหาวิทยาลัย จุฬา และ มหิดล โดยเรามีแนวความคิดว่า อยากเปลี่ยนรูปแบบร้านยาแบบเดิมๆ ให้เป็นร้านทีมีศักยภาพใกล้เคียงกับร้าน Chain store ชั้นนำต่างๆ ในเรื่องของรูปแบบร้าน การบริหารจัดการ จำนวนสินค้ากว่า 4000 รายการ รวมถึงการนำเทคโนโลยีต่างๆเข้ามาใช้อาจจะเป็นเพราะเรามีประสบการณ์ทั้งการทำงานกับร้านยามาหลากหลายรูปแบบ ทำให้เราเห็นจุดที่ดีและจุดอ่อน เราจึงได้ทำร้านนี้ขึ้นเพื่อให้เห็นเป็นที่ประจักษ์ว่าร้านยาบ้านๆธรรมดา ก็สามารถพัฒนาศักยภาพให้เติบโตได้</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ร้านขายยาเราเริ่มก่อตั้งเมื่อปี พ.ศ 2558 โดยเภสัชกรจาก 2 มหาวิทยาลัย จุฬา และ มหิดล โดยเรามีแนวความคิดว่า อยากเปลี่ยนรูปแบบร้านยาแบบเดิมๆ ให้เป็นร้านทีมีศักยภาพใกล้เคียงกับร้าน Chain store ชั้นนำต่างๆ ในเรื่องของรูปแบบร้าน การบริหารจัดการ จำนวนสินค้ากว่า 4000 รายการ รวมถึงการนำเทคโนโลยีต่างๆเข้ามาใช้อาจจะเป็นเพราะเรามีประสบการณ์ทั้งการทำงานกับร้านยามาหลากหลายรูปแบบ ทำให้เราเห็นจุดที่ดีและจุดอ่อน เราจึงได้ทำร้านนี้ขึ้นเพื่อให้เห็นเป็นที่ประจักษ์ว่าร้านยาบ้านๆธรรมดา ก็สามารถพัฒนาศักยภาพให้เติบโตได้</p>
                 </div>
                 <div class="footer-top-item">
                     <h4>Stay Connected</h4>

@@ -27,11 +27,11 @@ function showNotification(){
     }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+window.onload = function() {
     // Use event delegation to handle click events for all delete buttons
     document.body.addEventListener("click", function(event) {
         if (event.target && event.target.id === "deleteUser") {
-            let userID = event.target.getAttribute("data-uid"); //get uid from data-uid
+            let userID = event.target.getAttribute("data-uid");
             Swal.fire({//show notification confirm to delete
                 title: "แจ้งเตือน",
                 icon: "warning",
@@ -55,35 +55,4 @@ document.addEventListener("DOMContentLoaded", function() {
             })
         }
     });
-});
-
-window.onload = function(){
-    let deleteBTN = document.querySelectorAll('#deleteUser');
-
-    deleteBTN.forEach(button => { //forEach loop array
-        button.addEventListener("click",function(){
-            let userID = this.getAttribute("data-uid"); //get uid from data-uid
-            Swal.fire({//show notification confirm to delete
-                title: "แจ้งเตือน",
-                icon: "warning",
-                text: "ต้องการลบข้อมูลผู้ใช้หรือไม่",
-                showCancelButton: true,
-                confirmButtonColor: "#d33",
-                cancelButtonColor: "#3085d6",
-                confirmButtonText: "ลบ",
-                cancelButtonText: "ยกเลิก",
-            }).then((result) => {
-                if(result.isConfirmed){//when hit confirm btn using ajax
-                    request = new XMLHttpRequest();
-                    let url = "include/delete_user.php";
-                    let formData = new FormData();
-                    formData.append('uid',userID);
-                    request.open("POST",url);
-
-                    request.onreadystatechange = showNotification;
-                    request.send(formData);
-                }
-            })
-        })
-    })
-}
+};
