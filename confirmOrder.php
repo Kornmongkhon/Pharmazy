@@ -7,8 +7,10 @@ include("include/functions.php");
 if (isset($_POST['submit_button'])){
     if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])){
         try{
-            $sum = $_POST["sum"];
+            $sum = $_POST["total_sum"];
             $status = "wait";
+            $ship = 'wait for payment';
+            
             
             $countOrders = $pdo->prepare("SELECT COUNT(*) as order_count FROM orders");
             $countOrders->execute();
@@ -41,6 +43,7 @@ if (isset($_POST['submit_button'])){
                     $new_stock->bindParam(1,$update_stock);
                     $new_stock->bindParam(2,$pid);
                     $new_stock->execute();
+                    $insertDelivery = $pdo->prepare("INSERT INTO delivery (uid, ordID, delivery_type, delivery_price, delivery_status) VALUES(?, ?, ?, ?, ?)");
                 }
             }
             $_SESSION['cart'] = array(); ?>

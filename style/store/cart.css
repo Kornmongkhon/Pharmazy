@@ -5,5 +5,22 @@
 }
 
 .ship-type section{
-    margin-left: 2rem;
+    margin-left: 1rem;
+}
+
+
+
+#total_price{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.firstprice>span{
+    margin: auto 0.2rem;
+}
+
+#total_price h6{
+    /* color: rebeccapurple; */
+    margin: auto 0.5rem;
 }

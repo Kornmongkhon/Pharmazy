@@ -43,6 +43,7 @@ if ($pageWasRefreshed) {
     $pid = $_GET['pid'];
     unset($_SESSION['cart'][$pid]);
 }
+
 ?>
 
 
@@ -98,7 +99,7 @@ if ($pageWasRefreshed) {
                                     <a href="product.php?pid=<?= $item["pid"] ?>"><?= $item["pname"] ?></a>
                                 </td>
                                 <td style="padding: 1rem;">
-                                    <input type="number" class="form-control" style="width: 5rem;margin: 0 auto;" id="<?= $item["pid"] ?>" value="<?= $item["quan"] ?>" min="1" onblur="update(<?= $item['pid'] ?>,'<?= $relativePhotoPath ?>')">
+                                    <input type="number" class="form-control" style="width: 5rem;margin: 0 auto;text-align: center;" id="<?= $item["pid"] ?>" value="<?= $item["quan"] ?>" min="1" onblur="update(<?= $item['pid'] ?>,'<?= $relativePhotoPath ?>')">
                                 </td>
                                 <td style="padding: 1rem;"><?= number_format($item["price"], 2) ?> บาท</td>
                                 <td style="padding: 1rem;">
@@ -117,19 +118,29 @@ if ($pageWasRefreshed) {
                                             การจัดส่ง : 
                                         </aside>
                                         <section>
-                                            <select class="form-control">
+                                            <select class="form-control" id="delivery-type" name="delivery_type" onchange="Delivery()">
                                                 <option value="">กรุณาเลือกการจัดส่ง</option>
                                                 <option value="flash">Flash Express</option>
                                                 <option value="kery">Kery Express</option>
+                                                <option value="thaipost">Thailand Post : EMS</option>
+                                                <option value="jt">J&T Express</option>
+                                                <option value="dhl">DHL Express</option>
                                             </select>
                                         </section>
-                                        
                                     </article>         
                                 </td>
                             </tr>
                         <?php endif; ?>
                         <tr>
-                            <td colspan="6" align="right">รวม <?= number_format($sum, 2) ?> บาท</td>
+                            <td colspan="6" align="right">
+                                <span class="firstprice">ยอดรวม : <span><?= number_format($sum, 2) ?></span> บาท (ยังไม่รวมค่าจัดส่ง) </span>
+                                <span>
+                                    <aside id="total_price">ยอดรวม : 
+                                        <input type="hidden" name="total_sum" id="total_sum" value="">
+                                    </aside>
+                                </span>
+                            </td>
+                            <input type="hidden" name="delivery_price" id="delivery_price" value="">
                         </tr>
                     </tfoot>
                 <?php endif; ?>
@@ -138,9 +149,9 @@ if ($pageWasRefreshed) {
             <div id="addtext"></div>
             <input type="submit" name="submit_button" value="ORDER" class="btn btn-info">
         </form>
-
+        
         <a href="store.php"><- เลือกสินค้าต่อ</a>
-
+        <div id="getDeli"></div>
                 <!-- <form method="post" action="cartAdd.php?action=orders">
         
     </form> -->
@@ -150,6 +161,50 @@ if ($pageWasRefreshed) {
 
 </html>
 <script>
+
+    function Delivery(){
+        let deliveryType = document.getElementById('delivery-type').value; //รับค่าจาก select id delivery-type
+        let deliveryPrice = 0; //ตั้งราคา defualt = 0
+        let total_sum = 0;
+        if(deliveryType === 'flash'){
+            deliveryPrice = 50;
+        }else if(deliveryType === 'kery'){
+            deliveryPrice = 100;
+        }else if(deliveryType === 'thaipost'){
+            deliveryPrice = 45;
+        }else if(deliveryType === 'jt'){
+            deliveryPrice = 65;
+        }else if(deliveryType === 'dhl'){
+            deliveryPrice = 55;
+        }
+        document.getElementById('delivery_price').value = deliveryPrice; //ใส่ value ใน input id delivery-price เป็นค่าตามที่เลือก delivery
+        console.log(document.getElementById('delivery_price').value);
+        let sum = document.getElementById("sum").value; // ดึงค่าราคารวมมาใช้
+        console.log(sum)
+        total_sum = parseFloat(document.getElementById('delivery_price').value) + parseFloat(sum) //เอาราคารวมมา บวกเพื่มกับค่าจัดส่ง
+        document.getElementById('total_sum').value = total_sum; // ใส่ value ใน input id total_sum
+        console.log(total_sum)
+        let asideTag = document.getElementById('total_price'); // เข้าถึง tag aside
+        let h6Tag = document.querySelector('h6');//เข้าถึง element ตัวแรกที่พบ ในที่นี้เลือกเป็น h6 ตามที่สร้าง
+        if(h6Tag){
+            asideTag.removeChild(h6Tag) //ลบลูกใน aside h6 ตัวเเรกที่เจอ
+        }
+
+        if(document.getElementById('total_sum').value !== ''){// input id total_sum ไม่เป็นค่าว่าง
+            let h6Tag = document.createElement('h6');//สร้าง element h6
+            let all_price  =total_sum.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); //ทศนิยม 2 ตำแหน่ง มี comma คั่น
+            console.log(all_price)
+            h6Tag.innerHTML = all_price+" บาท";
+            asideTag.appendChild(h6Tag);
+        }else{
+            let h6Tag = document.createElement('h6');//สร้าง element h6
+            let all_price  =sum.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); //ทศนิยม 2 ตำแหน่ง มี comma คั่น
+            console.log(all_price)
+            h6Tag.innerHTML = all_price+" บาท";
+            asideTag.appendChild(h6Tag);
+        }
+    }
+
     function update(pid, pimg) {
         var qty = document.getElementById(pid).value;
         if (qty === '' || qty === 0) {
@@ -166,14 +221,26 @@ if ($pageWasRefreshed) {
         let create = document.getElementById("error-message");
         let sum = document.getElementById("sum").value;
         let add = document.getElementById("addtext");
+        let deliveryType = document.getElementById('delivery-type').value;
 
-        if (sum <= 0) {
+        if (sum <= 0 || deliveryType === '') {
             if (!create) {
                 create = document.createElement("h1");
                 create.id = "error-message";
                 add.appendChild(create);
             }
-            create.innerHTML = "กรุณาเพิ่มสินค้าลงตะกร้าก่อน";
+            if(sum <= 0){
+                create.innerHTML = "กรุณาเพิ่มสินค้าลงตะกร้าก่อน";
+            }else if(deliveryType === ''){
+                Swal.fire({
+                    title: 'คำเตือน',
+                    icon: 'warning',
+                    text: 'กรุณาระบุการจัดส่ง',
+                    confirmButtonText: 'ตกลง',
+                    confirmButtonColor: '#3085d6'
+                })
+            }
+            
             return false;
         } else {
             if (confirm("Are you sure you want to place the order?")) {
@@ -182,5 +249,8 @@ if ($pageWasRefreshed) {
                 return false; // Cancel form submission
             }
         }
+    }
+    window.onload = function(){
+        Delivery();
     }
 </script>

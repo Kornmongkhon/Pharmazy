@@ -60,7 +60,6 @@ function userValidation(){
     let addressRegex = /^[\wก-๏\s.-]+/;
     let passwordRegex = /^[\w]{8,}/;
 
-
     if(Fullname === ''){
         Swal.fire({
             icon:'warning',
