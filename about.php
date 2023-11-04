@@ -1,5 +1,9 @@
 <?php 
     include('include\head.php');
+    if(isset($_COOKIE['visit'])){
+        $visit = $_COOKIE["visit"]+1;
+        setcookie('visit',$visit);
+    }
 ?>
 <head>
     <link rel="stylesheet" href="style/about/about.css">
@@ -127,6 +131,17 @@
                     <p><img src="assets/images/ig.png"> <span class="space">peem_des</span></p>
                     <p><img src="assets/images/ig.png"> <span class="space">peeanw</span></p>
                     <p><img src="assets/images/ig.png"> <span class="space">imtrex_.png</span></p>
+                </div>
+                <div class="footer-top-item" style="display: flex;">
+                    <h5>จำนวนคนเข้าชมเว็ปไซต์ในวันนี้</h5> 
+                    <span style="margin:0rem 1rem;" id="visit-count">
+                        <?php if(isset($_COOKIE['visit'])):?>
+                            <?=$visit?>
+                        <?php else:?>
+                            <?=0?>
+                        <?php endif;?>
+                    </span>
+                    <h5>คน</h5>
                 </div>
             </div>
         </div>
