@@ -161,7 +161,7 @@ if (!isset($_SESSION['admin_login'])) {
                                             <?php endif;?>
                                         </td>
                                         <td>
-                                            <aside style="display: flex;justify-content: center;align-items: center;;">
+                                            <aside style="display: flex;justify-content: center;align-items: center;">
                                                 <section style="margin: auto 0.5rem;">
                                                 <?php if($order['status']==='paid'):?>
                                                     <section style="margin: auto 0.5rem;">

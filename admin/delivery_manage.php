@@ -11,16 +11,17 @@ if (!isset($_SESSION['admin_login'])) {
     <link rel="stylesheet" href="style/admin/product.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link href="https:////cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">  <!-- Datatable CSS -->
+    <link href="https:////cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"> <!-- Datatable CSS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="style/admin/order_manage.js"></script>
 </head>
+
 <body>
-    <?php 
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE uid = ?");
-        $stmt->bindParam(1,$_SESSION['admin_login']);
-        $stmt->execute();
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    <?php
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE uid = ?");
+    $stmt->bindParam(1, $_SESSION['admin_login']);
+    $stmt->execute();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
     ?>
     <div class="d-flex" id="wrapper">
         <!-- Sidebar Starts here -->
@@ -29,17 +30,16 @@ if (!isset($_SESSION['admin_login'])) {
                 <i class="fa-solid fa-user-secret"></i> Admin Mentos <!-- Sidebar Header -->
             </div>
             <div class="list-group list-group-flush my-3">
-            <ul class="sidebar-nav">
+                <ul class="sidebar-nav">
                     <li class="sidebar-item">
                         <a href="admin.php" class="sidebar-link">
-                        <i class="fas fa-tachometer-alt me-2"></i>
+                            <i class="fas fa-tachometer-alt me-2"></i>
                             <span style="margin-left: .1rem;">ภาพรวม</span>
                         </a>
                         <hr>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#pages"
-                            aria-expanded="false" aria-controls="pages">
+                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#pages" aria-expanded="false" aria-controls="pages">
                             <i class="fa-solid fa-store"></i>
                             <span style="margin-left: .5rem;">ร้านค้า</span>
                         </a>
@@ -54,8 +54,7 @@ if (!isset($_SESSION['admin_login'])) {
                         <hr>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#auth"
-                            aria-expanded="false" aria-controls="auth">
+                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
                             <i class="fa-solid fa-user pe-2"></i>
                             สมาชิก
                         </a>
@@ -73,8 +72,7 @@ if (!isset($_SESSION['admin_login'])) {
                         <hr>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#order"
-                            aria-expanded="false" aria-controls="order">
+                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#order" aria-expanded="false" aria-controls="order">
                             <i class="fa-solid fa-capsules"></i>
                             ออเดอร์
                         </a>
@@ -101,18 +99,15 @@ if (!isset($_SESSION['admin_login'])) {
                     <h2 class="fs-2 m-0"><a href="admin.php" style="text-decoration: none;color: #24252A;">ร้านค้า</a> / การจัดส่ง</h2>
                 </div>
                 <!-- button for dropdown admin info -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user me-2"></i><?=$row['u_name']?>
+                            <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user me-2"></i><?= $row['u_name'] ?>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">โปรไฟล์</a></li>
@@ -130,8 +125,8 @@ if (!isset($_SESSION['admin_login'])) {
                     <h3 class="fs-4 mb-3">รายการคำสั่งซื้อทั้งหมด</h3>
                     <div class="col">
                         <?php
-                            $stmt = $pdo->prepare("SELECT DISTINCT DATE_FORMAT(orders.date + INTERVAL 543 YEAR, '%d/%m/%Y %H:%i:%s') AS order_at ,orders.ordName,orders.ordID,users.u_username,orders.amount,orders.status FROM orders JOIN order_detail on orders.ordID=order_detail.ordID JOIN users ON order_detail.uid = users.uid ORDER BY orders.ordName;");
-                            $stmt->execute();
+                        $stmt = $pdo->prepare("SELECT DISTINCT DATE_FORMAT(orders.date + INTERVAL 543 YEAR, '%d/%m/%Y %H:%i:%s') AS order_at ,orders.ordName,orders.ordID,users.u_username,orders.amount,orders.status,delivery.delivery_status FROM orders JOIN delivery ON orders.ordID= delivery.ordID JOIN users ON delivery.uid = users.uid WHERE delivery.delivery_status IN ('prepare','shipping','shipped') AND orders.status IN ('paid') ORDER BY orders.ordName;");
+                        $stmt->execute();
                         ?>
                         <table id="ProductTable" class="table table-responsive-md">
                             <thead class="table-info">
@@ -142,48 +137,80 @@ if (!isset($_SESSION['admin_login'])) {
                                     <th style="text-align: center;">เจ้าของคำสั่งซื้อ</th>
                                     <th style="text-align: center;">ราคาสุทธิ</th>
                                     <th style="text-align: center;">สถานะ</th>
+                                    <th style="text-align: center;">สถานะการจัดส่ง</th>
                                     <th style="text-align: center;">การดำเนินการ</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $count = 1; while($order = $stmt->fetch(PDO::FETCH_ASSOC)):?>
+                                <?php $count = 1;
+                                while ($order = $stmt->fetch(PDO::FETCH_ASSOC)) : ?>
                                     <tr style="text-align: center;margin: 2rem auto;">
-                                        <td><?=$count?></td>
-                                        <td><?=$order['order_at']?></td>
-                                        <td><?=$order['ordName']?></td>
-                                        <td><?=$order['u_username']?></td>
-                                        <td><?=number_format($order['amount'],2)?> ฿</td>
+                                        <td><?= $count ?></td>
+                                        <td><?= $order['order_at'] ?></td>
+                                        <td><?= $order['ordName'] ?></td>
+                                        <td><?= $order['u_username'] ?></td>
+                                        <td><?= number_format($order['amount'], 2) ?> ฿</td>
                                         <td>
-                                            <?php if($order['status'] === 'paid'):?>
+                                            <?php if ($order['status'] === 'paid') : ?>
                                                 <span class="text-success">ชำระเงินแล้ว</span>
-                                            <?php elseif($order['status'] === 'wait'):?>
+                                            <?php elseif ($order['status'] === 'wait') : ?>
                                                 <span class="text-danger">ยังไม่ได้ชำระเงิน</span>
-                                            <?php endif;?>
+                                            <?php endif; ?>
                                         </td>
                                         <td>
                                             <aside style="display: flex;justify-content: center;align-items: center;;">
-                                                <section style="margin: auto 0.5rem;">
-                                                <?php if($order['status']==='paid'):?>
-                                                    <section style="margin: auto 0.5rem;">
+                                                <?php if ($order['delivery_status'] === 'prepare') : ?>
+                                                    <span class="text-secondary">กำลังจัดเตรียมสินค้า</span>
+                                                <?php elseif ($order['delivery_status'] === 'shipping') : ?>
+                                                    <span class="text-warning">กำลังจัดส่งสินค้า</span>
+                                                <?php elseif ($order['delivery_status'] === 'shipped') : ?>
+                                                    <span class="text-success">จัดส่งสำเร็จแล้ว</span>
+                                                <?php endif; ?>
+                                            </aside>
+                                        </td>
+                                        <td>
+                                            <aside style="display: flex;justify-content: center;align-items: center;">
+                                                <?php if ($order['status'] === 'paid') : ?>
+                                                    <?php if($order['delivery_status'] === 'prepare'):?>
+                                                        <section style="margin: auto 0.5rem;">
+                                                            <form>
+                                                                <button class="btn btn-warning" id="approve" data-ordID="<?= $order['ordID'] ?>"><i class="fa-solid fa-box"></i> จัดส่ง</button>
+                                                            </form>
+                                                        </section>
+                                                        <section style="margin: auto 0.5rem;">
+                                                            <form>
+                                                                <button class="btn btn-danger" id="denied" data-ordID="<?= $order['ordID'] ?>"><i class="fa-solid fa-rectangle-xmark"></i> ยกเลิก</button>
+                                                            </form>
+                                                        </section>
+                                                    <?php elseif($order['delivery_status'] === 'shipping'):?>
+                                                        <section style="margin: auto 0.5rem;">
                                                         <form>
-                                                            <button class="btn btn-warning" id="reapprove" data-ordID="<?=$order['ordID']?>"><i class="fa-solid fa-triangle-exclamation"></i> ตรวจสอบอีกครั้ง</button>
+                                                            <button class="btn btn-secondary" id="approve" data-ordID="<?= $order['ordID'] ?>"><i class="fa-solid fa-square-check"></i> จัดเตรียม</button>
                                                         </form>
-                                                    </section>
-                                                <?php elseif($order['status']==='wait'):?>
-                                                    <form>
-                                                        <button class="btn btn-success" id="approve" data-ordID="<?=$order['ordID']?>"><i class="fa-solid fa-square-check"></i> อนุมัติ</button> 
-                                                    </form>
-                                                </section>
-                                                <section style="margin: auto 0.5rem;">
-                                                    <form>
-                                                        <button class="btn btn-danger" id="denied" data-ordID="<?=$order['ordID']?>"><i class="fa-solid fa-rectangle-xmark"></i> ยกเลิก</button>
-                                                    </form>
-                                                </section>
-                                                <?php endif;?>
+                                                        </section>
+                                                        <section style="margin: auto 0.5rem;">
+                                                            <form>
+                                                                <button class="btn btn-danger" id="denied" data-ordID="<?= $order['ordID'] ?>"><i class="fa-solid fa-rectangle-xmark"></i> ยกเลิก</button>
+                                                            </form>
+                                                        </section>
+                                                    <?php elseif($order['delivery_status'] === 'shipped'):?>
+                                                        <section style="margin: auto 0.5rem;">
+                                                        <form>
+                                                            <button class="btn btn-success" id="approve" data-ordID="<?= $order['ordID'] ?>"><i class="fa-solid fa-square-check"></i> อนุมัติ</button>
+                                                        </form>
+                                                        </section>
+                                                        <section style="margin: auto 0.5rem;">
+                                                            <form>
+                                                                <button class="btn btn-danger" id="denied" data-ordID="<?= $order['ordID'] ?>"><i class="fa-solid fa-rectangle-xmark"></i> ยกเลิก</button>
+                                                            </form>
+                                                        </section>
+                                                    <?php endif;?>
+                                                <?php endif; ?>
                                             </aside>
                                         </td>
                                     </tr>
-                                <?php $count++; endwhile;?>
+                                <?php $count++;
+                                endwhile; ?>
                             </tbody>
                         </table>
                     </div>
@@ -193,7 +220,7 @@ if (!isset($_SESSION['admin_login'])) {
     </div>
     <!-- /#page-content-wrapper -->
     </div>
-        </div>
+    </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
