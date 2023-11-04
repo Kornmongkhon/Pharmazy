@@ -31,7 +31,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 echo "error";
             }
         }else if(isset($_POST['denied'])){
-            $stmt = $pdo->prepare("DELETE FROM delivery WHERE delivery_id = ?");
+            $stmt = $pdo->prepare("DELETE FROM orders WHERE ordID = ?");
             $stmt->bindParam(1,$_POST['denied']);
             if($stmt->execute()){
                 echo "denied";

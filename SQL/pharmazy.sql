@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2023 at 04:38 PM
+-- Generation Time: Nov 04, 2023 at 04:01 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -168,7 +168,8 @@ ALTER TABLE `orders`
 ALTER TABLE `order_detail`
   ADD PRIMARY KEY (`ordDeID`),
   ADD KEY `order_detail_uid` (`uid`),
-  ADD KEY `order_detail_pid` (`pid`);
+  ADD KEY `order_detail_pid` (`pid`),
+  ADD KEY `order_detail_ordID` (`ordID`);
 
 --
 -- Indexes for table `product`
@@ -196,13 +197,13 @@ ALTER TABLE `delivery`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `ordID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `ordID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `ordDeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `ordDeID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -231,6 +232,7 @@ ALTER TABLE `delivery`
 -- Constraints for table `order_detail`
 --
 ALTER TABLE `order_detail`
+  ADD CONSTRAINT `order_detail_ordID` FOREIGN KEY (`ordID`) REFERENCES `orders` (`ordID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `order_detail_pid` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `order_detail_uid` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
