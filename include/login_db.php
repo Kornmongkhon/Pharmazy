@@ -27,13 +27,13 @@
                             if($row['urole'] == 'admin'){//role admin
                                 $_SESSION['admin_login'] = $row['uid'];//take session login from uid
                                 // Set the cookie to expire 
-                                setcookie('admin_login',$row['uid'],time()+1800,'/');
+                                setcookie('admin_login',$row['uid'],time()+ 3600*24,'/');
                                 $_SESSION['success_login'] = 'success login';
                                 echo "admin login";
                             }else{
                                 $_SESSION['user_login'] = $row['uid'];//take session login from uid
                                 // Set the cookie to expire 
-                                setcookie('user_login',$row['uid'],time()+1800,'/');
+                                setcookie('user_login',$row['uid'],time()+ 3600*24,'/');
                                 $_SESSION['success_login'] = 'success login';
                                 echo "user login";
                             }
