@@ -166,17 +166,17 @@ if (!isset($_SESSION['admin_login'])) {
                                                 <?php if($order['status']==='paid'):?>
                                                     <section style="margin: auto 0.5rem;">
                                                         <form>
-                                                            <button class="btn btn-warning" id="reapprove" data-ordID="<?=$order['ordID']?>"><i class="fa-solid fa-triangle-exclamation"></i> ตรวจสอบอีกครั้ง</button>
+                                                            <button class="btn btn-warning" id="reapprove" data-ordID="<?=$order['ordID']?>"><i class="fa-solid fa-triangle-exclamation" id="reapprove" data-ordID="<?=$order['ordID']?>"></i> ตรวจสอบอีกครั้ง</button>
                                                         </form>
                                                     </section>
                                                 <?php elseif($order['status']==='wait'):?>
                                                     <form>
-                                                        <button class="btn btn-success" id="approve" data-ordID="<?=$order['ordID']?>"><i class="fa-solid fa-square-check"></i> อนุมัติ</button> 
+                                                        <button class="btn btn-success" id="approve" data-ordID="<?=$order['ordID']?>"><i class="fa-solid fa-square-check" id="approve" data-ordID="<?=$order['ordID']?>"></i> อนุมัติ</button> 
                                                     </form>
                                                 </section>
                                                 <section style="margin: auto 0.5rem;">
                                                     <form>
-                                                        <button class="btn btn-danger" id="denied" data-ordID="<?=$order['ordID']?>"><i class="fa-solid fa-rectangle-xmark"></i> ยกเลิก</button>
+                                                        <button class="btn btn-danger" id="denied" data-ordID="<?=$order['ordID']?>"><i class="fa-solid fa-rectangle-xmark" id="denied" data-ordID="<?=$order['ordID']?>"></i> ยกเลิก</button>
                                                     </form>
                                                 </section>
                                                 <?php endif;?>

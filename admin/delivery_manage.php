@@ -188,29 +188,29 @@ if (!isset($_SESSION['admin_login'])) {
                                                     <?php if($order['delivery_status'] === 'prepare'):?>
                                                         <section style="margin: auto 0.5rem;">
                                                             <form>
-                                                                <button class="btn btn-warning" id="shipping" data-deliID="<?= $order['delivery_id'] ?>"><i class="fa-solid fa-box"></i> นำส่ง</button>
+                                                                <button class="btn btn-warning" id="shipping" data-deliID="<?= $order['delivery_id'] ?>"><i class="fa-solid fa-box" id="shipping" data-deliID="<?= $order['delivery_id'] ?>"></i> นำส่ง</button>
                                                             </form>
                                                         </section>
                                                         <section style="margin: auto 0.5rem;">
                                                             <form>
-                                                                <button class="btn btn-danger" id="denied" data-deliID="<?= $order['delivery_id'] ?>"><i class="fa-solid fa-rectangle-xmark"></i> ยกเลิก</button>
+                                                                <button class="btn btn-danger" id="denied" data-deliID="<?= $order['delivery_id'] ?>"><i class="fa-solid fa-rectangle-xmark" id="denied" data-deliID="<?= $order['delivery_id'] ?>"></i> ยกเลิก</button>
                                                             </form>
                                                         </section>
                                                     <?php elseif($order['delivery_status'] === 'shipping'):?>
                                                         <section style="margin: auto 0.5rem;">
                                                         <form>
-                                                            <button class="btn btn-secondary" id="prepare" data-deliID="<?= $order['delivery_id'] ?>"><i class="fa-solid fa-box-open"></i> จัดเตรียม</button>
+                                                            <button class="btn btn-secondary" id="prepare" data-deliID="<?= $order['delivery_id'] ?>"><i class="fa-solid fa-box-open" id="prepare" data-deliID="<?= $order['delivery_id'] ?>"></i> จัดเตรียม</button>
                                                         </form>
                                                         </section>
                                                         <section style="margin: auto 0.5rem;">
                                                             <form>
-                                                                <button class="btn btn-success" id="shipped" data-deliID="<?= $order['delivery_id'] ?>"><i class="fa-solid fa-people-carry-box"></i> จัดส่ง</button>
+                                                                <button class="btn btn-success" id="shipped" data-deliID="<?= $order['delivery_id'] ?>"><i class="fa-solid fa-people-carry-box" id="shipped" data-deliID="<?= $order['delivery_id'] ?>"></i> จัดส่ง</button>
                                                             </form>
                                                         </section>
                                                     <?php elseif($order['delivery_status'] === 'shipped'):?>
                                                         <section style="margin: auto 0.5rem;">
                                                         <form>
-                                                        <button class="btn btn-warning" id="shipping" data-deliID="<?= $order['delivery_id'] ?>"><i class="fa-solid fa-box"></i> นำส่ง</button>
+                                                        <button class="btn btn-warning" id="shipping" data-deliID="<?= $order['delivery_id'] ?>"><i class="fa-solid fa-box" id="shipping" data-deliID="<?= $order['delivery_id'] ?>"></i> นำส่ง</button>
                                                         </form>
                                                         </section>
                                                         <section style="margin: auto 0.5rem;">
