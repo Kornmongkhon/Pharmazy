@@ -54,7 +54,7 @@ if ($pageWasRefreshed) {
 
 <body>
     <main class="container" style="margin-top: 2rem;">
-        <form method="post" action="confirmOrder.php" onsubmit="return confirmOrder()">
+        <form method="post" action="include/confirmOrder.php" onsubmit="return confirmOrder()">
             <h1 class="cart-title">ตะกร้าสินค้า</h1>
             <table class="table table-bordered text-center">
                 <thead class="table-dark text-center mx-auto">

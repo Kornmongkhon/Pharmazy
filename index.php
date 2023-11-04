@@ -15,9 +15,11 @@ if(isset($_COOKIE['visit'])){
 
 <body id="bodytag">
     <div>
-        <?php
-        include('include\header.php');
-        ?>
+        <header>
+            <?php
+            include('include\header.php');
+            ?>
+        </header>
         <?php if(isset($_SESSION['success_login'])):?>
             <script>
                 const Toast = Swal.mixin({

@@ -10,9 +10,11 @@
 </head>
 <body>
     <div>
-        <?php 
-            include('include\header.php');
-        ?>
+        <header>
+            <?php 
+                include('include\header.php');
+            ?>
+        </header> 
         <div class="container">
 
         </div>

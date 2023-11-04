@@ -15,11 +15,11 @@
     <script src="style/user/changePass.js"></script>
 </head>
 <body>
-    <div>
+    <header>
         <?php
         include('include\header.php');
         ?>
-    </div>
+    </header>
     <?php
     $stmt = $pdo->prepare("SELECT * FROM users WHERE u_username = :u_username");
     $stmt->bindParam(":u_username", $_GET['u_username']);

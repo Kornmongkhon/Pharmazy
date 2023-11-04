@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('include/head.php');
-include("include/functions.php");
+include('head.php');
+include("functions.php");
 // include("include/head.php");
 // echo "TEST";
 if (isset($_POST['submit_button'])){
@@ -54,26 +54,16 @@ if (isset($_POST['submit_button'])){
             }
             $_SESSION['cart'] = array(); ?>
             <?php
-            header("Location: cartAdd.php");
+            header("Location: ../cartAdd.php");
         }catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
     }
     else{
-        header("Location: cartAdd.php");
+        header("Location: ../cartAdd.php");
     }
 }
 else{
-    header("Location: cartAdd.php");
+    header("Location: ../cartAdd.php");
 }
 ?>
-
-
-<head>
-    
-</head>
-<body>
-
-
-</body>
-</html>
