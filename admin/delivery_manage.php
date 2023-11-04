@@ -125,7 +125,7 @@ if (!isset($_SESSION['admin_login'])) {
                     <h3 class="fs-4 mb-3">รายการคำสั่งซื้อทั้งหมด</h3>
                     <div class="col">
                         <?php
-                        $stmt = $pdo->prepare("SELECT DISTINCT DATE_FORMAT(orders.date + INTERVAL 543 YEAR, '%d/%m/%Y %H:%i:%s') AS order_at ,orders.ordName,delivery.delivery_id,users.u_username,orders.amount,orders.status,delivery.delivery_status FROM orders JOIN delivery ON orders.ordID= delivery.ordID JOIN users ON delivery.uid = users.uid WHERE delivery.delivery_status IN ('prepare','shipping','shipped') AND orders.status IN ('paid') ORDER BY orders.ordName;");
+                        $stmt = $pdo->prepare("SELECT DISTINCT DATE_FORMAT(orders.date + INTERVAL 543 YEAR, '%d/%m/%Y %H:%i:%s') AS order_at ,orders.ordName,delivery.delivery_id,users.u_username,orders.amount,delivery.delivery_type,orders.status,delivery.delivery_status FROM orders JOIN delivery ON orders.ordID= delivery.ordID JOIN users ON delivery.uid = users.uid WHERE delivery.delivery_status IN ('prepare','shipping','shipped') AND orders.status IN ('paid') ORDER BY orders.ordName;");
                         $stmt->execute();
                         ?>
                         <table id="ProductTable" class="table table-responsive-md">
@@ -137,6 +137,7 @@ if (!isset($_SESSION['admin_login'])) {
                                     <th style="text-align: center;">เจ้าของคำสั่งซื้อ</th>
                                     <th style="text-align: center;">ราคาสุทธิ</th>
                                     <th style="text-align: center;">สถานะ</th>
+                                    <th style="text-align: center;">บริษัทขนส่ง</th>
                                     <th style="text-align: center;">สถานะการจัดส่ง</th>
                                     <th style="text-align: center;">การดำเนินการ</th>
                                 </tr>
@@ -156,6 +157,19 @@ if (!isset($_SESSION['admin_login'])) {
                                             <?php elseif ($order['status'] === 'wait') : ?>
                                                 <span class="text-danger">ยังไม่ได้ชำระเงิน</span>
                                             <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($order['delivery_type'] === 'flash') : ?>
+                                                Flash Express
+                                            <?php elseif($order['delivery_type'] === 'kerry'):?>
+                                                Kerry Express
+                                            <?php elseif($order['delivery_type'] === 'thaipost'):?>
+                                                Thailand Post : EMS
+                                            <?php elseif($order['delivery_type'] === 'jt'):?>
+                                                J&T Express
+                                            <?php elseif($order['delivery_type'] === 'dhl'):?>
+                                                DHL Express
+                                            <?php endif;?>
                                         </td>
                                         <td>
                                             <aside style="display: flex;justify-content: center;align-items: center;;">
