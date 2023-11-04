@@ -54,7 +54,8 @@ if ($pageWasRefreshed) {
 
 <body>
     <main class="container" style="margin-top: 2rem;">
-        <form method="post" action="confirmOrder.php" onsubmit="return confirmOrder();">
+        <form method="post" action="confirmOrder.php" onsubmit="return confirmOrder()">
+            <h1 class="cart-title">ตะกร้าสินค้า</h1>
             <table class="table table-bordered text-center">
                 <thead class="table-dark text-center mx-auto">
                     <tr>
@@ -77,7 +78,7 @@ if ($pageWasRefreshed) {
                             timerProgressBar: true
                         }).then(function() {
                             location.href = 'login.php';
-                        }, 2000)
+                        })
                     </script>
                 <?php else : ?>
                     <?php
@@ -115,19 +116,19 @@ if ($pageWasRefreshed) {
                                 <td colspan="6" align="right">
                                     <article class="ship-type">
                                         <aside>
-                                            การจัดส่ง : 
+                                            การจัดส่ง :
                                         </aside>
                                         <section>
                                             <select class="form-control" id="delivery-type" name="delivery_type" onchange="Delivery()">
                                                 <option value="">กรุณาเลือกการจัดส่ง</option>
                                                 <option value="flash">Flash Express</option>
-                                                <option value="kery">Kery Express</option>
+                                                <option value="kerry">Kerry Express</option>
                                                 <option value="thaipost">Thailand Post : EMS</option>
                                                 <option value="jt">J&T Express</option>
                                                 <option value="dhl">DHL Express</option>
                                             </select>
                                         </section>
-                                    </article>         
+                                    </article>
                                 </td>
                             </tr>
                         <?php endif; ?>
@@ -142,17 +143,27 @@ if ($pageWasRefreshed) {
                             </td>
                             <input type="hidden" name="delivery_price" id="delivery_price" value="">
                         </tr>
+                        <tr>
+                            <td colspan="6">
+                                <aside class="orderBTN">
+                                    <a href="store.php" class="btn btn-warning">เลือกสินค้าต่อ</a>
+                                    <input id="sum" type="hidden" value="<?= $sum ?>" name="sum">
+                                    <input type="submit" name="submit_button" value="เพิ่มลงตะกร้า" class="btn btn-info" id="submitBTN">
+                                </aside>
+
+                            </td>
+                        </tr>
                     </tfoot>
                 <?php endif; ?>
             </table>
-            <input id="sum" type="hidden" value="<?= $sum ?>" name="sum">
+
             <div id="addtext"></div>
-            <input type="submit" name="submit_button" value="ORDER" class="btn btn-info">
+
         </form>
-        
-        <a href="store.php"><- เลือกสินค้าต่อ</a>
+
+
         <div id="getDeli"></div>
-                <!-- <form method="post" action="cartAdd.php?action=orders">
+        <!-- <form method="post" action="cartAdd.php?action=orders">
         
     </form> -->
 
@@ -161,20 +172,19 @@ if ($pageWasRefreshed) {
 
 </html>
 <script>
-
-    function Delivery(){
+    function Delivery() {
         let deliveryType = document.getElementById('delivery-type').value; //รับค่าจาก select id delivery-type
         let deliveryPrice = 0; //ตั้งราคา defualt = 0
         let total_sum = 0;
-        if(deliveryType === 'flash'){
+        if (deliveryType === 'flash') {
             deliveryPrice = 50;
-        }else if(deliveryType === 'kery'){
+        } else if (deliveryType === 'kerry') {
             deliveryPrice = 100;
-        }else if(deliveryType === 'thaipost'){
+        } else if (deliveryType === 'thaipost') {
             deliveryPrice = 45;
-        }else if(deliveryType === 'jt'){
+        } else if (deliveryType === 'jt') {
             deliveryPrice = 65;
-        }else if(deliveryType === 'dhl'){
+        } else if (deliveryType === 'dhl') {
             deliveryPrice = 55;
         }
         document.getElementById('delivery_price').value = deliveryPrice; //ใส่ value ใน input id delivery-price เป็นค่าตามที่เลือก delivery
@@ -185,24 +195,31 @@ if ($pageWasRefreshed) {
         document.getElementById('total_sum').value = total_sum; // ใส่ value ใน input id total_sum
         console.log(total_sum)
         let asideTag = document.getElementById('total_price'); // เข้าถึง tag aside
-        let h6Tag = document.querySelector('h6');//เข้าถึง element ตัวแรกที่พบ ในที่นี้เลือกเป็น h6 ตามที่สร้าง
-        if(h6Tag){
+        let h6Tag = document.querySelector('h6'); //เข้าถึง element ตัวแรกที่พบ ในที่นี้เลือกเป็น h6 ตามที่สร้าง
+        if (h6Tag) {
             asideTag.removeChild(h6Tag) //ลบลูกใน aside h6 ตัวเเรกที่เจอ
         }
 
-        if(document.getElementById('total_sum').value !== ''){// input id total_sum ไม่เป็นค่าว่าง
-            let h6Tag = document.createElement('h6');//สร้าง element h6
-            let all_price  =total_sum.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); //ทศนิยม 2 ตำแหน่ง มี comma คั่น
+        if (document.getElementById('total_sum').value !== '') { // input id total_sum ไม่เป็นค่าว่าง
+            let h6Tag = document.createElement('h6'); //สร้าง element h6
+            let all_price = total_sum.toLocaleString('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }); //ทศนิยม 2 ตำแหน่ง มี comma คั่น
             console.log(all_price)
-            h6Tag.innerHTML = "ยอดรวมสุทธิ : "+all_price+" บาท";
+            h6Tag.innerHTML = "ยอดรวมสุทธิ : " + all_price + " บาท";
             asideTag.appendChild(h6Tag);
-        }else{
-            let h6Tag = document.createElement('h6');//สร้าง element h6
-            let all_price  =sum.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); //ทศนิยม 2 ตำแหน่ง มี comma คั่น
+        } else {
+            let h6Tag = document.createElement('h6'); //สร้าง element h6
+            let all_price = sum.toLocaleString('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }); //ทศนิยม 2 ตำแหน่ง มี comma คั่น
             console.log(all_price)
-            h6Tag.innerHTML = "ยอดรวมสุทธิ : "+all_price+" บาท";
+            h6Tag.innerHTML = "ยอดรวมสุทธิ : " + all_price + " บาท";
             asideTag.appendChild(h6Tag);
         }
+
     }
 
     function update(pid, pimg) {
@@ -221,17 +238,20 @@ if ($pageWasRefreshed) {
         let create = document.getElementById("error-message");
         let sum = document.getElementById("sum").value;
         let add = document.getElementById("addtext");
-        let deliveryType = document.getElementById('delivery-type').value;
+        let deliveryType = document.getElementById('delivery-type');
+        if (sum <= 0 || !deliveryType) {
 
-        if (sum <= 0 || deliveryType === '') {
             if (!create) {
-                create = document.createElement("h1");
+                create = document.createElement("h3");
                 create.id = "error-message";
                 add.appendChild(create);
             }
-            if(sum <= 0){
-                create.innerHTML = "กรุณาเพิ่มสินค้าลงตะกร้าก่อน";
-            }else if(deliveryType === ''){
+            if (sum <= 0) {
+                create.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> กรุณาเพิ่มสินค้าลงตะกร้าก่อน";
+                create.style.color = 'red';
+                create.style.margin = '0.5rem 2.5rem';
+                create.className = 'btn btn-warning';
+            } else {
                 Swal.fire({
                     title: 'คำเตือน',
                     icon: 'warning',
@@ -240,17 +260,29 @@ if ($pageWasRefreshed) {
                     confirmButtonColor: '#3085d6'
                 })
             }
-            
             return false;
         } else {
-            if (confirm("Are you sure you want to place the order?")) {
-                return true; // Continue with form submission
+            let selectedValue = deliveryType.value;
+            if (selectedValue === '') {
+                Swal.fire({
+                    title: 'คำเตือน',
+                    icon: 'warning',
+                    text: 'กรุณาระบุการจัดส่ง',
+                    confirmButtonText: 'ตกลง',
+                    confirmButtonColor: '#3085d6'
+                });
+                return false;
             } else {
-                return false; // Cancel form submission
+                if(confirm("ต้องการเพิ่มสืนค้าลงตะกร้าหรือไม่?")){
+                    return true;
+                }else {
+                    return false;
+                }
             }
         }
+
     }
-    window.onload = function(){
+    window.onload = function() {
         Delivery();
     }
 </script>

@@ -66,7 +66,7 @@
                     <?php $count++; endwhile;?>
                 </tbody>
             </table>
-            <section id="orderHistory">
+            <section id="orderHistory" style="padding-bottom: 3rem;padding-top: 2rem;">
             </section>
         </main>
         <?php endif;?>

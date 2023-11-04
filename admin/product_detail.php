@@ -31,40 +31,61 @@ if (!isset($_SESSION['admin_login'])) {
                 <i class="fa-solid fa-user-secret"></i> Admin Mentos <!-- Sidebar Header -->
             </div>
             <div class="list-group list-group-flush my-3">
-                <ul class="sidebar-nav">
+            <ul class="sidebar-nav">
                     <li class="sidebar-item">
                         <a href="admin.php" class="sidebar-link">
-                            <i class="fas fa-tachometer-alt me-2"></i>
-                            <span style="margin-left: .1rem;">Dashboard</span>
+                        <i class="fas fa-tachometer-alt me-2"></i>
+                            <span style="margin-left: .1rem;">ภาพรวม</span>
                         </a>
                         <hr>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#pages" aria-expanded="false" aria-controls="pages">
+                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#pages"
+                            aria-expanded="false" aria-controls="pages">
                             <i class="fa-solid fa-store"></i>
-                            <span style="margin-left: .5rem;">Store</span>
+                            <span style="margin-left: .5rem;">ร้านค้า</span>
                         </a>
                         <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item" style="margin-top: 1.1rem;">
-                                <a href="product.php" class="sidebar-link">Stock</a>
+                                <a href="product.php" class="sidebar-link">คลังสินค้า</a>
                             </li>
                             <li class="sidebar-item" style="margin-top: 1.1rem;">
-                                <a href="add_product.php" class="sidebar-link">Product</a>
+                                <a href="add_product.php" class="sidebar-link">เพิ่มสินค้า</a>
                             </li>
                         </ul>
                         <hr>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
+                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#auth"
+                            aria-expanded="false" aria-controls="auth">
                             <i class="fa-solid fa-user pe-2"></i>
-                            Users
+                            สมาชิก
                         </a>
                         <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item" style="margin-top: 1.1rem;">
-                                <a href="user_manage.php" class="sidebar-link">User Management</a>
+                                <a href="user_manage.php" class="sidebar-link">จัดการผู้ใช้</a>
                             </li>
                             <li class="sidebar-item" style="margin-top: 1.1rem;">
-                                <a href="admin_manage.php" class="sidebar-link">Admin Management</a>
+                                <a href="admin_manage.php" class="sidebar-link">จัดการแอดมิน</a>
+                            </li>
+                            <li class="sidebar-item" style="margin-top: 1.1rem;">
+                                <a href="add_user.php" class="sidebar-link">เพิ่มสมาชิก</a>
+                            </li>
+                        </ul>
+                        <hr>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#order"
+                            aria-expanded="false" aria-controls="order">
+                            <i class="fa-solid fa-capsules"></i>
+                            ออเดอร์
+                        </a>
+                        <ul id="order" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item" style="margin-top: 1.1rem;">
+                                <a href="order_manage.php" class="sidebar-link">การชำระเงิน</a>
+                            </li>
+                            <li class="sidebar-item" style="margin-top: 1.1rem;">
+                                <a href="delivery_manage.php" class="sidebar-link">การจัดส่ง</a>
                             </li>
                         </ul>
                         <hr>

@@ -8,14 +8,12 @@ if (!isset($_SESSION['admin_login'])) {
 ?>
 
 <head>
-    <link rel="stylesheet" href="style/admin/admin.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="style/admin/product.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link href="https:////cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https:////cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">  <!-- Datatable CSS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script src="style/admin/delete_user.js"></script>
+    <script src="style/admin/order_manage.js"></script>
 </head>
 <body>
     <?php 
@@ -100,7 +98,7 @@ if (!isset($_SESSION['admin_login'])) {
                 <div class="d-flex align-items-center">
                     <!-- icon bar -->
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0"><a href="admin.php" style="text-decoration: none;color: #24252A;">สมาชิก</a> / จัดการแอดมิน</h2>
+                    <h2 class="fs-2 m-0"><a href="admin.php" style="text-decoration: none;color: #24252A;">ร้านค้า</a> / การชำระเงิน</h2>
                 </div>
                 <!-- button for dropdown admin info -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -129,62 +127,63 @@ if (!isset($_SESSION['admin_login'])) {
             <div class="container-fluid px-4">
                 <div id="notification" style="display: none;"></div>
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">รายชื่อทีมงาน</h3>
+                    <h3 class="fs-4 mb-3">คำร้องทั้งหมด</h3>
                     <div class="col">
                         <?php
-                            $stmt = $pdo->prepare("SELECT uid,avatar,u_username,u_name,email,address,phone,gender,DATE_FORMAT(create_at + INTERVAL 543 YEAR, '%d/%m/%Y %H:%i:%s') AS create_at FROM users WHERE users.urole = 'admin';");
+                            $stmt = $pdo->prepare("SELECT DISTINCT DATE_FORMAT(orders.date + INTERVAL 543 YEAR, '%d/%m/%Y %H:%i:%s') AS order_at ,orders.ordName,orders.ordID,users.u_username,orders.amount,orders.status FROM orders JOIN order_detail on orders.ordID=order_detail.ordID JOIN users ON order_detail.uid = users.uid ORDER BY orders.ordName;");
                             $stmt->execute();
                         ?>
-                        <table id="OrderTable" class="table table-responsive-md">
+                        <table id="ProductTable" class="table table-responsive-md">
                             <thead class="table-info">
                                 <tr>
-                                    <th style="text-align: center;">ID</th>
-                                    <th style="text-align: center;">โปรไฟล์</th>
-                                    <th style="text-align: center;">ชื่อผู้ใช้</th>
-                                    <th style="text-align: center;">ชื่อ - นามสกุล</th>
-                                    <th style="text-align: center;">อีเมล์</th>
-                                    <th style="text-align: center;">ที่อยู่</th>
-                                    <th style="text-align: center;">เบอร์โทรศัพท์</th>
-                                    <th style="text-align: center;">เพศ</th>
-                                    <th style="text-align: center;">วันที่สร้างบัญชี</th>
-                                    <th style="text-align: center;">การจัดการ</th>
+                                    <th style="text-align: center;">ลำดับที่</th>
+                                    <th style="text-align: center;">วันที่สั่งซื้อ</th>
+                                    <th style="text-align: center;">เลขคำสั่งซื้อ</th>
+                                    <th style="text-align: center;">เจ้าของคำสั่งซื้อ</th>
+                                    <th style="text-align: center;">ราคาสุทธิ</th>
+                                    <th style="text-align: center;">สถานะ</th>
+                                    <th style="text-align: center;">การดำเนินการ</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php while($check_user = $stmt->fetch(PDO::FETCH_ASSOC)):?>
-                                    <?php
-                                        $relativeAvatarPath = str_replace('../', '', $check_user['avatar']);
-                                    ?>
-                                    <tr style="text-align: center;">
-                                        <td><?= $check_user['uid'] ?></td>
-                                        <td><img src="../<?= $relativeAvatarPath ?>" width="50" height="50" class="rounded-circle"></td>
-                                        <td><?= $check_user['u_username'] ?></td>
-                                        <td><?= $check_user['u_name'] ?></td>
-                                        <td><?= $check_user['email'] ?></td>
-                                        <td><?= $check_user['address'] ?></td>
-                                        <td><?= $check_user['phone'] ?></td>
-                                        <td><?php if ($check_user['gender'] == 'male') : ?>
-                                            ชาย
-                                        <?php elseif ($check_user['gender'] == 'female') : ?>
-                                            หญิง
-                                        <?php endif; ?>
-                                    </td>
-                                    <td><?= $check_user['create_at'] ?></td>
-                                    <td>
-                                        <!-- <a href="#" class="btn btn-warning">แก้ไข</a> <a href="#" class="btn btn-danger">ลบ</a> -->
-                                        <div style="display: flex;justify-content: center;align-items: center">
-                                            <form style="margin-right: .6rem;" method="post" action="user_detail.php">
-                                                <input type="hidden" name="uid" id="uid" value="<?=$check_user['uid']?>">
-                                                <button type="submit" class="btn btn-warning">แก้ไข</button>
-                                            </form>
-                                            <form style="margin-right: .6rem;" method="post">
-                                            <input type="hidden" name="uid" value="<?= $check_user['uid'] ?>">
-                                            <button type="button" class="btn btn-danger" id="deleteUser" data-uid="<?= $check_user['uid']?>">ลบ</button>
-                                            </form>
-                                        </div>
-                                    </td>
+                                <?php $count = 1; while($order = $stmt->fetch(PDO::FETCH_ASSOC)):?>
+                                    <tr style="text-align: center;margin: 2rem auto;">
+                                        <td><?=$count?></td>
+                                        <td><?=$order['order_at']?></td>
+                                        <td><?=$order['ordName']?></td>
+                                        <td><?=$order['u_username']?></td>
+                                        <td><?=number_format($order['amount'],2)?> ฿</td>
+                                        <td>
+                                            <?php if($order['status'] === 'paid'):?>
+                                                <span class="text-success">ชำระเงินแล้ว</span>
+                                            <?php elseif($order['status'] === 'wait'):?>
+                                                <span class="text-danger">ยังไม่ได้ชำระเงิน</span>
+                                            <?php endif;?>
+                                        </td>
+                                        <td>
+                                            <aside style="display: flex;justify-content: center;align-items: center;;">
+                                                <section style="margin: auto 0.5rem;">
+                                                <?php if($order['status']==='paid'):?>
+                                                    <section style="margin: auto 0.5rem;">
+                                                        <form>
+                                                            <button class="btn btn-warning" id="reapprove" data-ordID="<?=$order['ordID']?>"><i class="fa-solid fa-triangle-exclamation"></i> ตรวจสอบอีกครั้ง</button>
+                                                        </form>
+                                                    </section>
+                                                <?php elseif($order['status']==='wait'):?>
+                                                    <form>
+                                                        <button class="btn btn-success" id="approve" data-ordID="<?=$order['ordID']?>"><i class="fa-solid fa-square-check"></i> อนุมัติ</button> 
+                                                    </form>
+                                                </section>
+                                                <section style="margin: auto 0.5rem;">
+                                                    <form>
+                                                        <button class="btn btn-danger" id="denied" data-ordID="<?=$order['ordID']?>"><i class="fa-solid fa-rectangle-xmark"></i> ยกเลิก</button>
+                                                    </form>
+                                                </section>
+                                                <?php endif;?>
+                                            </aside>
+                                        </td>
                                     </tr>
-                                <?php endwhile;?>
+                                <?php $count++; endwhile;?>
                             </tbody>
                         </table>
                     </div>
@@ -201,7 +200,7 @@ if (!isset($_SESSION['admin_login'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="style/sidebar/sidebar.js"></script>
     <script>
-        let table = new DataTable('#OrderTable');
+        let table = new DataTable('#ProductTable');
     </script>
 </body>
 

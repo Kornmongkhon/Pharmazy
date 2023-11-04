@@ -4,7 +4,7 @@ include("include/head.php");
 if (isset($_GET['pid'])) {
     $pid = $_GET['pid'];
 }
-if (!isset($_POST['product']) || !isset($_POST['pid'])) {
+else if (!isset($_POST['product']) || !isset($_POST['pid'])) {
     header("location: store.php");
     exit;
 } else {

@@ -7,7 +7,7 @@
             $showOrder = $pdo->prepare("SELECT orders.ordName, order_detail.ordDeID,product.pimg,product.pname,product.price,order_detail.qty,SUM(order_detail.qty*product.price) AS total_price FROM orders JOIN order_detail ON orders.ordID = order_detail.ordID JOIN product ON order_detail.pid = product.pid JOIN users ON users.uid = order_detail.uid WHERE order_detail.ordID = ? GROUP BY order_detail.ordDeID;");
             $showOrder->bindParam(1,$_POST['ordID']);
             $showOrder->execute();
-            $showDelivery = $pdo->prepare("SELECT delivery.delivery_id,orders.ordName,delivery.delivery_type,delivery.delivery_price,delivery.delivery_status FROM delivery JOIN users ON delivery.uid = users.uid JOIN orders ON delivery.ordID = orders.ordID WHERE orders.ordID = ?;");
+            $showDelivery = $pdo->prepare("SELECT delivery.delivery_id,orders.ordName,delivery.delivery_type,delivery.delivery_price,delivery.delivery_status,users.address FROM delivery JOIN users ON delivery.uid = users.uid JOIN orders ON delivery.ordID = orders.ordID WHERE orders.ordID = ?;");
             $showDelivery->bindParam(1,$_POST['ordID']);
             $showDelivery->execute();
         }
@@ -19,7 +19,7 @@
             $delivery = $showDelivery->fetch();
         ?>
         <article style="display: flex;justify-content: space-between;margin: 2rem 0;">
-            <aside>คำสั่งซื้อ <?=$row['ordName']?></aside>
+            <aside style="margin: auto 2rem;">คำสั่งซื้อ <?=$row['ordName']?></aside>
             <button class="btn btn-danger btn-sm" id="closeOrder" style="position: absolute;top: 0;right: 0;margin: 0.2rem 0.2rem;"><i class="fa-solid fa-xmark" id="closeOrder"></i></button>
         </article>
         <table class="table">
@@ -50,11 +50,14 @@
             </tbody>
             <tfoot>
                 <tr>
+                    <td colspan="6" align="left" style="padding-left: 2rem;">ที่อยู่การจัดส่ง : <?=$delivery['address']?></td>
+                </tr>
+                <tr>
                     <td colspan="6" align="right" style="padding-right: 2rem;">การจัดส่ง : 
                         <?php if($delivery['delivery_type'] === 'flash'):?>
                             Flash Express
-                        <?php elseif($delivery['delivery_type'] === 'kery'):?>
-                            Kery Express
+                        <?php elseif($delivery['delivery_type'] === 'kerry'):?>
+                            Kerry Express
                         <?php elseif($delivery['delivery_type'] === 'thaipost'):?>
                             Thailand Post : EMS
                         <?php elseif($delivery['delivery_type'] === 'jt'):?>
@@ -66,6 +69,8 @@
                         <span style="margin-left: 2rem;">สถานะ :
                             <?php if($delivery['delivery_status'] === 'wait for payment'):?>
                                 <span class="text-danger">กำลังรอการชำระเงิน</span>
+                            <?php elseif($delivery['delivery_status'] === 'prepare'):?>
+                                <span class="text-secondary">กำลังจัดเตรียมสินค้า</span>
                             <?php elseif($delivery['delivery_status'] === 'shipping'):?>
                                 <span class="text-warning">กำลังจัดส่ง</span>
                             <?php elseif($delivery['delivery_status'] === 'shipped'):?>

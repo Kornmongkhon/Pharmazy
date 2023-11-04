@@ -72,6 +72,22 @@ if (!isset($_SESSION['admin_login'])) {
                         </ul>
                         <hr>
                     </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#order"
+                            aria-expanded="false" aria-controls="order">
+                            <i class="fa-solid fa-capsules"></i>
+                            ออเดอร์
+                        </a>
+                        <ul id="order" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item" style="margin-top: 1.1rem;">
+                                <a href="order_manage.php" class="sidebar-link">การชำระเงิน</a>
+                            </li>
+                            <li class="sidebar-item" style="margin-top: 1.1rem;">
+                                <a href="delivery_manage.php" class="sidebar-link">การจัดส่ง</a>
+                            </li>
+                        </ul>
+                        <hr>
+                    </li>
                 </ul>
             </div>
         </div>
