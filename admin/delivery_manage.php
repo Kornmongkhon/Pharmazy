@@ -13,7 +13,7 @@ if (!isset($_SESSION['admin_login'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link href="https:////cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"> <!-- Datatable CSS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="style/admin/order_manage.js"></script>
+    <script src="style/admin/delivery_manage.js"></script>
 </head>
 
 <body>
@@ -125,7 +125,7 @@ if (!isset($_SESSION['admin_login'])) {
                     <h3 class="fs-4 mb-3">รายการคำสั่งซื้อทั้งหมด</h3>
                     <div class="col">
                         <?php
-                        $stmt = $pdo->prepare("SELECT DISTINCT DATE_FORMAT(orders.date + INTERVAL 543 YEAR, '%d/%m/%Y %H:%i:%s') AS order_at ,orders.ordName,orders.ordID,users.u_username,orders.amount,orders.status,delivery.delivery_status FROM orders JOIN delivery ON orders.ordID= delivery.ordID JOIN users ON delivery.uid = users.uid WHERE delivery.delivery_status IN ('prepare','shipping','shipped') AND orders.status IN ('paid') ORDER BY orders.ordName;");
+                        $stmt = $pdo->prepare("SELECT DISTINCT DATE_FORMAT(orders.date + INTERVAL 543 YEAR, '%d/%m/%Y %H:%i:%s') AS order_at ,orders.ordName,delivery.delivery_id,users.u_username,orders.amount,orders.status,delivery.delivery_status FROM orders JOIN delivery ON orders.ordID= delivery.ordID JOIN users ON delivery.uid = users.uid WHERE delivery.delivery_status IN ('prepare','shipping','shipped') AND orders.status IN ('paid') ORDER BY orders.ordName;");
                         $stmt->execute();
                         ?>
                         <table id="ProductTable" class="table table-responsive-md">
@@ -174,34 +174,34 @@ if (!isset($_SESSION['admin_login'])) {
                                                     <?php if($order['delivery_status'] === 'prepare'):?>
                                                         <section style="margin: auto 0.5rem;">
                                                             <form>
-                                                                <button class="btn btn-warning" id="approve" data-ordID="<?= $order['ordID'] ?>"><i class="fa-solid fa-box"></i> จัดส่ง</button>
+                                                                <button class="btn btn-warning" id="shipping" data-deliID="<?= $order['delivery_id'] ?>"><i class="fa-solid fa-box"></i> นำส่ง</button>
                                                             </form>
                                                         </section>
                                                         <section style="margin: auto 0.5rem;">
                                                             <form>
-                                                                <button class="btn btn-danger" id="denied" data-ordID="<?= $order['ordID'] ?>"><i class="fa-solid fa-rectangle-xmark"></i> ยกเลิก</button>
+                                                                <button class="btn btn-danger" id="denied" data-deliID="<?= $order['delivery_id'] ?>"><i class="fa-solid fa-rectangle-xmark"></i> ยกเลิก</button>
                                                             </form>
                                                         </section>
                                                     <?php elseif($order['delivery_status'] === 'shipping'):?>
                                                         <section style="margin: auto 0.5rem;">
                                                         <form>
-                                                            <button class="btn btn-secondary" id="approve" data-ordID="<?= $order['ordID'] ?>"><i class="fa-solid fa-square-check"></i> จัดเตรียม</button>
+                                                            <button class="btn btn-secondary" id="prepare" data-deliID="<?= $order['delivery_id'] ?>"><i class="fa-solid fa-box-open"></i> จัดเตรียม</button>
                                                         </form>
                                                         </section>
                                                         <section style="margin: auto 0.5rem;">
                                                             <form>
-                                                                <button class="btn btn-danger" id="denied" data-ordID="<?= $order['ordID'] ?>"><i class="fa-solid fa-rectangle-xmark"></i> ยกเลิก</button>
+                                                                <button class="btn btn-success" id="shipped" data-deliID="<?= $order['delivery_id'] ?>"><i class="fa-solid fa-people-carry-box"></i> จัดส่ง</button>
                                                             </form>
                                                         </section>
                                                     <?php elseif($order['delivery_status'] === 'shipped'):?>
                                                         <section style="margin: auto 0.5rem;">
                                                         <form>
-                                                            <button class="btn btn-success" id="approve" data-ordID="<?= $order['ordID'] ?>"><i class="fa-solid fa-square-check"></i> อนุมัติ</button>
+                                                        <button class="btn btn-warning" id="shipping" data-deliID="<?= $order['delivery_id'] ?>"><i class="fa-solid fa-box"></i> นำส่ง</button>
                                                         </form>
                                                         </section>
                                                         <section style="margin: auto 0.5rem;">
                                                             <form>
-                                                                <button class="btn btn-danger" id="denied" data-ordID="<?= $order['ordID'] ?>"><i class="fa-solid fa-rectangle-xmark"></i> ยกเลิก</button>
+                                                                <button class="btn btn-danger" id="denied" data-deliID="<?= $order['delivery_id'] ?>"><i class="fa-solid fa-rectangle-xmark"></i> ยกเลิก</button>
                                                             </form>
                                                         </section>
                                                     <?php endif;?>
