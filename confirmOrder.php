@@ -23,6 +23,13 @@ if (isset($_POST['submit_button'])){
             $addOrder->bindParam(3,$sum);
             $addOrder->execute();
             $orderId = $pdo->lastInsertId();
+            $insertDelivery = $pdo->prepare("INSERT INTO delivery (uid, ordID, delivery_type, delivery_price, delivery_status) VALUES(?, ?, ?, ?, ?)");
+            $insertDelivery->bindParam(1,$_SESSION['user_login']);
+            $insertDelivery->bindParam(2,$orderId);
+            $insertDelivery->bindParam(3,$_POST['delivery_type']);
+            $insertDelivery->bindParam(4,$_POST['delivery_price']);
+            $insertDelivery->bindParam(5,$ship);
+            $insertDelivery->execute();
             foreach ($_SESSION['cart'] as $item) {
                 $uid = $_SESSION["user_login"];
                 $qty = $item['quan'];
@@ -43,7 +50,6 @@ if (isset($_POST['submit_button'])){
                     $new_stock->bindParam(1,$update_stock);
                     $new_stock->bindParam(2,$pid);
                     $new_stock->execute();
-                    $insertDelivery = $pdo->prepare("INSERT INTO delivery (uid, ordID, delivery_type, delivery_price, delivery_status) VALUES(?, ?, ?, ?, ?)");
                 }
             }
             $_SESSION['cart'] = array(); ?>
