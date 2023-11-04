@@ -21,6 +21,20 @@
 </head>
 <body>
     <h1>ประวัติการสั่งซื้อ</h1>
+    <?php if (!isset($_SESSION['user_login'])) : ?>
+                    <script>
+                        Swal.fire({
+                            title: 'ล้มเหลว',
+                            icon: 'error',
+                            text: 'กรุณาเข้าสู่ระบบก่อน',
+                            timer: 3500,
+                            showConfirmButton: false,
+                            timerProgressBar: true
+                        }).then(function() {
+                            location.href = 'login.php';
+                        }, 2000)
+                    </script>
+    <?php else:?>
     <?php
     $uid = $_SESSION["user_login"];
         $stmt=$pdo->prepare("SELECT DISTINCT orders.ordID,orders.ordName,orders.amount FROM orders JOIN order_detail on orders.ordID=order_detail.ordID WHERE uid = ?");
@@ -55,5 +69,6 @@
             <section id="orderHistory">
             </section>
         </main>
+        <?php endif;?>
 </body>
 </html>

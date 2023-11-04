@@ -135,7 +135,7 @@ if ($pageWasRefreshed) {
                             <td colspan="6" align="right">
                                 <span class="firstprice">ยอดรวม : <span><?= number_format($sum, 2) ?></span> บาท (ยังไม่รวมค่าจัดส่ง) </span>
                                 <span>
-                                    <aside id="total_price">ยอดรวม : 
+                                    <aside id="total_price">
                                         <input type="hidden" name="total_sum" id="total_sum" value="">
                                     </aside>
                                 </span>
@@ -194,13 +194,13 @@ if ($pageWasRefreshed) {
             let h6Tag = document.createElement('h6');//สร้าง element h6
             let all_price  =total_sum.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); //ทศนิยม 2 ตำแหน่ง มี comma คั่น
             console.log(all_price)
-            h6Tag.innerHTML = all_price+" บาท";
+            h6Tag.innerHTML = "ยอดรวมสุทธิ : "+all_price+" บาท";
             asideTag.appendChild(h6Tag);
         }else{
             let h6Tag = document.createElement('h6');//สร้าง element h6
             let all_price  =sum.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); //ทศนิยม 2 ตำแหน่ง มี comma คั่น
             console.log(all_price)
-            h6Tag.innerHTML = all_price+" บาท";
+            h6Tag.innerHTML = "ยอดรวมสุทธิ : "+all_price+" บาท";
             asideTag.appendChild(h6Tag);
         }
     }
