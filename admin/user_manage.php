@@ -77,7 +77,7 @@ if (!isset($_SESSION['admin_login'])) {
                         <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#order"
                             aria-expanded="false" aria-controls="order">
                             <i class="fa-solid fa-capsules"></i>
-                            ออเดอร์
+                            คำสั่งซื้อ
                         </a>
                         <ul id="order" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item" style="margin-top: 1.1rem;">
