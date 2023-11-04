@@ -158,7 +158,13 @@ if (!isset($_SESSION['admin_login'])) {
                                         $stmt->execute();
                                         $total_product = $stmt->fetch(PDO::FETCH_ASSOC);
                                     ?>
-                                    <h3 class="fs-2 "><?=number_format($total_product['total_product'],2)?></h3>
+                                    <h3 class="fs-2 ">
+                                        <?php if($total_product['total_product'] == ''):?>
+                                            <?=0?>
+                                        <?php else:?>
+                                            <?=$total_product['total_product']?>
+                                        <?php endif;?>
+                                    </h3>
                                     <p class="fs-5">สินค้าทั้งหมด</p>
                                 </div>
                                 <i class="fas fa-gift fs-1 primary-text border rounded-full secondary-bg p-3"></i>
@@ -169,8 +175,19 @@ if (!isset($_SESSION['admin_login'])) {
                     <div class="col-md-3">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div class="text-center mt-3">
-                                
-                                <h3 class="fs-2">0</h3>
+                                <?php
+                                    $stmt = $pdo->prepare("SELECT SUM(orders.amount-delivery.delivery_price) AS total_income FROM orders JOIN delivery ON orders.ordID = delivery.ordID WHERE orders.status IN('paid');");
+                                    $stmt->execute();
+                                    $total_income = $stmt->fetch(PDO::FETCH_ASSOC);
+                                ?>
+                                <h3 class="fs-2">
+                                    <?php if($total_income['total_income'] == ''):?>
+                                        <?=0?>
+                                    <?php else:?>
+                                        <?=$total_income['total_income']?>
+                                    <?php endif?>
+                                    
+                                </h3>
                                 <p class="fs-5">รายได้ทั้งหมด</p>
                             </div>
                             <i
@@ -196,8 +213,13 @@ if (!isset($_SESSION['admin_login'])) {
                     <div class="col-md-3">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div class="text-center mt-3">
-                                <h3 class="fs-2">%25</h3>
-                                <p class="fs-5">Increase</p>
+                                <?php
+                                    $stmt = $pdo->prepare("SELECT COUNT(orders.ordID) AS total_orders FROM orders;");
+                                    $stmt->execute();
+                                    $total_orders = $stmt->fetch(PDO::FETCH_ASSOC);
+                                ?>
+                                <h3 class="fs-2"><?=$total_orders['total_orders']?></h3>
+                                <p class="fs-5">คำสั่งซื้อทั้งหมด</p>
                             </div>
                             <i class="fas fa-chart-line fs-1 primary-text border rounded-full secondary-bg p-3"></i>
                         </div>
@@ -210,17 +232,37 @@ if (!isset($_SESSION['admin_login'])) {
                         <table id="OrderTable" class="table table-responsive-md">
                             <thead class="table-info">
                                 <tr>
+                                    <th style="text-align: center;">ลำดับที่</th>
                                     <th style="text-align: center;">วันและเวลา</th>
                                     <th style="text-align: center;">เลขที่คำสั่งซื้อ</th>
                                     <th style="text-align: center;">ชื่อผู้ใช้</th>
-                                    <th style="text-align: center;">รหัสสินค้า</th>
-                                    <th style="text-align: center;">ชื่อสินค้า</th>
                                     <th style="text-align: center;">จำนวน</th>
                                     <th style="text-align: center;">ราคารวม</th>
+                                    <th style="text-align: center;">สถานะ</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                                <?php
+                                    $stmt = $pdo->prepare("SELECT DISTINCT DATE_FORMAT(orders.date + INTERVAL 543 YEAR, '%d/%m/%Y %H:%i:%s') AS order_at,orders.ordName,users.u_username,SUM(order_detail.qty) AS total_quantity,orders.amount,orders.status FROM orders JOIN order_detail ON orders.ordID = order_detail.ordID JOIN users ON order_detail.uid = users.uid GROUP BY orders.ordName ORDER BY order_at DESC;");
+                                    $stmt->execute();
+                                ?>
+                                <?php $count = 1; while($lastest_order = $stmt->fetch(PDO::FETCH_ASSOC)):?>
+                                    <tr>
+                                        <td style="text-align: center;"><?=$count?></td>
+                                        <td style="text-align: center;"><?=$lastest_order['order_at']?></td>
+                                        <td style="text-align: center;"><?=$lastest_order['ordName']?></td>
+                                        <td style="text-align: center;"><?=$lastest_order['u_username']?></td>
+                                        <td style="text-align: center;"><?=$lastest_order['total_quantity']?></td>
+                                        <td style="text-align: center;"><?=number_format($lastest_order['amount'],2)?> บาท</td>
+                                        <td style="text-align: center;">
+                                            <?php if($lastest_order['status'] === 'paid'):?>
+                                                <span class="text-success">ชำระเงินแล้ว</span>
+                                            <?php elseif($lastest_order['status'] === 'wait'):?>
+                                                <span class="text-danger">ยังไม่ได้ชำระเงิน</span>
+                                            <?php endif;?>
+                                        </td>
+                                    </tr>
+                                <?php $count++; endwhile;?>
                             </tbody>
                         </table>
                     </div>
