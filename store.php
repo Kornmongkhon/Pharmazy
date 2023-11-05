@@ -82,6 +82,21 @@ $totalPagesType = ceil($allProductsType / $itemPerPage);
     <main>
         <section>
             <div class="bg-light py-3">
+                <?php if (isset($_SESSION['buyfailed'])) : ?>
+                    <script>
+                        Swal.fire({
+                            title: 'ล้มเหลว',
+                            icon: 'error',
+                            text: 'กรุณาเข้าสู่ระบบก่อน',
+                            timer: 3500,
+                            showConfirmButton: false,
+                            timerProgressBar: true
+                        }).then(function() {
+                            location.href = 'login.php';
+                            <?php unset($_SESSION['buyfailed']);?>
+                        })
+                    </script>
+                <?php endif;?>
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 mb-0 color1">

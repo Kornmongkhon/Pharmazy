@@ -1,5 +1,9 @@
 <?php include("functions.php"); 
 session_start();
+    if(!isset($_SESSION['user_login'])){
+        $_SESSION['buyfailed'] = 'not login';
+        header("location: ../store.php");
+    }
     if(isset($_POST['Orders'])){
         $countOrders = $pdo->prepare("SELECT COUNT(*) as order_count FROM orders");
         $countOrders->execute();
