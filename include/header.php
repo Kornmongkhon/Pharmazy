@@ -53,8 +53,8 @@
                 <?php session_destroy();?>
             <?php endif;?>
             <?php if(!isset($_SESSION['user_login'])):?>
-                    <a class="btn btn-outline-success" style="margin-right: 15px;" href="login.php">เข้าสู่ระบบ</a>
-                    <a class="btn btn-outline-success" style="margin-right: 15px;" href="register.php">สมัครสมาชิก</a>
+                    <a class="btn btn-outline-info" style="margin-right: 15px;" href="login.php">เข้าสู่ระบบ</a>
+                    <a class="btn btn-outline-info" style="margin-right: 15px;" href="register.php">สมัครสมาชิก</a>
             <?php endif;?>
             <?php if(isset($_SESSION['user_login'])):?>
                 <a href="cartAdd.php"><i class="fa-solid fa-cart-shopping" style="color: white;margin-right: 0.5rem;"></i></a>
