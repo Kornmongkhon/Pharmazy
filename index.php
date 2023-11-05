@@ -11,6 +11,73 @@ if(isset($_COOKIE['visit'])){
 
 <head>
     <link href="style/index/index.css" rel="stylesheet"></link>
+    <style>
+        .hidden-head{
+            display: none;
+        }
+
+        .hero-img-mobile {
+            display: none;
+        }
+        .h4-mobile{
+            display: none;
+        }
+        @media screen and (max-width: 778px){
+            .hero-info h3 , p{
+                text-align: center;
+            }
+            .hero-img{
+                display: none;
+            }
+            .footer-top{
+                display: none;
+                padding: 2rem;
+            }
+            .footer-bottom{
+                margin-top: 2rem;
+            }
+            .h4-mobile{
+            display: none;
+        }
+        }
+        @media screen and (max-width: 500px) {
+            .hidden-head {
+                display: block;
+                text-align: center;
+                padding-top: 2rem;
+            }
+
+            .hero-img-mobile img {
+            width: 120px;
+            height: 40px; 
+            }
+
+            .hero-img {
+                display: none;
+
+            }
+            .footer-top{
+                display: none;
+            }
+            .text{
+                display: none;
+                /* margin-bottom: 2rem; */
+            }
+            /* .blog-item .moblie-margin{
+                margin-top: 2rem;
+            } */
+            .h4-skin{
+                display: none;
+            }
+            .h4-mobile{
+                display: block;
+            }
+            .buyBTN{
+                margin-top: 1.6rem;
+            }
+
+        }
+    </style>
 </head>
 
 <body id="bodytag">
@@ -74,22 +141,23 @@ if(isset($_COOKIE['visit'])){
                 <div class="blog-item">
                     <img src="assets/images/yasaman.jpg" alt="">
                     <h4>ยาสามัญประจำบ้าน</h4>
-                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"ยาสามัญประจำบ้าน" คือ ตัวยาที่กระทรวงสาธารณะสุขได้พิจารณาเอาไว้ว่าเป็นยาอันเหมาะสมที่ประชาชนควรซื้อมาไว้ประจำบ้านของตนเอง เพื่อจะเป็นประโยชน์ในการใช้ดูแลตัวเองจากอาการเจ็บป่วยเล็กๆ น้อยๆ ที่สามารถเกิดขึ้นได้ทั่วไปในชีวิตประจำวัน</p>
+                    <p class="text">"ยาสามัญประจำบ้าน" คือ ตัวยาที่กระทรวงสาธารณะสุขได้พิจารณาเอาไว้ว่าเป็นยาอันเหมาะสมที่ประชาชนควรซื้อมาไว้ประจำบ้านของตนเอง เพื่อจะเป็นประโยชน์ในการใช้ดูแลตัวเองจากอาการเจ็บป่วยเล็กๆ น้อยๆ ที่สามารถเกิดขึ้นได้ทั่วไปในชีวิตประจำวัน</p>
                     <a href="store.php?ptype=home-medicine">สั่งซื้อ</a>
                 </div>
 
                 <div class="blog-item">
                     <img src="assets/images/serm.jpg" alt="">
                     <h4>อาหารเสริม</h4>
-                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;อาหารเสริม (Complementary foods) ทางเภสัชกรรมหมายถึง อาหารที่ให้รับประทานเพิ่มเติมนอกเหนือจากอาหารหลัก (อาหารมีประโยชน์ 5 หมู่ ที่ได้รับ 3 มื้อต่อวัน) โดยการให้อาหารเสริมมีวัตถุประสงค์ต่างๆ เช่น เพื่อช่วยให้สุขภาพแข็งแรง เพื่อเพิ่มพลังงานให้กับร่างกาย</p>
-                    <a href="store.php?ptype=supplementary-food">สั่งซื้อ</a>
+                    <p class="text">อาหารเสริม (Complementary foods) ทางเภสัชกรรมหมายถึง อาหารที่ให้รับประทานเพิ่มเติมนอกเหนือจากอาหารหลัก (อาหารมีประโยชน์ 5 หมู่ ที่ได้รับ 3 มื้อต่อวัน) โดยการให้อาหารเสริมมีวัตถุประสงค์ต่างๆ เช่น เพื่อช่วยให้สุขภาพแข็งแรง เพื่อเพิ่มพลังงานให้กับร่างกาย</p>
+                    <a class="buyBTN" href="store.php?ptype=supplementary-food">สั่งซื้อ</a>
                 </div>
 
                 <div class="blog-item">
                     <img src="assets/images/skincare.jpg" alt="">
-                    <h4>สกินแคร์</h4>
-                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;สกินแคร์คือ ผลิตภัณฑ์สำหรับดูแลและฟื้นฟูผิวที่เสื่อมสภาพให้ดีขึ้น เช่น รอยดำ รอยแดง ฝ้า กระ ริ้วรอยก่อนวัย รวมถึงให้ความชุ่มชื้นกันผิวไม่ว่าจะเป็นผิวหน้าหรือผิวกาย โดยสกินแคร์แต่ละชนิดอาจมีรูปแบบและส่วนผสมที่แตกต่างกัน ดังนั้น จึงควรเลือกใช้สกินแคร์ให้เหมาะกับสภาพผิว เพื่อประสิทธิภาพในการดูแลผิวที่ดี</p>
-                    <a href="store.php?ptype=skin-care">สั่งซื้อ</a>
+                    <h4 class="h4-skin">สกินแคร์</h4>
+                    <h4 class="h4-mobile">สกินแคร์</h4>
+                    <p class="text">สกินแคร์คือ ผลิตภัณฑ์สำหรับดูแลและฟื้นฟูผิวที่เสื่อมสภาพให้ดีขึ้น เช่น รอยดำ รอยแดง ฝ้า กระ ริ้วรอยก่อนวัย รวมถึงให้ความชุ่มชื้นกันผิวไม่ว่าจะเป็นผิวหน้าหรือผิวกาย โดยสกินแคร์แต่ละชนิดอาจมีรูปแบบและส่วนผสมที่แตกต่างกัน ดังนั้น จึงควรเลือกใช้สกินแคร์ให้เหมาะกับสภาพผิว</p>
+                    <a class="mobile-margin buyBTN" href="store.php?ptype=skin-care">สั่งซื้อ</a>
                 </div>
 
             </div>
