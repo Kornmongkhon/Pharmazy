@@ -46,7 +46,7 @@
              </div>
 
              <div class="hero-img"> 
-                <img src="assets/images/pharmazy.jpg" alt="">
+                <img src="assets/images/pharmazy.jpg">
              </div>
         </div>
     </div>
@@ -64,7 +64,7 @@
             <div class="blog-con">
 
                 <div class="blog-item">
-                    <img src="assets/images/peem.jpg" alt="">
+                    <img src="assets/images/mhor1.jpg">
                     <h4>เภสัชกร</h4>
                     <h5>ปริญญาเอก ภาควิชาวิทยาการคอมพิวเตอร์</h5>
                     <p>มีประสบการณ์เภสัชกรร้านขายยาเดียวและร้านขายยา Mexcio มายาวนานกว่า 10 ปี</p>
@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="blog-item">
-                    <img src="assets/images/pang.jpg" alt="">
+                    <img src="assets/images/mhor2.jpg" alt="">
                     <h4>ผู้ช่วยเภสัชกร</h4>
                     <h5>ปริญญาเอก ภาควิชาไฟฟ้ากำลัง</h5>
                     <p>มีความเชียวชาญด้านยา อาหารเสริม สกินแคร์ มีประสบการณ์ร้านขายยาที่ Argentina 5 ปี</p>
@@ -80,7 +80,7 @@
                 </div>
 
                 <div class="blog-item">
-                    <img src="assets/images/golf.jpg" alt="">
+                    <img src="assets/images/mhor3.jpg" alt="">
                     <h4>จัดจำหน่าย</h4>
                     <h5>ปริญญาเอก ภาควิชาสถาปัตยกรรม</h5>
                     <p>มีประสบการณ์ร้านขายยามากกว่า 12 ปี เคยอยู่ร้านยา France มาหลายที่</p>

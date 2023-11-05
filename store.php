@@ -2,7 +2,7 @@
 include('include\functions.php');
 include('include\head.php');
 $selectType = ''; //set type default to null
-$itemPerPage = 15; // set item per 1 page
+$itemPerPage = 9; // set item per 1 page
 if (isset($_GET['ptype'])) {
     $selectType = $_GET['ptype']; //ptype from js
     // echo $selectType;
@@ -33,8 +33,15 @@ if(!empty($selectLiked) && $selectLiked !== "allLiked"){
 }
 $stmtt->execute();
 // $stmttt->execute();
-$totalProducts = $pdo->query("SELECT COUNT(*) FROM product")->fetchColumn();
-$totalPages = ceil($totalProducts / $itemPerPage);
+$totalProducts = $pdo->prepare("SELECT COUNT(*) FROM product");
+$totalProducts->execute();
+$allProduct = $totalProducts->fetchColumn();
+$totalProductsType = $pdo->prepare("SELECT COUNT(*) FROM product WHERE ptype = ?");
+$totalProductsType->bindParam(1,$selectType);
+$totalProductsType->execute();
+$allProductsType = $totalProductsType->fetchColumn();
+$totalPages = ceil($allProduct / $itemPerPage);
+$totalPagesType = ceil($allProductsType / $itemPerPage);
 ?>
 
 <head>
@@ -183,43 +190,58 @@ $totalPages = ceil($totalProducts / $itemPerPage);
         </article>
         <?php if(!isset($_POST['search'])):?>
             <section class="page-custom">
-                <?php if ($page == 1) : ?> <!-- if in first page show btn prev but can't go prev page -->
+                <?php if ($page == 1) : ?> <!-- อยู่หน้าแรกกดปุ่ม prev ไม่ได้ -->
                     <a class="btn btn-secondary">Previous</a>
                 <?php endif; ?>
-                <?php if(!isset($_GET['ptype'])):?>
-                    <?php if ($page > 1) : ?> <!-- if not in first page show btn prev can go prev page -->
+                <!-- ยังไม่ได้กดเลือก type กับ like -->
+                <?php if(!isset($_GET['ptype']) && !isset($_GET['plike'])):?>
+                    <?php if ($page > 1) : ?> <!-- ไม่ได้อยู่หน้าเเรกกดปุ่ม prev ได้ -->
                         <a href="store.php?page=<?= $page - 1 ?>" class="btn btn-primary">Previous</a>
                     <?php endif; ?>
                     <?php for ($i = 1; $i <= $totalPages; $i++) : ?> <!-- loop number of page to button -->
                         <a href="store.php?page=<?= $i ?>" class="btn btn-primary <?= ($i == $page) ? 'active' : ''; ?>" style="margin-left: 20px;"><?= $i ?></a>
                     <?php endfor; ?>
-                    <?php if ($page < $totalPages)  : ?> <!-- if in first page show btn next can go to next page -->
+                    <?php if ($page < $totalPages)  : ?> <!-- อยู่หน้าแรกกดปุ่ม next ได้ -->
                         <a href="store.php?page=<?= $page + 1 ?>" class="btn btn-primary" style="margin-left: 20px;">Next</a>
                     <?php else: ?>
                         <a class="btn btn-secondary" style="margin-left: 20px;">Next</a>
                     <?php endif; ?>
                 <?php endif; ?>
-                <?php if(isset($_GET['ptype'])):?>
-                    <?php if ($page > 1) : ?> <!-- if not in first page show btn prev can go prev page -->
+                <!-- กดเลือก type -->
+                <?php if(isset($_GET['ptype']) && $_GET['ptype'] == 'all'):?>
+                    <?php if ($page > 1) : ?> <!-- ไม่ได้อยู่หน้าเเรกกดปุ่ม prev ได้ -->
                         <a href="store.php?ptype=<?= $selectType ?>&page=<?= $page - 1 ?>" class="btn btn-primary">Previous</a>
                     <?php endif; ?>
                     <?php for ($i = 1; $i <= $totalPages; $i++) : ?> <!-- loop number of page to button -->
                         <a href="store.php?ptype=<?= $selectType ?>&page=<?= $i ?>" class="btn btn-primary <?= ($i == $page) ? 'active' : ''; ?>" style="margin-left: 20px;"><?= $i ?></a>
                     <?php endfor; ?>
-                    <?php if ($page < $totalPages)  : ?> <!-- if in first page show btn next can go to next page -->
+                    <?php if ($page < $totalPages)  : ?> <!-- อยู่หน้าแรกกดปุ่ม next ได้ -->
+                        <a href="store.php?ptype=<?= $selectType ?>&page=<?= $page + 1 ?>" class="btn btn-primary" style="margin-left: 20px;">Next</a>
+                    <?php else: ?>
+                        <a class="btn btn-secondary" style="margin-left: 20px;">Next</a>
+                    <?php endif; ?>
+                <?php elseif(isset($_GET['ptype']) && $_GET['ptype'] != 'all'):?>
+                    <?php if ($page > 1) : ?> <!-- ไม่ได้อยู่หน้าเเรกกดปุ่ม prev ได้ -->
+                        <a href="store.php?ptype=<?= $selectType ?>&page=<?= $page - 1 ?>" class="btn btn-primary">Previous</a>
+                    <?php endif; ?>
+                    <?php for ($i = 1; $i <= $totalPagesType; $i++) : ?> <!-- loop number of page to button -->
+                        <a href="store.php?ptype=<?= $selectType ?>&page=<?= $i ?>" class="btn btn-primary <?= ($i == $page) ? 'active' : ''; ?>" style="margin-left: 20px;"><?= $i ?></a>
+                    <?php endfor; ?>
+                    <?php if ($page < $totalPagesType)  : ?> <!-- อยู่หน้าแรกกดปุ่ม next ได้ -->
                         <a href="store.php?ptype=<?= $selectType ?>&page=<?= $page + 1 ?>" class="btn btn-primary" style="margin-left: 20px;">Next</a>
                     <?php else: ?>
                         <a class="btn btn-secondary" style="margin-left: 20px;">Next</a>
                     <?php endif; ?>
                 <?php endif; ?>
+                <!-- กดเลือก like -->
                 <?php if(isset($_GET['plike'])):?>
-                    <?php if ($page > 1) : ?> <!-- if not in first page show btn prev can go prev page -->
+                    <?php if ($page > 1) : ?> <!-- ไม่ได้อยู่หน้าเเรกกดปุ่ม prev ได้ -->
                         <a href="store.php?plike=<?= $selectLiked ?>&page=<?= $page - 1 ?>" class="btn btn-primary">Previous</a>
                     <?php endif; ?>
                     <?php for ($i = 1; $i <= $totalPages; $i++) : ?> <!-- loop number of page to button -->
                         <a href="store.php?plike=<?= $selectLiked ?>&page=<?= $i ?>" class="btn btn-primary <?= ($i == $page) ? 'active' : ''; ?>" style="margin-left: 20px;"><?= $i ?></a>
                     <?php endfor; ?>
-                    <?php if ($page < $totalPages)  : ?> <!-- if in first page show btn next can go to next page -->
+                    <?php if ($page < $totalPages)  : ?> <!-- อยู่หน้าแรกกดปุ่ม next ได้ -->
                         <a href="store.php?plike=<?= $selectLiked ?>&page=<?= $page + 1 ?>" class="btn btn-primary" style="margin-left: 20px;">Next</a>
                     <?php else: ?>
                         <a class="btn btn-secondary" style="margin-left: 20px;">Next</a>
