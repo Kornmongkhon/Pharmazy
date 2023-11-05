@@ -27,7 +27,7 @@ if (!isset($_SESSION['admin_login'])) {
         <!-- Sidebar Starts here -->
         <div class="bg-white" id="sidebar-wrapper">
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase">
-                <i class="fa-solid fa-user-secret"></i> Admin Mentos <!-- Sidebar Header -->
+                <i class="fa-solid fa-house-medical fa-xs"></i> Admin Mentos <!-- Sidebar Header -->
             </div>
             <div class="list-group list-group-flush my-3">
                 <ul class="sidebar-nav">
@@ -94,10 +94,19 @@ if (!isset($_SESSION['admin_login'])) {
 
         <div class="page-content-wrapper" style="width: 100%;">
             <?php
-            $stmt = $pdo->prepare("SELECT * FROM `users` WHERE uid = ?;");
-            $stmt->bindParam(1, $_POST['uid']);
-            $stmt->execute();
-            $check_user = $stmt->fetch(PDO::FETCH_ASSOC);
+            if(isset($_POST['uid'])){
+                $stmt = $pdo->prepare("SELECT * FROM `users` WHERE uid = ?;");
+                $stmt->bindParam(1, $_POST['uid']);
+                $stmt->execute();
+                $check_user = $stmt->fetch(PDO::FETCH_ASSOC);
+            }elseif(isset($_GET['uid'])){
+                $stmt = $pdo->prepare("SELECT * FROM `users` WHERE uid = ?;");
+                $stmt->bindParam(1, $_GET['uid']);
+                $stmt->execute();
+                $check_user = $stmt->fetch(PDO::FETCH_ASSOC);
+            }
+           
+            
             ?>
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
@@ -120,11 +129,11 @@ if (!isset($_SESSION['admin_login'])) {
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user me-2"></i><?= $row['u_name'] ?>
+                                <i class="fas fa-user me-2"></i><?= $row['u_username'] ?>
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">โปรไฟล์</a></li>
-                                <li><a class="dropdown-item" href="#">ตั้งค่าบัญชี</a></li>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li><span class="dropdown-item">ยินดีต้อนรับ, <?= $row['u_name'] ?></span></li>
+                                <li><a class="dropdown-item" href="user_detail.php?uid=<?=$row['uid']?>">โปรไฟล์</a></li>
                                 <li><a class="dropdown-item" href="include/logout_admin.php">ออกจากระบบ</a></li>
                             </ul>
                         </li>
