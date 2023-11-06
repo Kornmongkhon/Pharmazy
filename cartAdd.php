@@ -148,7 +148,7 @@ if ($pageWasRefreshed) {
                                 <aside class="orderBTN">
                                     <a href="store.php" class="btn btn-warning">เลือกสินค้าต่อ</a>
                                     <input id="sum" type="hidden" value="<?= $sum ?>" name="sum">
-                                    <input type="submit" name="submit_button" value="เพิ่มลงตะกร้า" class="btn btn-info" id="submitBTN">
+                                    <input type="submit" name="submit_button" value="สั่งซื้อสินค้า" class="btn btn-info" id="submitBTN">
                                 </aside>
 
                             </td>
@@ -273,7 +273,7 @@ if ($pageWasRefreshed) {
                 });
                 return false;
             } else {
-                if(confirm("ต้องการเพิ่มสินค้าลงตะกร้าหรือไม่?")){
+                if(confirm("ต้องการสั่งซื้อสินค้าเลยหรือไม่?")){
                     return true;
                 }else {
                     return false;
