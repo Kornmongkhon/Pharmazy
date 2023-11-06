@@ -41,6 +41,9 @@
     width: 30rem;
     padding: 2rem;
 }
+.hero-img2 img{
+    display: none;
+}
 .hero-info{
     width: 100%;
     padding: 2rem;
@@ -60,4 +63,15 @@
 }
 #addtext{
     margin-top: 1rem;
+}
+
+@media screen and (max-width:500px){
+    .hero-img img{
+       display: none;
+    }
+    .hero-img2 img{
+        display: flex;
+        width: 10rem;
+        margin: 0 auto;
+     }
 }

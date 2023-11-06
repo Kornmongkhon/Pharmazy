@@ -218,6 +218,12 @@ else if (!isset($_POST['product']) || !isset($_POST['pid'])) {
                 <div class="container1 card">
                     <div class="hero-con">
                         <div class="hero-info">
+                            <div class="hero-img2">
+                                <?php
+                                    $relativePhotoPath = str_replace('../', '', $row['pimg']);
+                                ?>
+                            <img src="<?= $relativePhotoPath?>">
+                            </div>
                             <h3><?= $row['pname'] ?></h3>
                             <h4>รายละเอียดสินค้า</h4>
                             <h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?= $row['pdetail'] ?></h6>
@@ -266,7 +272,7 @@ else if (!isset($_POST['product']) || !isset($_POST['pid'])) {
                             <?php
                                 $relativePhotoPath = str_replace('../', '', $row['pimg']);
                             ?>
-                            <img src="<?= $relativePhotoPath?>" width="350" height="400">
+                            <img src="<?= $relativePhotoPath?>">
                         </div>
                     </div>
                 </div>

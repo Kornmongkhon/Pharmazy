@@ -273,7 +273,7 @@ if ($pageWasRefreshed) {
                 });
                 return false;
             } else {
-                if(confirm("ต้องการเพิ่มสืนค้าลงตะกร้าหรือไม่?")){
+                if(confirm("ต้องการเพิ่มสินค้าลงตะกร้าหรือไม่?")){
                     return true;
                 }else {
                     return false;
