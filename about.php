@@ -45,7 +45,7 @@ if (isset($_COOKIE['visit'])) {
             <div class="About-con">
                 <div class="About-info">
                     <h3>เกี่ยวกับเรา</h3>
-                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pharmacy is the science and practice of discovering, producing, preparing, dispensing, reviewing and monitoring medications, aiming to ensure the safe, effective, and affordable use of medicines. It is a miscellaneous science as it links health sciences with pharmaceutical sciences and natural sciences. The professional practice is becoming more clinically oriented as most of the drugs are now manufactured by pharmaceutical industries. Based on the setting, pharmacy practice is either classified as community or institutional pharmacy. Providing direct patient care in the community of institutional pharmacies is considered clinical pharmacy.</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;เภสัชศาสตร์เป็นศาสตร์และการฝึกฝนในการค้นหา ผลิต จัดเตรียม จ่าย ทบทวน และติดตามยา โดยมีจุดมุ่งหมายเพื่อให้แน่ใจว่าการใช้ยามีความปลอดภัย มีประสิทธิภาพ และราคาไม่แพง เป็นวิทยาศาสตร์เบ็ดเตล็ดเนื่องจากเชื่อมโยงวิทยาศาสตร์สุขภาพกับวิทยาศาสตร์เภสัชกรรมและวิทยาศาสตร์ธรรมชาติ การปฏิบัติวิชาชีพกำลังมุ่งเน้นไปที่ทางคลินิกมากขึ้น เนื่องจากปัจจุบันยาส่วนใหญ่ผลิตโดยอุตสาหกรรมยา ขึ้นอยู่กับสภาพแวดล้อม การปฏิบัติงานด้านเภสัชกรรมจัดเป็นร้านขายยาชุมชนหรือร้านขายยาแบบสถาบัน การให้การดูแลผู้ป่วยโดยตรงในชุมชนร้านขายยาของสถาบันถือเป็นร้านขายยาคลินิก</p>
                 </div>
 
                 <div class="hero-img">
@@ -69,7 +69,7 @@ if (isset($_COOKIE['visit'])) {
                 <div class="blog-item">
                     <img src="assets/images/mhor1.jpg">
                     <h4>เภสัชกร</h4>
-                    <h5>ปริญญาเอก ภาควิชาวิทยาการคอมพิวเตอร์</h5>
+                    <h5>ปริญญาเอก คณะเภสัชศาสตร์</h5>
                     <p>มีประสบการณ์เภสัชกรร้านขายยาเดียวและร้านขายยา Mexcio มายาวนานกว่า 10 ปี</p>
 
                 </div>
@@ -77,7 +77,7 @@ if (isset($_COOKIE['visit'])) {
                 <div class="blog-item">
                     <img src="assets/images/mhor2.jpg" alt="">
                     <h4>ผู้ช่วยเภสัชกร</h4>
-                    <h5>ปริญญาเอก ภาควิชาไฟฟ้ากำลัง</h5>
+                    <h5>ปริญญาเอก คณะเภสัชศาสตร์</h5>
                     <p>มีความเชียวชาญด้านยา อาหารเสริม สกินแคร์ มีประสบการณ์ร้านขายยาที่ Argentina 5 ปี</p>
 
                 </div>
@@ -85,7 +85,7 @@ if (isset($_COOKIE['visit'])) {
                 <div class="blog-item">
                     <img src="assets/images/mhor3.jpg" alt="">
                     <h4>จัดจำหน่าย</h4>
-                    <h5>ปริญญาเอก ภาควิชาสถาปัตยกรรม</h5>
+                    <h5>ปริญญาเอก คณะเภสัชศาสตร์</h5>
                     <p>มีประสบการณ์ร้านขายยามากกว่า 12 ปี เคยอยู่ร้านยา France มาหลายที่</p>
 
                 </div>
