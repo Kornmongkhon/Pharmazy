@@ -157,7 +157,13 @@ else if (!isset($_POST['product']) || !isset($_POST['pid'])) {
                 create.innerHTML = "สินค้าต้องมีค่าเป็น 1 ขึ้นไป";
                 return false;
             } else if(deliveryType!="flash"&&deliveryType!="kerry"&&deliveryType!="thaipost"&&deliveryType!="jt"&&deliveryType!="dhl"){
-                alert("กรุณาเลือกการจัดส่ง")
+                Swal.fire({
+                    title: 'คำเตือน',
+                    icon: 'warning',
+                    text: 'กรุณาระบุการจัดส่ง',
+                    confirmButtonText: 'ตกลง',
+                    confirmButtonColor: '#3085d6'
+                })
                 return false;
             }
             else {
