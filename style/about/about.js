@@ -1,3 +1,4 @@
+let table = null;
 async function getDataFromJSON(){
     let response = await fetch('json/medical.json');
     let rawData = await response.text();
@@ -34,6 +35,12 @@ async function getDataFromJSON(){
         tr.appendChild(td6);
         count++;
         result.appendChild(tr);
+    }
+    if(!table){
+        table = new DataTable('#MedicalTable'); //เรียก DataTable ถ้าไม่มีการเรียกมาก่อน
+    }else{
+        table.destroy(); //ถ้าเรียกมาเเล้วให้ลบแล้วเรียกใหม่
+        table = new DataTable('#MedicalTable');
     }
 }
 getDataFromJSON();
