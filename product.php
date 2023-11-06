@@ -11,6 +11,7 @@ else if (!isset($_POST['product']) || !isset($_POST['pid'])) {
 } else {
     $pid = $_POST['product']; //get value from button name product (value is pid)
 }
+
 ?>
 
 <head>
@@ -222,7 +223,7 @@ else if (!isset($_POST['product']) || !isset($_POST['pid'])) {
                                 <?php
                                     $relativePhotoPath = str_replace('../', '', $row['pimg']);
                                 ?>
-                            <img src="<?= $relativePhotoPath?>">
+                                <img src="<?= $relativePhotoPath?>">
                             </div>
                             <h3><?= $row['pname'] ?></h3>
                             <h4>รายละเอียดสินค้า</h4>
