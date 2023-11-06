@@ -153,7 +153,7 @@ if (isset($_COOKIE['visit'])) {
                     <p><img src="assets/images/ig.png"> <span class="space">imtrex_.png</span></p>
                 </div>
                 <div class="footer-top-item" style="display: flex;">
-                    <h5>จำนวนคนเข้าชมเว็ปไซต์ในวันนี้</h5>
+                    <h5>จำนวนการเข้าชมเว็ปไซต์ในวันนี้</h5>
                     <span style="margin:0rem 1rem;" id="visit-count">
                         <?php if (isset($_COOKIE['visit'])) : ?>
                             <?= $visit ?>
@@ -161,7 +161,7 @@ if (isset($_COOKIE['visit'])) {
                             <?= 0 ?>
                         <?php endif; ?>
                     </span>
-                    <h5>คน</h5>
+                    <h5>ครั้ง</h5>
                 </div>
             </div>
         </div>
