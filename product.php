@@ -74,6 +74,26 @@ else if (!isset($_POST['product']) || !isset($_POST['pid'])) {
             request.onreadystatechange = function() {
                 if (request.readyState == 4 && request.status == 200) {
                     document.getElementById('notification').innerHTML = request.responseText;
+                    if(request.responseText.trim() === 'not login'){
+                        Swal.fire({
+                                title: 'ล้มเหลว',
+                                icon: 'error',
+                                text: 'กรุณาเข้าสู่ระบบก่อน',
+                                timer: 3500,
+                                showConfirmButton: false,
+                                timerProgressBar: true
+                            }).then(function(){
+                                <?php unset($_SESSION['notlike']);?>
+                                let likeIcon = document.getElementById('like-icon');
+                                let plike = document.getElementById('plike').value;
+                                if (likeIcon.classList.contains('fa-solid')) {
+                                    likeIcon.classList.remove("fa-solid");
+                                    likeIcon.classList.remove("fa-heart");
+                                    likeIcon.classList.add("fa-regular");
+                                    likeIcon.classList.add("fa-heart");
+                                }
+                            })
+                    }
                 }
             }
         }
